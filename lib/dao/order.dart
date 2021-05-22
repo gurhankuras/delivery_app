@@ -9,6 +9,8 @@ class Order {
   String recipientPhoneNumber;
   String recipientAddress;
 
+  List<OrderStatus> orderStates;
+
   String packageName;
   String packageCategory;
   double weight;
@@ -22,12 +24,41 @@ class Order {
     required this.recipientName,
     required this.recipientPhoneNumber,
     required this.recipientAddress,
+    required this.orderStates,
     required this.packageName,
     required this.packageCategory,
     required this.weight,
     required this.vehicleType,
   });
 }
+
+class OrderStatus {
+  String event;
+  DateTime timeStamp;
+  OrderStatus({
+    required this.event,
+    required this.timeStamp,
+  });
+}
+
+final _mockOrderStates = <OrderStatus>[
+  OrderStatus(
+    event: 'Courier has accepted order request',
+    timeStamp: DateTime.now(),
+  ),
+  OrderStatus(
+    event: 'Package picked up by courier',
+    timeStamp: DateTime.now(),
+  ),
+  OrderStatus(
+    event: 'Package delivered to destination',
+    timeStamp: DateTime.now(),
+  ),
+  OrderStatus(
+    event: 'Order completed',
+    timeStamp: DateTime.now(),
+  ),
+];
 
 final mockOrder = Order(
   orderId: "249 316 28C",
@@ -41,4 +72,5 @@ final mockOrder = Order(
   packageName: "iPhone 11 Pro 256 GB",
   vehicleType: "Motorcycle",
   weight: 1,
+  orderStates: _mockOrderStates,
 );

@@ -1,8 +1,8 @@
-import 'package:delivery_app/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:delivery_app/dao/order.dart';
+import '../../../dao/order.dart';
+import '../../../utils/size_config.dart';
 
 class SenderRecipientTile extends StatelessWidget {
   final Order order;

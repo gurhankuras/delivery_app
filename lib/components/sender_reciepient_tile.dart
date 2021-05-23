@@ -57,8 +57,8 @@ class SenderRecipientTile extends StatelessWidget {
         ),
         if (editing)
           IconButton(
-            icon: Icon(Icons.dangerous),
-            onPressed: () {},
+            icon: Icon(Icons.mode_edit_outline),
+            onPressed: onEdit,
           )
       ],
     );

@@ -54,9 +54,10 @@ class OrderDetailsPageBody extends StatelessWidget {
         SizedBox(height: SizeConfig.defaultSize * 3),
         Text(
           'Order Status',
-          style: Theme.of(context).textTheme.headline6?.copyWith(
-                fontSize: 18,
-              ),
+          style: Theme.of(context)
+              .textTheme
+              .headline6
+              ?.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF3D4B61)),
         ),
         Column(
           children: order.orderStates

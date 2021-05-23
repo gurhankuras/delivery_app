@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../components/app_logo.dart';
 import '../../utils/size_config.dart';
 import '../home_page/home_page.dart';
+import '../orders_page/orders_page.dart';
 import '../send_package_form_page/send_package_form_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,9 +16,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Center(
-      child: Text('Yooo'),
-    ),
+    OrdersPage(),
     SendPackageFormPage(),
     Text(
       'Index 2: School',
@@ -64,35 +62,7 @@ class _MainPageState extends State<MainPage> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            'assets/svgs/fast-delivery.svg',
-            fit: BoxFit.cover,
-            height: kToolbarHeight,
-            color: Color(0xFFef5448),
-          ),
-          SizedBox(
-            width: 6,
-          ),
-          Text.rich(
-            TextSpan(text: 'Deliver', children: [
-              TextSpan(
-                text: 'it.',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ]),
-            style: GoogleFonts.lato().copyWith(
-              fontSize: SizeConfig.defaultSize * 2,
-              fontWeight: FontWeight.w500,
-            ),
-          )
-        ],
-      ),
+      title: AppLogo(),
     );
   }
 }

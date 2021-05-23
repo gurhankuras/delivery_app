@@ -7,12 +7,16 @@ import '../../../utils/size_config.dart';
 import 'sender_reciepient_tile.dart';
 
 class SenderReceiverSection extends StatelessWidget {
-  const SenderReceiverSection({
-    Key? key,
-    required this.order,
-  }) : super(key: key);
+  final bool editing;
+  final void Function()? onEdit;
 
   final Order order;
+  const SenderReceiverSection({
+    Key? key,
+    this.editing = false,
+    this.onEdit,
+    required this.order,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,11 @@ class SenderReceiverSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SenderRecipientTile(order: order),
+              SenderRecipientTile(
+                order: order,
+                editing: editing,
+                onEdit: onEdit,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -41,7 +49,11 @@ class SenderReceiverSection extends StatelessWidget {
                   Text('1.1 Km'),
                 ],
               ),
-              SenderRecipientTile(order: order),
+              SenderRecipientTile(
+                order: order,
+                editing: editing,
+                onEdit: onEdit,
+              ),
             ],
           ),
         ),

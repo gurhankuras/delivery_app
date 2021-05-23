@@ -25,21 +25,20 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
   }
 
   Future<void> submitForm() async {
-    final currentState = _formKey.currentState;
-    if (currentState != null && currentState.validate()) {
-      currentState.save();
-      _formInfo['type'] = types[typeIndex!];
-      _formInfo['category'] = categories[categoryIndex!];
-      print(_formInfo);
-      final hasBeenSent = await orderService.submitOrder(_formInfo);
-      print(hasBeenSent);
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) =>
-              SendPackageConfirmationPage(formData: _formInfo),
-        ),
-      );
-    }
+    // final currentState = _formKey.currentState;
+    // if (currentState != null && currentState.validate()) {
+    //   currentState.save();
+    //   _formInfo['type'] = types[typeIndex!];
+    //   _formInfo['category'] = categories[categoryIndex!];
+    //   print(_formInfo);
+    //   final hasBeenSent = await orderService.submitOrder(_formInfo);
+    //   print(hasBeenSent);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SendPackageConfirmationPage(formData: _formInfo),
+      ),
+    );
+    // }
   }
 
   final Map<String, dynamic> _formInfo = {

@@ -40,6 +40,11 @@ class MyApp extends StatelessWidget {
           color: Colors.black.withOpacity(0.7),
         ),
       ),
+      indicatorColor: Color(0xFFef5448),
+      tabBarTheme: TabBarTheme(
+        unselectedLabelColor: Colors.black.withOpacity(0.4),
+        labelColor: Color(0xFFef5448),
+      ),
       textTheme: GoogleFonts.latoTextTheme(),
     );
   }

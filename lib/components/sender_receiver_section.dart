@@ -28,17 +28,23 @@ class SenderReceiverSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SenderRecipientTile(order: order),
-              Divider(
-                color: Colors.grey.withOpacity(0.25),
-                height: SizeConfig.defaultSize * 3,
-                thickness: 1,
-                endIndent: SizeConfig.defaultSize * 3,
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: Colors.grey.withOpacity(0.25),
+                      height: SizeConfig.defaultSize * 3,
+                      thickness: 1,
+                      endIndent: SizeConfig.defaultSize * 3,
+                    ),
+                  ),
+                  Text('1.1 Km'),
+                ],
               ),
               SenderRecipientTile(order: order),
             ],
           ),
         ),
-        Text('1.1 Km'),
       ],
     );
   }

@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
           color: Colors.black.withOpacity(0.7),
         ),
       ),
+      textTheme: GoogleFonts.latoTextTheme(),
     );
   }
 }

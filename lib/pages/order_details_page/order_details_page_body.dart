@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../components/sender_receiver_section.dart';
 import '../../dao/order.dart';
 import '../../utils/size_config.dart';
-import 'components/sender_receiver_section.dart';
 
 class OrderDetailsPageBody extends StatelessWidget {
   const OrderDetailsPageBody({
@@ -19,7 +19,7 @@ class OrderDetailsPageBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Order ID",
+          'Order ID',
           style: Theme.of(context)
               .textTheme
               .subtitle1
@@ -36,7 +36,7 @@ class OrderDetailsPageBody extends StatelessWidget {
         SenderReceiverSection(order: order),
         SizedBox(height: SizeConfig.defaultSize * 3),
         Text(
-          "Package",
+          'Package',
           style: Theme.of(context)
               .textTheme
               .subtitle1
@@ -53,7 +53,7 @@ class OrderDetailsPageBody extends StatelessWidget {
         buildAdditionalInfo(context),
         SizedBox(height: SizeConfig.defaultSize * 3),
         Text(
-          "Order Status",
+          'Order Status',
           style: Theme.of(context).textTheme.headline6?.copyWith(
                 fontSize: 18,
               ),
@@ -80,17 +80,17 @@ class OrderDetailsPageBody extends StatelessWidget {
       children: [
         buildAdditionalInfoSubsection(
           title: 'Category',
-          content: "Electronics",
+          content: 'Electronics',
           context: context,
         ),
         buildAdditionalInfoSubsection(
           title: 'Weight',
-          content: "<1 kg",
+          content: '<1 kg',
           context: context,
         ),
         buildAdditionalInfoSubsection(
           title: 'Vehicle',
-          content: "Motorcycle",
+          content: 'Motorcycle',
           context: context,
         ),
       ],

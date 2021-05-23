@@ -1,27 +1,42 @@
-import 'package:delivery_app/dao/order.dart';
-import 'package:delivery_app/pages/main_page/components/search_bar.dart';
-import 'package:delivery_app/pages/order_details_page/order_details_page.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:string_validator/string_validator.dart';
+
+import '../../dao/order.dart';
+import '../main_page/components/search_bar.dart';
+import '../order_details_page/order_details_page.dart';
 
 class HomePage extends StatelessWidget {
+  String? validateTrackId(String id) {
+    if (id.trim() == '') {
+      return 'Must be filled!';
+    }
+    if (!isInt(id)) {
+      return 'Invalid track id';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SearchBar(
-        onSearch: (value) async {
-          try {
-            final response = await Dio().get('http://10.0.2.2:5000/${value}');
-            print(response.data);
-          } catch (e) {
-            print('Bir hata oldu');
+        onSearch: (value) {
+          final errorMessage = validateTrackId(value);
+          if (errorMessage != null) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(errorMessage)));
           }
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => OrderDetailPage(order: mockOrder),
-          ));
+          Dio().get('http://10.0.2.2:5000/$value').then((res) {
+            print(res.data);
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => OrderDetailPage(order: mockOrder),
+            ));
+          }).catchError((err) => print(err));
+          // print('Bir hata oldu');
         },
         keyboardType: TextInputType.number,
-        hintText: "Gönderi sorgula",
+        hintText: 'Gönderi sorgula',
       ),
     );
   }

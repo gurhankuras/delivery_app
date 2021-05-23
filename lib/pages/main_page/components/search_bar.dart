@@ -4,7 +4,7 @@ import '../../../utils/size_config.dart';
 
 class SearchBar extends StatefulWidget {
   final String hintText;
-  final Future<void> Function(String value) onSearch;
+  final void Function(String value) onSearch;
   final TextInputType keyboardType;
   const SearchBar({
     Key? key,
@@ -31,8 +31,8 @@ class _SearchBarState extends State<SearchBar> {
     return TextField(
       keyboardType: widget.keyboardType,
       controller: _textController,
-      onSubmitted: (text) async {
-        await widget.onSearch(text);
+      onSubmitted: (text) {
+        widget.onSearch(text);
       },
       decoration: getInputDecoration(),
     );
@@ -48,8 +48,8 @@ class _SearchBarState extends State<SearchBar> {
         color: Colors.black.withOpacity(0.5),
       ),
       suffixIcon: IconButton(
-          onPressed: () async {
-            await widget.onSearch(_textController.text);
+          onPressed: () {
+            widget.onSearch(_textController.text);
           },
           icon: Icon(
             Icons.arrow_forward,

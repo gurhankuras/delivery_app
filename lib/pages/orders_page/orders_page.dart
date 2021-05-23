@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/size_config.dart';
+import 'components/order_card.dart';
 
 class OrdersPage extends StatefulWidget {
   @override
@@ -34,147 +35,70 @@ class _OrdersPageState extends State<OrdersPage>
 }
 
 class CompletedOrders extends StatelessWidget {
-  final stage = 1;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 2),
-        child: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(SizeConfig.defaultSize * 1.5)),
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 2),
-            child: Column(
-              children: [
-                buildIdRow(context),
-                Divider(),
-                buildFromTo(context),
-                buildAdressesRow(context),
-                Divider(),
-                Row(
-                  children: [
-                    StageDot(stage: stage),
-                    Expanded(
-                      child: StageLine(stage: stage),
-                    ),
-                    StageDot(stage: stage),
-                    Expanded(
-                      child: StageLine(stage: stage),
-                    ),
-                    StageDot(stage: stage),
-                    Expanded(
-                      child: StageLine(stage: stage),
-                    ),
-                    StageDot(stage: stage),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
+          padding: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 2),
+          child: OrderCard()),
     );
   }
-
-  Row buildIdRow(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'ID 249 342 G42',
-          style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
-        TextButton(onPressed: () {}, child: Text('See details'))
-      ],
-    );
-  }
-}
-
-Row buildFromTo(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        'From',
-        style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: Colors.black.withOpacity(0.6),
-            ),
-      ),
-      Text(
-        'To',
-        style: Theme.of(context).textTheme.bodyText1?.copyWith(
-              color: Colors.black.withOpacity(0.6),
-            ),
-      ),
-    ],
-  );
-}
-
-Row buildAdressesRow(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(
-        child: Text(
-          '3117 Doctors Drive, LA',
-        ),
-      ),
-      Icon(
-        Icons.arrow_right,
-        size: 40,
-        color: Theme.of(context).colorScheme.primary,
-      ),
-      Expanded(
-        child: Text(
-          '3117 Doctors Drive, LA',
-        ),
-      )
-    ],
-  );
 }
 
 class StageLine extends StatelessWidget {
   final int stage;
+  final int index;
+
   const StageLine({
-    required this.stage,
     Key? key,
+    required this.stage,
+    required this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final filled = index < stage;
+
     return Container(
-      // width: SizeConfig.defaultSize * 2,
       height: SizeConfig.defaultSize * 0.2,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
-      ),
+          color: filled
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.5)
+              : null,
+          gradient: !filled
+              ? LinearGradient(colors: [
+                  Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                  Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+                ], begin: Alignment.centerLeft, end: Alignment.centerRight)
+              : null),
     );
   }
 }
 
 class StageDot extends StatelessWidget {
   final int stage;
+  final int index;
 
   const StageDot({
-    required this.stage,
     Key? key,
+    required this.stage,
+    required this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final dotColor = index <= stage
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.secondary.withOpacity(0.3);
+
     return Container(
       width: SizeConfig.defaultSize * 2,
       height: SizeConfig.defaultSize * 2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(SizeConfig.defaultSize * 5),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary,
+          color: dotColor,
         ),
       ),
       child: Padding(
@@ -182,11 +106,34 @@ class StageDot extends StatelessWidget {
         child: Container(
           width: SizeConfig.defaultSize,
           height: SizeConfig.defaultSize,
-          decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              shape: BoxShape.circle),
+          decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
         ),
       ),
+    );
+  }
+}
+
+class StageManager extends StatelessWidget {
+  final int stage;
+  final int dotCount;
+  final Axis direction;
+  const StageManager({
+    Key? key,
+    required this.stage,
+    required this.dotCount,
+    this.direction = Axis.horizontal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate((dotCount * 2) - 1, (index) {
+        final isEven = index % 2 == 0;
+        if (isEven) {
+          return StageDot(stage: stage, index: index ~/ 2);
+        }
+        return Expanded(child: StageLine(stage: stage, index: index ~/ 2));
+      }),
     );
   }
 }

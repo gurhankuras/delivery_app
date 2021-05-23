@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       colorScheme: ColorScheme.light(
         primary: Color(0xFFef5448),
+        secondary: Color(0xFF038BFA),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: Color(0xFFef5448),

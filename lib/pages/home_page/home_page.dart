@@ -1,3 +1,4 @@
+import 'package:delivery_app/services/pdf_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,36 +34,40 @@ class HomePage extends StatelessWidget {
               if (errorMessage != null) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(errorMessage)));
-                Alert(
-                    context: context,
-                    title: "LOGIN",
-                    content: Column(
-                      children: <Widget>[
-                        TextField(
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.account_circle),
-                            labelText: 'Username',
-                          ),
-                        ),
-                        TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.lock),
-                            labelText: 'Password',
-                          ),
-                        ),
-                      ],
-                    ),
-                    buttons: [
-                      DialogButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text(
-                          "LOGIN",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      )
-                    ]).show();
-
+                // Alert(
+                //     context: context,
+                //     title: "LOGIN",
+                //     content: Column(
+                //       children: <Widget>[
+                //         TextField(
+                //           decoration: InputDecoration(
+                //             icon: Icon(Icons.account_circle),
+                //             labelText: 'Username',
+                //           ),
+                //         ),
+                //         TextField(
+                //           obscureText: true,
+                //           decoration: InputDecoration(
+                //             icon: Icon(Icons.lock),
+                //             labelText: 'Password',
+                //           ),
+                //         ),
+                //         SvgPicture.asset('assets/svgs/faq.svg'),
+                //       ],
+                //     ),
+                //     buttons: [
+                //       DialogButton(
+                //         onPressed: () => Navigator.pop(context),
+                //         child: Text(
+                //           "LOGIN",
+                //           style: TextStyle(color: Colors.white, fontSize: 20),
+                //         ),
+                //       )
+                //     ]).show();
+                final pdfService = PdfService();
+                pdfService
+                    .generateSamplePdf()
+                    .then((file) => pdfService.openFile(file));
                 return;
               }
               Dio().get('http://10.0.2.2:5000/$value').then((res) {

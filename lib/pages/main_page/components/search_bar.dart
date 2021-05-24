@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../utils/size_config.dart';
 
@@ -47,14 +48,30 @@ class _SearchBarState extends State<SearchBar> {
         Icons.search,
         color: Colors.black.withOpacity(0.5),
       ),
-      suffixIcon: IconButton(
-          onPressed: () {
-            widget.onSearch(_textController.text);
-          },
-          icon: Icon(
-            Icons.arrow_forward,
-            color: Colors.black.withOpacity(0.5),
-          )),
+      suffixIcon: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            onPressed: () {
+              widget.onSearch(_textController.text);
+            },
+            icon: FaIcon(
+              FontAwesomeIcons.questionCircle,
+              size: SizeConfig.defaultSize * 2,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              widget.onSearch(_textController.text);
+            },
+            icon: Icon(
+              Icons.arrow_forward,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+        ],
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(
           SizeConfig.defaultSize * 2,

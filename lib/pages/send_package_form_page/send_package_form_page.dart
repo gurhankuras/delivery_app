@@ -1,10 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:direct_select/direct_select.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../services/order_service.dart';
 import '../../utils/size_config.dart';
 import '../send_package_confirmation_page/send_package_confirmation_page.dart';
 import 'components/my_selection.dart';
@@ -15,13 +13,11 @@ class SendPackageFormPage extends StatefulWidget {
 }
 
 class _SendPackageFormPageState extends State<SendPackageFormPage> {
-  late final OrderService orderService;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    orderService = OrderService(dio: Dio());
   }
 
   Future<void> submitForm() async {
@@ -31,7 +27,7 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
     //   _formInfo['type'] = types[typeIndex!];
     //   _formInfo['category'] = categories[categoryIndex!];
     //   print(_formInfo);
-    //   final hasBeenSent = await orderService.submitOrder(_formInfo);
+    // final hasBeenSent = await context.read<OrderService>().submitOrder(_formInfo);
     //   print(hasBeenSent);
     Navigator.of(context).push(
       MaterialPageRoute(

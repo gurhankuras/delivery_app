@@ -1,10 +1,10 @@
-import 'package:delivery_app/services/pdf_service.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
 
+import '../../dao/order.dart';
+import '../../services/order_service.dart';
 import '../../utils/size_config.dart';
 import '../main_page/components/search_bar.dart';
 
@@ -29,29 +29,93 @@ class HomePage extends StatelessWidget {
             height: SizeConfig.defaultSize * 17,
           ),
           SearchBar(
+            onInfo: () => showMyDialog(context),
             onSearch: (value) {
               final errorMessage = validateTrackId(value);
               if (errorMessage != null) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(errorMessage)));
-                // Alert(
+
+                return;
+              }
+              context
+                  .read<OrderService>()
+                  .queryTrackId(value)
+                  .then((Order? order) {
+                if (order == null) {
+                  print('error order is nulll');
+                }
+                print(order!.toJson());
+              }).catchError((err) => print(err));
+              // CacheService.instance
+              //     .saveItem<TrackId>(int.parse(value), TrackId(value: value))
+              //     .then((value) => print(value ? 'Saved' : 'Fail!'));
+            },
+            keyboardType: TextInputType.number,
+            hintText: 'Gönderi sorgula',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<Object> showMyDialog(BuildContext context) async {
+    return showGeneralDialog(
+      context: context,
+      barrierColor: Colors.black12.withOpacity(0.8), // Background color
+      barrierDismissible: false,
+      barrierLabel: 'Dialog',
+      transitionDuration: Duration(
+        milliseconds: 400,
+      ), // How long it takes to popup dialog after button click
+      pageBuilder: (_, __, ___) {
+        // Makes widget fullscreen
+        return SizedBox.expand(
+          child: Column(
+            children: <Widget>[
+              Spacer(
+                flex: 1,
+              ),
+              Row(
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.all(SizeConfig.defaultSize),
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                flex: 10,
+                child: SizedBox.expand(
+                    child: Image.asset('assets/svgs/track_id_info.png')),
+              ),
+              Spacer(
+                flex: 2,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+
+
+
+// Alert(
                 //     context: context,
                 //     title: "LOGIN",
                 //     content: Column(
                 //       children: <Widget>[
-                //         TextField(
-                //           decoration: InputDecoration(
-                //             icon: Icon(Icons.account_circle),
-                //             labelText: 'Username',
-                //           ),
-                //         ),
-                //         TextField(
-                //           obscureText: true,
-                //           decoration: InputDecoration(
-                //             icon: Icon(Icons.lock),
-                //             labelText: 'Password',
-                //           ),
-                //         ),
                 //         SvgPicture.asset('assets/svgs/faq.svg'),
                 //       ],
                 //     ),
@@ -64,26 +128,19 @@ class HomePage extends StatelessWidget {
                 //         ),
                 //       )
                 //     ]).show();
-                final pdfService = PdfService();
-                pdfService
-                    .generateSamplePdf()
-                    .then((file) => pdfService.openFile(file));
-                return;
-              }
-              Dio().get('http://10.0.2.2:5000/$value').then((res) {
-                print(res.data);
+                // final pdfService = PdfService();
+                // pdfService
+                //     .generateSamplePdf()
+                //     .then((file) => pdfService.openFile(file));
+                // return;
 
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => OrderDetailPage(order: mockOrder),
-                // ));
-              }).catchError((err) => print(err));
+
+ // Dio().get('http://10.0.2.2:5000/$value').then((res) {
+              //   print(res.data);
+
+              //   Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => OrderDetailPage(order: mockOrder),
+              //   ));
+              // }).catchError((err) => print(err));
+
               // print('Bir hata oldu');
-            },
-            keyboardType: TextInputType.number,
-            hintText: 'Gönderi sorgula',
-          ),
-        ],
-      ),
-    );
-  }
-}

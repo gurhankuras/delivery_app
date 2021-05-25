@@ -27,7 +27,7 @@ class OrderDetailsPageBody extends StatelessWidget {
         ),
         SizedBox(height: SizeConfig.defaultSize * 0.5),
         Text(
-          order.orderId,
+          order.orderId ?? 'Not Found',
           style: Theme.of(context).textTheme.headline6?.copyWith(
                 fontSize: 18,
               ),
@@ -44,7 +44,7 @@ class OrderDetailsPageBody extends StatelessWidget {
         ),
         SizedBox(height: SizeConfig.defaultSize * 0.5),
         Text(
-          order.packageName,
+          order.packageName ?? 'Not Found',
           style: Theme.of(context).textTheme.headline6?.copyWith(
                 fontSize: 18,
               ),
@@ -60,16 +60,19 @@ class OrderDetailsPageBody extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF3D4B61)),
         ),
         Column(
-          children: order.orderStates
-              .map(
-                (state) => ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Text(state.event),
-                  subtitle: Text(
-                      '${DateFormat.yMMMMd().format(state.timeStamp)} - ${DateFormat.jm().format(state.timeStamp)}'),
-                ),
-              )
-              .toList(),
+          children: order.orderStates != null
+              ? order.orderStates!
+                  .map(
+                    (state) => ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(state.event ?? 'Not found'),
+                      subtitle: Text(state.timeStamp != null
+                          ? '${DateFormat.yMMMMd().format(state.timeStamp!)} - ${DateFormat.jm().format(state.timeStamp!)}'
+                          : 'Not found'),
+                    ),
+                  )
+                  .toList()
+              : [],
         )
       ],
     );

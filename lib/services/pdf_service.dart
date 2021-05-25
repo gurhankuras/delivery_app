@@ -12,13 +12,6 @@ class PdfService {
   Future<File> generateSamplePdf() async {
     final pdf = Document();
 
-    // final headers = <String>['Sender Info', 'Receiver Info'];
-
-    // final data = [
-    //   ['Name: Gurhan', 'Name: Eric Catman'],
-    //   ['Address: HAHAH sokak ali caddesi no 4/4 Pendik Istanbul', 'Adress: dsd']
-    // ];
-
     pdf.addPage(
       await ReceiptPdf().getPage(),
     );
@@ -32,6 +25,7 @@ class PdfService {
     final bytes = await pdf.save();
     final dir = await getApplicationDocumentsDirectory();
     final pdfFile = File(path.join(dir.path, name));
+
     await pdfFile.writeAsBytes(bytes);
     return pdfFile;
   }

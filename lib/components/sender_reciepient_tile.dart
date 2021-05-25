@@ -51,7 +51,7 @@ class SenderRecipientTile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: SizeConfig.defaultSize * 0.5),
-              Text(order.senderAddress),
+              Text(order.senderAddress ?? 'Not Found'),
             ],
           ),
         ),

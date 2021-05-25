@@ -40,7 +40,7 @@ class SendPackageConfirmationPage extends StatelessWidget {
                 order: mockOrder,
                 editing: true,
                 onEdit: () {
-                  showMyDialog(context);
+                  // showMyDialog(context);
                 },
               );
             }),
@@ -58,38 +58,6 @@ class SendPackageConfirmationPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Future<Object> showMyDialog(BuildContext context) async {
-    return showGeneralDialog(
-      context: context,
-      barrierColor: Colors.black12.withOpacity(0.5), // Background color
-      barrierDismissible: false,
-      barrierLabel: 'Dialog',
-      transitionDuration: Duration(
-        milliseconds: 400,
-      ), // How long it takes to popup dialog after button click
-      pageBuilder: (_, __, ___) {
-        // Makes widget fullscreen
-        return SizedBox.expand(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: SizedBox.expand(
-                    child: Image.asset('assets/svgs/tenor.gif')),
-              ),
-              Expanded(
-                  flex: 1,
-                  child: AppButton(
-                    click: () => Navigator.pop(context),
-                    text: 'Hahahaha',
-                  )),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -145,7 +113,7 @@ SizedBox.expand(
                 ),
               ),
               SizedBox(height: SizeConfig.defaultSize * 0.5),
-              Text(mockOrder.packageCategory),
+              Text(mockOrder.packageCategory!),
             ],
           ),
         ),

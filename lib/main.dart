@@ -1,9 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/main_page/main_page.dart';
+import 'services/cache_manager.dart';
+import 'services/order_service.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheService.instance.initPreferences();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,7 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: MainPage(),
+      home: MultiProvider(
+        providers: [
+          Provider(
+            create: (context) => OrderService(dio: Dio()),
+          )
+        ],
+        child: MainPage(),
+      ),
       theme: appTheme(context),
     );
   }

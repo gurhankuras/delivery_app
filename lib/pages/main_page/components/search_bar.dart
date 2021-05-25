@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../dao/track_id.dart';
+import '../../../services/cache_manager.dart';
 import '../../../utils/size_config.dart';
 
 class SearchBar extends StatefulWidget {
   final String hintText;
   final void Function(String value) onSearch;
+  final VoidCallback onInfo;
   final TextInputType keyboardType;
   const SearchBar({
     Key? key,
-    this.keyboardType = TextInputType.text,
     required this.hintText,
     required this.onSearch,
+    required this.onInfo,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -27,15 +32,53 @@ class _SearchBarState extends State<SearchBar> {
     _textController = TextEditingController();
   }
 
+  Iterable<TrackId> getSuggestions(String pattern) {
+    if (pattern.isEmpty) {
+      return <TrackId>[];
+    }
+    return CacheService.instance
+        .getItems<TrackId>(TrackId())
+        .where((id) => id.value.toString().contains(pattern));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: widget.keyboardType,
-      controller: _textController,
-      onSubmitted: (text) {
-        widget.onSearch(text);
+    return TypeAheadField(
+      noItemsFoundBuilder: (context) => SizedBox.shrink(),
+      hideSuggestionsOnKeyboardHide: false,
+      textFieldConfiguration: TextFieldConfiguration(
+        controller: _textController,
+        decoration: getInputDecoration(),
+      ),
+      suggestionsCallback: (pattern) async {
+        return getSuggestions(pattern);
       },
-      decoration: getInputDecoration(),
+      itemBuilder: (context, TrackId item) {
+        return _buildSuggestion(item, context);
+      },
+      onSuggestionSelected: (TrackId suggestion) {
+        _textController.text = suggestion.value!;
+        print(suggestion.value);
+      },
+    );
+
+    // TextField(
+    //   keyboardType: widget.keyboardType,
+    //   controller: _textController,
+    //   decoration: getInputDecoration(),
+    // );
+  }
+
+  Padding _buildSuggestion(TrackId item, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.defaultSize * 2,
+        vertical: SizeConfig.defaultSize,
+      ),
+      child: Text(
+        item.value!,
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
     );
   }
 
@@ -53,7 +96,7 @@ class _SearchBarState extends State<SearchBar> {
         children: [
           IconButton(
             onPressed: () {
-              widget.onSearch(_textController.text);
+              widget.onInfo();
             },
             icon: FaIcon(
               FontAwesomeIcons.questionCircle,

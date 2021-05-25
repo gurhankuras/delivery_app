@@ -45,7 +45,10 @@ class HomePage extends StatelessWidget {
                 if (order == null) {
                   print('error order is nulll');
                 }
-                print(order!.toJson());
+                order?.orderStates?.forEach((element) {
+                  print(element.event);
+                  print(element.timeStamp);
+                });
               }).catchError((err) => print(err));
               // CacheService.instance
               //     .saveItem<TrackId>(int.parse(value), TrackId(value: value))

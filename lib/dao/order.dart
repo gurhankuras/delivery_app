@@ -1,6 +1,11 @@
-import '../base/json_serializable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class Order implements GJsonSerializable<Order> {
+import 'order_status.dart';
+
+part 'order.g.dart';
+
+@JsonSerializable()
+class Order {
   String? orderId;
 
   String? senderName;
@@ -35,76 +40,9 @@ class Order implements GJsonSerializable<Order> {
     this.vehicleType,
   });
 
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
   Order.empty();
-
-  @override
-  Order fromJson(Map<String, dynamic> json) {
-    final orderStatesJson = json['orderStates'];
-
-    var orderStateList;
-    if (orderStatesJson is List<Map<String, dynamic>>) {
-      final model = OrderStatus();
-      orderStateList = orderStatesJson
-          .map((orderStateMap) => model.fromJson(orderStateMap))
-          .toList();
-    }
-
-    return Order(
-      orderId: json['orderId'],
-      senderName: json['senderName'],
-      senderAddress: json['senderAddress'],
-      senderPhoneNumber: json['senderPhoneNumber'],
-      receiverName: json['receiverName'],
-      receiverAddress: json['receiverAddress'],
-      receiverPhoneNumber: json['receiverPhoneNumber'],
-      packageName: json['packageName'],
-      packageCategory: json['packageCategory'],
-      packageType: json['packageType'],
-      weight: json['weight'],
-      vehicleType: json['vehicleType'],
-      orderStates: orderStateList,
-    );
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['orderId'] = orderId;
-    data['senderName'] = senderName;
-    data['senderPhone'] = senderPhoneNumber;
-    data['senderAddress'] = senderAddress;
-    data['receiverName'] = receiverName;
-    data['receiverPhone'] = receiverPhoneNumber;
-    data['receiverAddress'] = receiverAddress;
-    data['packageName'] = packageName;
-    data['packageCategory'] = packageCategory;
-    data['packageType'] = packageType;
-    data['weight'] = weight;
-    data['vehicleType'] = vehicleType;
-    data['orderStates'] = orderStates?.map((state) => state.toJson());
-    return data;
-  }
-}
-
-class OrderStatus implements GJsonSerializable<OrderStatus> {
-  String? event;
-  DateTime? timeStamp;
-
-  OrderStatus({this.event, this.timeStamp});
-
-  @override
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['event'] = event;
-    data['timeStamp'] = timeStamp?.toIso8601String();
-    return data;
-  }
-
-  @override
-  OrderStatus fromJson(Map<String, dynamic> json) => OrderStatus(
-        event: json['event'],
-        timeStamp: DateTime.parse(json['timeStamp']),
-      );
 }
 
 final _mockOrderStates = <OrderStatus>[

@@ -6,7 +6,7 @@ import '../dao/order.dart';
 
 class OrderService {
   final Dio dio;
-  final Order modelOrder = Order.empty();
+  // final Order modelOrder = Order.empty();
 
   OrderService({
     required this.dio,
@@ -28,7 +28,7 @@ class OrderService {
     final response = await dio.get(url);
 
     if (response.statusCode == HttpStatus.ok) {
-      return modelOrder.fromJson(response.data);
+      return Order.fromJson(response.data);
     }
     return null;
   }

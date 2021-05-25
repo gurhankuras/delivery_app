@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
 
-import '../../dao/order.dart';
-import '../../services/order_service.dart';
 import '../../utils/size_config.dart';
 import '../main_page/components/search_bar.dart';
+import '../order_details_page/order_details_page.dart';
 
 class HomePage extends StatelessWidget {
   String? validateTrackId(String id) {
@@ -38,18 +36,24 @@ class HomePage extends StatelessWidget {
 
                 return;
               }
-              context
-                  .read<OrderService>()
-                  .queryTrackId(value)
-                  .then((Order? order) {
-                if (order == null) {
-                  print('error order is nulll');
-                }
-                order?.orderStates?.forEach((element) {
-                  print(element.event);
-                  print(element.timeStamp);
-                });
-              }).catchError((err) => print(err));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => OrderDetailPage(
+                  trackNo: value,
+                ),
+              ));
+
+              // context
+              //     .read<OrderService>()
+              //     .queryTrackId(value)
+              //     .then((Order? order) {
+              //   if (order == null) {
+              //     print('error order is nulll');
+              //   }
+              //   order?.orderStates?.forEach((element) {
+              //     print(element.event);
+              //     print(element.timeStamp);
+              //   });
+              // }).catchError((err) => print(err));
               // CacheService.instance
               //     .saveItem<TrackId>(int.parse(value), TrackId(value: value))
               //     .then((value) => print(value ? 'Saved' : 'Fail!'));

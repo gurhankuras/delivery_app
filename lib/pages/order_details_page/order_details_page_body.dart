@@ -1,20 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/sender_receiver_section.dart';
 import '../../dao/order.dart';
+import '../../dao/track_id.dart';
+import '../../services/cache_manager.dart';
+import '../../services/order_service.dart';
 import '../../utils/size_config.dart';
 
-class OrderDetailsPageBody extends StatelessWidget {
+class OrderDetailsPageBody extends StatefulWidget {
+  final String trackNo;
+
   const OrderDetailsPageBody({
+    required this.trackNo,
     Key? key,
-    required this.order,
   }) : super(key: key);
 
-  final Order order;
+  @override
+  _OrderDetailsPageBodyState createState() => _OrderDetailsPageBodyState();
+}
+
+class _OrderDetailsPageBodyState extends State<OrderDetailsPageBody> {
+  Future<Order>? orderFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    orderFuture = context.read<OrderService>().queryTrackId(widget.trackNo);
+  }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<Order?>(
+      future: orderFuture,
+      builder: (context, AsyncSnapshot<Order?> snapshot) {
+        if (snapshot.hasData) {
+          // CacheService.instance.clear()
+          // ;
+          CacheService.instance
+              .saveItem<TrackId>(
+                  int.parse(widget.trackNo), TrackId(value: widget.trackNo))
+              .then((value) => print(value ? 'Saved' : 'Fail!'));
+          return buildContent(context, snapshot.data!);
+        } else if (snapshot.hasError) {
+          return _buildError();
+        } else {
+          print(snapshot.connectionState);
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+    // buildContent(context);
+  }
+
+  Center _buildError() {
+    return Center(
+      child: Text('Order Not found'),
+    );
+  }
+
+  Column buildContent(BuildContext context, Order order) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

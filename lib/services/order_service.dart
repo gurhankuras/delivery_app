@@ -23,13 +23,13 @@ class OrderService {
     return false;
   }
 
-  Future<Order?> queryTrackId(String id) async {
+  Future<Order> queryTrackId(String id) async {
     final url = '$baseUrl/track/$id';
     final response = await dio.get(url);
 
     if (response.statusCode == HttpStatus.ok) {
       return Order.fromJson(response.data);
     }
-    return null;
+    throw response.data;
   }
 }

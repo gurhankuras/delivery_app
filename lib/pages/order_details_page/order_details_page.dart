@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../dao/order.dart';
 import '../../utils/size_config.dart';
 import 'order_details_page_body.dart';
 
 class OrderDetailPage extends StatelessWidget {
-  final Order order;
+  final String trackNo;
 
   const OrderDetailPage({
+    required this.trackNo,
     Key? key,
-    required this.order,
   }) : super(key: key);
 
   @override
@@ -21,7 +20,10 @@ class OrderDetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(SizeConfig.defaultSize * 2),
-        child: SingleChildScrollView(child: OrderDetailsPageBody(order: order)),
+        child: SingleChildScrollView(
+            child: OrderDetailsPageBody(
+          trackNo: trackNo,
+        )),
       ),
     );
   }

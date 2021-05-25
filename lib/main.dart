@@ -10,7 +10,13 @@ import 'services/order_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheService.instance.initPreferences();
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    Provider(
+      create: (context) => OrderService(
+        dio: Dio(),
+      ),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,14 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: MultiProvider(
-        providers: [
-          Provider(
-            create: (context) => OrderService(dio: Dio()),
-          )
-        ],
-        child: MainPage(),
-      ),
+      home: MainPage(),
       theme: appTheme(context),
     );
   }

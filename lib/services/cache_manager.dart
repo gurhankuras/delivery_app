@@ -1,7 +1,8 @@
-import 'package:delivery_app/base/json_serializable.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../base/json_serializable.dart';
 
 class CacheService {
   static CacheService? _instance;
@@ -21,12 +22,12 @@ class CacheService {
     prefs = await SharedPreferences.getInstance();
   }
 
-  String generateKey<T>(int id) => "${T.toString()}$id";
+  String generateKey<T>(int id) => '${T.toString()}$id';
 
   // i assume that id is integer. if you need to use id that includes non-numeric characters then
   // refactor the function
   bool keyMatched<T>(String key) {
-    final keyRegex = RegExp("^${T}[0-9]+\$");
+    final keyRegex = RegExp('^${T}[0-9]+\$');
     return keyRegex.hasMatch(key);
   }
 
@@ -34,14 +35,14 @@ class CacheService {
     if (isCached<T>(id)) {
       return false;
     }
-    String key = generateKey<T>(id);
+    final key = generateKey<T>(id);
     var itemMap = item.toJson();
     final saved = await prefs.setString(key, json.encode(itemMap));
     return saved;
   }
 
   Future<bool> removeItem<T>(int id) async {
-    String key = generateKey<T>(id);
+    final key = generateKey<T>(id);
     final removed = await prefs.remove(key);
     return removed;
   }
@@ -66,9 +67,9 @@ class CacheService {
   List<T> getItems<T extends GJsonSerializable>(T model) {
     final keys = prefs.getKeys();
 
-    List<T> items = [];
+    final items = <T>[];
     keys.where((key) => keyMatched<T>(key)).forEach((correctKey) {
-      String item = prefs.getString(correctKey)!;
+      final item = prefs.getString(correctKey)!;
       var itemMap = json.decode(item);
       assert(itemMap is Map<String, dynamic>);
       items.add(model.fromJson(itemMap));

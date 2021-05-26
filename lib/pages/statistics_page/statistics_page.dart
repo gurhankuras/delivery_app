@@ -5,9 +5,7 @@ import 'package:provider/provider.dart';
 import '../../components/app_button.dart';
 import '../../services/order_statistics_service.dart';
 import '../../utils/size_config.dart';
-import 'components/app_bar_chart.dart';
-import 'components/app_bar_chart_placeholder.dart';
-import 'components/app_pie_chart.dart';
+import 'components/chart_future_builder.dart';
 
 class StatisticsPage extends StatefulWidget {
   @override
@@ -59,7 +57,6 @@ class _StatisticsPageState extends State<StatisticsPage>
         .fetchCategoryStatByDate(Stats.amount, _date);
   }
 
-// TODO REFACTOR
   @override
   Widget build(BuildContext context) {
     print('build');
@@ -74,87 +71,21 @@ class _StatisticsPageState extends State<StatisticsPage>
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          FutureBuilder(
-            future: quantityChartInfo,
-            builder: (context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return AppBarChartPlaceholder();
-              }
-              if (snapshot.hasData) {
-                final quantities = snapshot.data!.values.cast<int>().toList();
-                final labels = snapshot.data!.keys.toList();
-
-                return AppBarChart(
-                  title: 'Total Number Of Products Sent By Categories',
-                  quantities: quantities,
-                  labels: labels,
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong!'));
-              }
-              return AppBarChartPlaceholder();
-            },
+          ChartFutureBuilder(
+            chartFuture: quantityChartInfo,
+            title: 'Total Number Of Products Sent By Categories',
           ),
-          FutureBuilder(
-            future: quantityChartInfo,
-            builder: (context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return AppBarChartPlaceholder();
-              }
-              if (snapshot.hasData) {
-                final quantities = snapshot.data!.values.cast<int>().toList();
-                final labels = snapshot.data!.keys.toList();
-                return AppPieChart(titles: labels, values: quantities);
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong!'));
-              }
-              return AppBarChartPlaceholder();
-            },
+          ChartFutureBuilder(
+            chartFuture: quantityChartInfo,
+            isPieChart: true,
           ),
-          FutureBuilder(
-            future: amountChartInfo,
-            builder: (context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return AppBarChartPlaceholder();
-              }
-
-              if (snapshot.hasData) {
-                final amount = snapshot.data!.values.cast<int>().toList();
-                final labels = snapshot.data!.keys.toList();
-
-                return AppBarChart(
-                  title: 'Total Sum Earned By Category',
-                  quantities: amount,
-                  labels: labels,
-                );
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong!'));
-              }
-              return AppBarChartPlaceholder();
-            },
+          ChartFutureBuilder(
+            chartFuture: amountChartInfo,
+            title: 'Total Sum Earned By Category',
           ),
-          FutureBuilder(
-            future: amountChartInfo,
-            builder: (context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return AppBarChartPlaceholder();
-              }
-
-              if (snapshot.hasData) {
-                final amount = snapshot.data!.values.cast<int>().toList();
-                final labels = snapshot.data!.keys.toList();
-
-                // return AppBarChart(
-                //   title: 'Total Sum Earned By Category',
-                //   quantities: amount,
-                //   labels: labels,
-                // );
-                return AppPieChart(titles: labels, values: amount);
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong!'));
-              }
-              return AppBarChartPlaceholder();
-            },
+          ChartFutureBuilder(
+            chartFuture: amountChartInfo,
+            isPieChart: true,
           ),
         ],
       ),

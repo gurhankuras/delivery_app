@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/main_page/main_page.dart';
+import 'providers/home_vm.dart';
 import 'providers/order_form_data.dart';
 import 'services/cache_manager.dart';
 import 'services/order_service.dart';
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: MainPage(),
+      home: ChangeNotifierProvider(
+        create: (context) => HomeVM(),
+        child: MainPage(),
+      ),
       theme: appTheme(context),
     );
   }

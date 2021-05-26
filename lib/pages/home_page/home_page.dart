@@ -6,7 +6,13 @@ import '../../utils/size_config.dart';
 import '../main_page/components/search_bar.dart';
 import '../order_details_page/order_details_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   String? validateTrackId(String id) {
     if (id.trim() == '') {
       return 'Must be filled!';
@@ -112,6 +118,9 @@ class HomePage extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 

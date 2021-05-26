@@ -3,9 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
-import 'package:delivery_app/dao/order.dart';
-import 'package:delivery_app/pdf_components/pdf_page_manager.dart';
-import 'package:provider/provider.dart';
+import '../dao/order.dart';
+import 'pdf_page_manager.dart';
 
 class ReceiptPdfManager implements PdfPageManager {
   PdfColor mainColor = PdfColor.fromHex('ef5448');

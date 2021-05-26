@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../dao/order.dart';
 import '../../../utils/size_config.dart';
+import '../dao/person.dart';
 
 class SenderRecipientTile extends StatelessWidget {
-  final Order order;
+  final Person person;
   final bool editing;
+  final String title;
+
   final void Function()? onEdit;
 
   const SenderRecipientTile({
     Key? key,
-    required this.order,
+    required this.title,
+    required this.person,
     this.editing = false,
     this.onEdit,
   })  : assert((editing && onEdit != null) || (!editing && onEdit == null)),
@@ -37,10 +40,10 @@ class SenderRecipientTile extends StatelessWidget {
               SizedBox(height: SizeConfig.defaultSize * 0.5),
               Text.rich(
                 TextSpan(
-                  text: order.senderName,
+                  text: person.name,
                   children: [
                     TextSpan(
-                        text: '  (${order.senderPhoneNumber})',
+                        text: '  (${person.phoneNumber})',
                         style: Theme.of(context).textTheme.subtitle2?.copyWith(
                               fontWeight: FontWeight.normal,
                             )),
@@ -51,7 +54,7 @@ class SenderRecipientTile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: SizeConfig.defaultSize * 0.5),
-              Text(order.senderAddress ?? 'Not Found'),
+              Text(person.address),
             ],
           ),
         ),

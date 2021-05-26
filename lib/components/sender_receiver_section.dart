@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../dao/order.dart';
 import '../../../utils/size_config.dart';
+import '../dao/person.dart';
 import 'sender_reciepient_tile.dart';
 
 class SenderReceiverSection extends StatelessWidget {
@@ -32,7 +33,9 @@ class SenderReceiverSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SenderRecipientTile(
-                order: order,
+                title: 'Sender',
+                person: order.sender ??
+                    Person(name: '', phoneNumber: '', trId: '', address: ''),
                 editing: editing,
                 onEdit: onEdit,
               ),
@@ -50,7 +53,9 @@ class SenderReceiverSection extends StatelessWidget {
                 ],
               ),
               SenderRecipientTile(
-                order: order,
+                title: 'Receiver',
+                person: order.receiver ??
+                    Person(name: '', phoneNumber: '', trId: '', address: ''),
                 editing: editing,
                 onEdit: onEdit,
               ),

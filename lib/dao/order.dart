@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'order_status.dart';
+import 'person.dart';
 
 part 'order.g.dart';
 
@@ -8,13 +9,8 @@ part 'order.g.dart';
 class Order {
   String? orderId;
 
-  String? senderName;
-  String? senderPhoneNumber;
-  String? senderAddress;
-
-  String? receiverName;
-  String? receiverPhoneNumber;
-  String? receiverAddress;
+  Person? sender;
+  Person? receiver;
 
   List<OrderStatus>? orderStates;
 
@@ -26,12 +22,8 @@ class Order {
 
   Order({
     this.orderId,
-    this.senderName,
-    this.senderPhoneNumber,
-    this.senderAddress,
-    this.receiverName,
-    this.receiverPhoneNumber,
-    this.receiverAddress,
+    this.sender,
+    this.receiver,
     this.orderStates,
     this.packageName,
     this.packageCategory,
@@ -40,9 +32,20 @@ class Order {
     this.vehicleType,
   });
 
+  Order.empty() {
+    orderId = '';
+    sender = Person(address: '', name: '', phoneNumber: '', trId: '');
+    receiver = Person(address: '', name: '', phoneNumber: '', trId: '');
+    orderStates = [];
+    packageName = '';
+    packageCategory = '';
+    packageType = '';
+    weight = 0;
+    vehicleType = '';
+  }
+
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
-  Order.empty();
 }
 
 final _mockOrderStates = <OrderStatus>[
@@ -67,12 +70,18 @@ final _mockOrderStates = <OrderStatus>[
 final mockOrder = Order(
     orderId: '249 316 28C',
     packageCategory: 'Electronics',
-    senderName: 'Arvin Aradhana',
-    senderPhoneNumber: '+62 812 332 021',
-    senderAddress: '3117 Doctors Drive, LA, California',
-    receiverName: 'Eric Cartman',
-    receiverPhoneNumber: '+62 310 341 303',
-    receiverAddress: '4123 Big Green, LA, California',
+    sender: Person(
+      name: 'Arvin Aradhana',
+      phoneNumber: '+62 812 332 021',
+      address: '3117 Doctors Drive, LA, California',
+      trId: '21484486692',
+    ),
+    receiver: Person(
+      name: 'Eric Cartman',
+      phoneNumber: '+62 310 341 303',
+      address: '4123 Big Green, LA, California',
+      trId: '21234634575',
+    ),
     packageName: 'iPhone 11 Pro 256 GB',
     vehicleType: 'Motorcycle',
     weight: 1,

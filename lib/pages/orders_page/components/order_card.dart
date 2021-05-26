@@ -1,9 +1,8 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:delivery_app/components/stage/stage_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../../components/stage/stage_manager.dart';
 import '../../../utils/size_config.dart';
-import '../orders_page.dart';
 
 class OrderCard extends StatelessWidget {
   @override

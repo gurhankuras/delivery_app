@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/main_page/main_page.dart';
+import 'providers/order_form_data.dart';
 import 'services/cache_manager.dart';
 import 'services/order_service.dart';
 
@@ -16,6 +17,7 @@ void main() async {
         dio: Dio(),
       ),
     ),
+    Provider(create: (context) => OrderFormData())
   ], child: MyApp()));
 }
 
@@ -60,7 +62,10 @@ class MyApp extends StatelessWidget {
         unselectedLabelColor: Colors.black.withOpacity(0.4),
         labelColor: Color(0xFFef5448),
       ),
-      textTheme: GoogleFonts.latoTextTheme(),
+      textTheme: GoogleFonts.latoTextTheme().copyWith(
+          headline6: TextStyle(
+        color: Color(0xFF3D4B61),
+      )),
     );
   }
 }

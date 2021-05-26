@@ -1,8 +1,12 @@
+import '../../services/pdf_service.dart';
 import 'package:direct_select/direct_select.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 
+import '../../dao/order.dart';
+import '../../providers/order_form_data.dart';
 import '../../utils/size_config.dart';
 import '../send_package_confirmation_page/send_package_confirmation_page.dart';
 import 'components/my_selection.dart';
@@ -14,43 +18,15 @@ class SendPackageFormPage extends StatefulWidget {
 
 class _SendPackageFormPageState extends State<SendPackageFormPage> {
   final _formKey = GlobalKey<FormState>();
+  late final Order? order;
+  // late final Map<String, dynamic> _formInfo;
 
   @override
   void initState() {
     super.initState();
+    order = context.read<OrderFormData>().order ?? Order.empty();
+    // _formInfo = order!.toJson();
   }
-
-  Future<void> submitForm() async {
-    // final currentState = _formKey.currentState;
-    // if (currentState != null && currentState.validate()) {
-    //   currentState.save();
-    //   _formInfo['type'] = types[typeIndex!];
-    //   _formInfo['category'] = categories[categoryIndex!];
-    //   print(_formInfo);
-    // final hasBeenSent = await context.read<OrderService>().submitOrder(_formInfo);
-    //   print(hasBeenSent);
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SendPackageConfirmationPage(formData: _formInfo),
-      ),
-    );
-    // }
-  }
-
-  final Map<String, dynamic> _formInfo = {
-    'senderName': '',
-    'senderPhone': '',
-    'senderAddress': '',
-    'receiverName': '',
-    'receiverPhone': '',
-    'receiverAddress': '',
-    'category': '',
-    'type': '',
-    'packageName': '',
-  };
-
-  int? categoryIndex = 0;
-  int? typeIndex = 0;
 
   final categories = [
     'Electronics',
@@ -63,6 +39,30 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
     'Bundle',
     'Package',
   ];
+
+  int categoryIndex = 0;
+  int typeIndex = 0;
+
+  Future<void> submitForm() async {
+    final currentState = _formKey.currentState;
+    if (currentState != null && currentState.validate()) {
+      currentState.save();
+      order!.packageType = types[typeIndex];
+      order!.packageCategory = categories[categoryIndex];
+
+      context.read<OrderFormData>().saveOrder(order! /*_formInfo*/);
+      // ignore: unawaited_futures
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Provider(
+              create: (context) => PdfService(),
+              child: SendPackageConfirmationPage()),
+        ),
+      );
+      // // }
+    }
+  }
+
   List<MySelectionItem> _buildCategories() {
     return categories.map((e) => MySelectionItem(title: e)).toList();
   }
@@ -167,11 +167,14 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
 
   TextFormField buildNameField({required bool isSender}) {
     return TextFormField(
+      initialValue: isSender ? order!.sender!.name : order!.receiver!.name,
       onSaved: (newValue) {
         if (isSender) {
-          _formInfo['senderName'] = newValue;
+          // _formInfo['sender']['name'] = newValue;
+          order!.sender!.name = newValue!;
         } else {
-          _formInfo['receiverName'] = newValue;
+          // _formInfo['receiver']['name'] = newValue;
+          order!.receiver!.name = newValue!;
         }
       },
       validator: (value) {
@@ -190,11 +193,15 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
 
   TextFormField buildPhoneField({required bool isSender}) {
     return TextFormField(
+      initialValue:
+          isSender ? order!.sender!.phoneNumber : order!.receiver!.phoneNumber,
       onSaved: (newValue) {
         if (isSender) {
-          _formInfo['senderPhone'] = newValue;
+          order!.sender!.phoneNumber = newValue!;
+          // _formInfo['sender']['phoneNumber'] = newValue;
         } else {
-          _formInfo['receiverPhone'] = newValue;
+          // _formInfo['receiver']['phoneNumber'] = newValue;
+          order!.receiver!.phoneNumber = newValue!;
         }
       },
       validator: (value) {
@@ -219,11 +226,15 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
 
   TextFormField buildAddressField({required bool isSender}) {
     return TextFormField(
+      initialValue:
+          isSender ? order!.sender!.address : order!.receiver!.address,
       onSaved: (newValue) {
         if (isSender) {
-          _formInfo['senderAddress'] = newValue;
+          // _formInfo['sender']['address'] = newValue;
+          order!.sender!.address = newValue!;
         } else {
-          _formInfo['receiverAddress'] = newValue;
+          // _formInfo['receiver']['address'] = newValue;
+          order!.receiver!.address = newValue!;
         }
       },
       validator: (value) {
@@ -286,13 +297,16 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
 
   TextFormField buildPackageNameField() {
     return TextFormField(
+        initialValue: order!.packageName,
         validator: (value) {
           if (value != null && value.trim() == '') {
             return 'This field cannot be empty';
           }
           return null;
         },
-        onSaved: (newValue) => _formInfo['packageName'] = newValue,
+        onSaved: (newValue) {
+          order!.packageName = newValue;
+        },
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.name,
@@ -315,11 +329,11 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
         ),
         DirectSelect(
             itemExtent: 75.0,
-            selectedIndex: categoryIndex ?? 0,
+            selectedIndex: categoryIndex,
             onSelectedItemChanged: (index) {
               setState(
                 () {
-                  categoryIndex = index;
+                  categoryIndex = index!;
                 },
               );
             },
@@ -327,7 +341,7 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
             items: _buildCategories(),
             child: MySelectionItem(
               isForList: false,
-              title: categories[categoryIndex ?? 0],
+              title: categories[categoryIndex],
             )),
       ],
     );
@@ -345,11 +359,11 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
         ),
         DirectSelect(
             itemExtent: 75.0,
-            selectedIndex: typeIndex ?? 0,
+            selectedIndex: typeIndex,
             onSelectedItemChanged: (index) {
               setState(
                 () {
-                  typeIndex = index;
+                  typeIndex = index!;
                 },
               );
             },
@@ -357,7 +371,7 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
             items: _buildTypes(),
             child: MySelectionItem(
               isForList: false,
-              title: types[typeIndex ?? 0],
+              title: types[typeIndex],
             )),
       ],
     );

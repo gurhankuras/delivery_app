@@ -15,12 +15,16 @@ class OrderService {
   String get baseUrl =>
       Platform.isAndroid ? 'http://10.0.2.2:5000' : 'http://localhost:5000';
 
-  Future<bool> submitOrder(Map<String, dynamic> formData) async {
-    final response = await dio.post('$baseUrl/new-order', data: formData);
+  Future<String?> submitOrder(Order order) async {
+    final response = await dio.post('$baseUrl/new-order', data: order.toJson());
     if (response.statusCode == HttpStatus.ok) {
-      return true;
+      final id = response.data['id'];
+      if (id is int) {
+        return id.toString();
+      }
+      return null;
     }
-    return false;
+    return null;
   }
 
   Future<Order> queryTrackId(String id) async {
@@ -32,4 +36,18 @@ class OrderService {
     }
     throw response.data;
   }
+
+  // Future<String?> getVendorPhoneNumber() async {
+  //   final url = '$baseUrl/vendor/phone';
+  //   final response = await dio.get(url);
+
+  //   if (response.statusCode == HttpStatus.ok) {
+  //     final phoneNumber = response.data;
+  //     if (phoneNumber is String) {
+  //       return phoneNumber;
+  //     }
+  //     return null;
+  //   }
+  //   return null;
+  // }
 }

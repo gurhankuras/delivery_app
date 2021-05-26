@@ -1,11 +1,15 @@
+import 'package:delivery_app/services/order_statistics_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/app_logo.dart';
 import '../../utils/size_config.dart';
 import '../home_page/home_page.dart';
 import '../orders_page/orders_page.dart';
 import '../send_package_form_page/send_package_form_page.dart';
+import '../statistics_page/statistics_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -18,8 +22,9 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     OrdersPage(),
     SendPackageFormPage(),
-    Text(
-      'Index 2: School',
+    Provider(
+      create: (context) => OrderStatisticsService(Dio()),
+      child: StatisticsPage(),
     ),
   ];
 

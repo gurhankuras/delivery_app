@@ -9,12 +9,12 @@ part of 'order.dart';
 Order _$OrderFromJson(Map<String, dynamic> json) {
   return Order(
     orderId: json['orderId'] as String?,
-    senderName: json['senderName'] as String?,
-    senderPhoneNumber: json['senderPhoneNumber'] as String?,
-    senderAddress: json['senderAddress'] as String?,
-    receiverName: json['receiverName'] as String?,
-    receiverPhoneNumber: json['receiverPhoneNumber'] as String?,
-    receiverAddress: json['receiverAddress'] as String?,
+    sender: json['sender'] == null
+        ? null
+        : Person.fromJson(json['sender'] as Map<String, dynamic>),
+    receiver: json['receiver'] == null
+        ? null
+        : Person.fromJson(json['receiver'] as Map<String, dynamic>),
     orderStates: (json['orderStates'] as List<dynamic>?)
         ?.map((e) => OrderStatus.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -28,12 +28,8 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'orderId': instance.orderId,
-      'senderName': instance.senderName,
-      'senderPhoneNumber': instance.senderPhoneNumber,
-      'senderAddress': instance.senderAddress,
-      'receiverName': instance.receiverName,
-      'receiverPhoneNumber': instance.receiverPhoneNumber,
-      'receiverAddress': instance.receiverAddress,
+      'sender': instance.sender,
+      'receiver': instance.receiver,
       'orderStates': instance.orderStates,
       'packageName': instance.packageName,
       'packageCategory': instance.packageCategory,

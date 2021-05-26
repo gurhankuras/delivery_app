@@ -1,19 +1,18 @@
 import 'dart:io';
 
-import 'package:delivery_app/pdf_components/receipt_pdf.dart';
-import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:pdf/widgets.dart';
+
+import '../pdf_components/pdf_page_manager.dart';
 
 class PdfService {
-  Future<File> generateSamplePdf() async {
+  Future<File> generate(PdfPageManager pageManager) async {
     final pdf = Document();
 
     pdf.addPage(
-      await ReceiptPdf().getPage(),
+      await pageManager.getPage(),
     );
     return _saveDocument(name: 'sample.pdf', pdf: pdf);
   }

@@ -1,10 +1,21 @@
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
-class ReceiptPdf {
-  PdfColor mainColor = PdfColor(239 / 255, 84 / 255, 72 / 255);
+import 'package:delivery_app/dao/order.dart';
+import 'package:delivery_app/pdf_components/pdf_page_manager.dart';
+import 'package:provider/provider.dart';
 
+class ReceiptPdfManager implements PdfPageManager {
+  PdfColor mainColor = PdfColor.fromHex('ef5448');
+  TextStyle get textStyle =>
+      TextStyle(fontWeight: FontWeight.bold, color: mainColor);
+  final Order order;
+
+  ReceiptPdfManager(this.order);
+
+  @override
   Future<Page> getPage() async {
     final logoSvg =
         await rootBundle.loadString('assets/svgs/fast-delivery.svg');
@@ -12,11 +23,13 @@ class ReceiptPdf {
       build: (context) => Container(
         child: Column(
           children: [
+            Spacer(),
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               _buildLogo(logoSvg),
               Spacer(),
               _buildInfo(),
             ]),
+            Spacer(flex: 1),
             Header(
               child: Center(child: Text('INVOICE DETAILS')),
             ),
@@ -26,56 +39,79 @@ class ReceiptPdf {
             _buildFieldRow(
               context: context,
               fieldName: 'Address',
-              senderValue: 'HAHAH sokak ali caddesi no 4/4 Pendik',
-              receiverValue:
-                  'HAHAH sokak ali caddesi no 4/4 Pendik Istanbul HAHAH sokak ali caddesi no 4/4 Pendik Istanbul HAHAH sokak ali caddesi no 4/4 Pendik Istanbul',
+              senderValue: order.sender!.address,
+              receiverValue: order.receiver!.address,
             ),
             Container(height: 20),
             _buildFieldRow(
               context: context,
               fieldName: 'Name',
-              senderValue: 'Gurhan',
-              receiverValue: 'Eric Cartman',
+              senderValue: order.sender!.name,
+              receiverValue: order.receiver!.name,
             ),
             Container(height: 20),
             _buildFieldRow(
               context: context,
-              fieldName: 'Address',
-              senderValue: 'HAHAH sokak ali caddesi no 4/4 Pendik',
-              receiverValue:
-                  'HAHAH sokak ali caddesi no 4/4 Pendik Istanbul HAHAH sokak ali caddesi no 4/4 Pendik Istanbul HAHAH sokak ali caddesi no 4/4 Pendik Istanbul',
+              fieldName: 'Phone Number',
+              senderValue: order.sender!.phoneNumber,
+              receiverValue: order.receiver!.phoneNumber,
             ),
+            Container(height: 20),
+            _buildFieldRow(
+              context: context,
+              fieldName: 'TR Id',
+              senderValue: '21484486692',
+              receiverValue: '21553484338',
+            ),
+            Spacer(flex: 9),
+            Lorem(),
           ],
         ),
       ),
     );
   }
 
-  Row _buildLogo(String logoSvg) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgImage(
-          svg: logoSvg,
-          height: 40,
-          colorFilter: mainColor,
-        ),
-        SizedBox(
-          width: 6,
-        ),
-        Text(
-          'Deliver',
-        ),
-        Text(
-          'it',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: mainColor,
+  Widget _buildLogo(String logoSvg) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgImage(
+            svg: logoSvg,
+            height: 40,
+            colorFilter: mainColor,
           ),
+          SizedBox(width: 6),
+          Text('Deliver'),
+          Text('it', style: textStyle),
+        ],
+      ),
+      Text(
+        'Package Info',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      SizedBox(height: 10),
+      Row(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name:', style: textStyle),
+            Text('Category:', style: textStyle),
+            Text('Type:', style: textStyle),
+          ],
         ),
-      ],
-    );
+        SizedBox(width: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(order.packageName!),
+            Text(order.packageCategory!),
+            Text(order.packageType!),
+          ],
+        )
+      ]),
+    ]);
   }
 
   Widget _buildInfo() {
@@ -93,27 +129,18 @@ class ReceiptPdf {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Track Id:',
-                style: TextStyle(
-                  color: mainColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Date:',
-                style: TextStyle(
-                  color: mainColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text('Track Id:', style: textStyle),
+              Text('Date:', style: textStyle),
             ],
           ),
           SizedBox(width: 20),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('2223 4222 453GD'),
-            Text('11.01.2021'),
-          ])
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(order.orderId!),
+              Text(DateFormat.yMd().format(DateTime.now())),
+            ],
+          )
         ]),
       ],
     );

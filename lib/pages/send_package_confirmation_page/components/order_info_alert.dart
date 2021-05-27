@@ -5,19 +5,25 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../utils/size_config.dart';
 
 class OrderInfoAlert {
-  final VoidCallback onGeneratePdf;
+  final VoidCallback onPdf;
   final VoidCallback onClose;
   final BuildContext context;
   final bool success;
 
-  OrderInfoAlert({
-    required this.onGeneratePdf,
+  const OrderInfoAlert({
+    required this.onPdf,
     required this.onClose,
     required this.context,
     this.success = true,
   });
 
   void show() {
+    final alertStyle = AlertStyle(
+      isOverlayTapDismiss: false,
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(SizeConfig.defaultSize * 2),
+      ),
+    );
     final svgFileName = success ? 'on_the_way' : 'faq';
     final title = success ? 'Success!' : 'Fail!';
     final description =
@@ -26,8 +32,9 @@ class OrderInfoAlert {
         success ? Theme.of(context).colorScheme.secondary : Colors.red;
 
     final alert = Alert(
-      closeIcon: Container(),
-      // closeFunction: () => print('hehehehe'),
+      // closeIcon: Container(),
+      style: alertStyle,
+      closeFunction: onClose,
       context: context,
       title: title,
       content: _buildContents(svgFileName, description),
@@ -57,7 +64,7 @@ class OrderInfoAlert {
 
   DialogButton _buildGetPdfButton(BuildContext context) {
     return DialogButton(
-      onPressed: /*() => generateAndShowPdf(context)*/ onGeneratePdf,
+      onPressed: onPdf,
       color: Theme.of(context).colorScheme.primary,
       child: Text(
         'Get Receipt',
@@ -68,15 +75,7 @@ class OrderInfoAlert {
 
   DialogButton _buildCloseButton(BuildContext context, Color buttonColor) {
     return DialogButton(
-      onPressed:
-          // () {
-          //   var count = 0;
-          //   Navigator.popUntil(context, (route) {
-          //     return count++ == 3;
-          //   });
-          //   context.read<OrderFormData>().clearOrder();
-          // },
-          onClose,
+      onPressed: onClose,
       color: buttonColor,
       child: Text(
         'Close',

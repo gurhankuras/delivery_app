@@ -47,6 +47,7 @@ class _SearchBarState extends State<SearchBar> {
       noItemsFoundBuilder: (context) => SizedBox.shrink(),
       hideSuggestionsOnKeyboardHide: false,
       textFieldConfiguration: TextFieldConfiguration(
+        keyboardType: TextInputType.number,
         controller: _textController,
         decoration: getInputDecoration(),
       ),
@@ -61,12 +62,6 @@ class _SearchBarState extends State<SearchBar> {
         print(suggestion.value);
       },
     );
-
-    // TextField(
-    //   keyboardType: widget.keyboardType,
-    //   controller: _textController,
-    //   decoration: getInputDecoration(),
-    // );
   }
 
   Padding _buildSuggestion(TrackId item, BuildContext context) {

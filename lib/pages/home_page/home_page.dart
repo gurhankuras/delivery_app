@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(
       child: Column(
         children: [
@@ -42,27 +43,13 @@ class _HomePageState extends State<HomePage>
 
                 return;
               }
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => OrderDetailPage(
-                  trackNo: value,
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => OrderDetailPage(
+                    trackNo: value,
+                  ),
                 ),
-              ));
-
-              // context
-              //     .read<OrderService>()
-              //     .queryTrackId(value)
-              //     .then((Order? order) {
-              //   if (order == null) {
-              //     print('error order is nulll');
-              //   }
-              //   order?.orderStates?.forEach((element) {
-              //     print(element.event);
-              //     print(element.timeStamp);
-              //   });
-              // }).catchError((err) => print(err));
-              // CacheService.instance
-              //     .saveItem<TrackId>(int.parse(value), TrackId(value: value))
-              //     .then((value) => print(value ? 'Saved' : 'Fail!'));
+              );
             },
             keyboardType: TextInputType.number,
             hintText: 'Gönderi sorgula',
@@ -122,41 +109,3 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
 }
-
-
-
-
-
-// Alert(
-                //     context: context,
-                //     title: "LOGIN",
-                //     content: Column(
-                //       children: <Widget>[
-                //         SvgPicture.asset('assets/svgs/faq.svg'),
-                //       ],
-                //     ),
-                //     buttons: [
-                //       DialogButton(
-                //         onPressed: () => Navigator.pop(context),
-                //         child: Text(
-                //           "LOGIN",
-                //           style: TextStyle(color: Colors.white, fontSize: 20),
-                //         ),
-                //       )
-                //     ]).show();
-                // final pdfService = PdfService();
-                // pdfService
-                //     .generateSamplePdf()
-                //     .then((file) => pdfService.openFile(file));
-                // return;
-
-
- // Dio().get('http://10.0.2.2:5000/$value').then((res) {
-              //   print(res.data);
-
-              //   Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => OrderDetailPage(order: mockOrder),
-              //   ));
-              // }).catchError((err) => print(err));
-
-              // print('Bir hata oldu');

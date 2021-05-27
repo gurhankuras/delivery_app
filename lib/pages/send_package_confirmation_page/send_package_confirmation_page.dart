@@ -24,11 +24,8 @@ class SendPackageConfirmationPage extends StatelessWidget {
     if (success) context.read<OrderFormData>().order!.orderId = id;
     OrderInfoAlert(
       success: success,
-      onClose: () {
-        Navigator.of(context).popNTimes(3);
-        context.read<OrderFormData>().clearOrder();
-      },
-      onGeneratePdf: () => generateAndShowPdf(context),
+      onClose: () => onCloseHandler(success, context),
+      onPdf: () => generateAndShowPdf(context),
       context: context,
     ).show();
   }
@@ -36,6 +33,15 @@ class SendPackageConfirmationPage extends StatelessWidget {
   Future<String?> sendOrder(BuildContext context) async {
     final order = context.read<OrderFormData>().order;
     return context.read<OrderService>().submitOrder(order!);
+  }
+
+  void onCloseHandler(bool success, BuildContext context) {
+    if (!success) {
+      Navigator.of(context).popNTimes(1);
+      return;
+    }
+    Navigator.of(context).popNTimes(3);
+    context.read<OrderFormData>().clearOrder();
   }
 
   Future<void> generateAndShowPdf(BuildContext context) async {

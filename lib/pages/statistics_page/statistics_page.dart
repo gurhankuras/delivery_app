@@ -1,3 +1,5 @@
+import 'package:delivery_app/extensions/date_time_extension.dart';
+import 'package:delivery_app/pages/statistics_page/components/app_pie_chart_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +39,7 @@ class _StatisticsPageState extends State<StatisticsPage>
       lastDate: DateTime.now(),
     );
 
-    if (date == null) {
+    if (date == null || date.isSameDate(_date)) {
       return;
     }
     _date = date;
@@ -59,7 +61,7 @@ class _StatisticsPageState extends State<StatisticsPage>
 
   @override
   Widget build(BuildContext context) {
-    print('build');
+    super.build(context);
     return SingleChildScrollView(
       child: Column(
         children: [

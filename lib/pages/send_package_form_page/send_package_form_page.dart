@@ -73,92 +73,93 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 2),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    'Send Package',
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                ],
-              ),
-              SizedBox(height: SizeConfig.defaultSize),
-              Text(
-                'Sender Info',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              Divider(
-                thickness: 2,
-              ),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildNameField(isSender: true),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildPhoneField(isSender: true),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildAddressField(isSender: true),
-              SizedBox(height: SizeConfig.defaultSize * 3),
-              Text(
-                'Receiver Info',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              Divider(
-                thickness: 2,
-              ),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildNameField(isSender: false),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildPhoneField(isSender: false),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildAddressField(isSender: false),
-              SizedBox(height: SizeConfig.defaultSize * 3),
-              Text(
-                'Package Info',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              Divider(
-                thickness: 2,
-              ),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildPackageNameField(),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildPackageCategorySelect(),
-              SizedBox(height: SizeConfig.defaultSize),
-              buildPackageTypeSelect(),
-              SizedBox(height: SizeConfig.defaultSize),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: submitForm,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.defaultSize),
-                      child: Text(
-                        'Continue',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              letterSpacing: 1,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      ),
-                    )),
-              ),
-              SizedBox(height: SizeConfig.defaultSize),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Send Package',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize * 2),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: SizeConfig.defaultSize),
+                Text(
+                  'Sender Info',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildNameField(isSender: true),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildPhoneField(isSender: true),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildAddressField(isSender: true),
+                SizedBox(height: SizeConfig.defaultSize * 3),
+                Text(
+                  'Receiver Info',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildNameField(isSender: false),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildPhoneField(isSender: false),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildAddressField(isSender: false),
+                SizedBox(height: SizeConfig.defaultSize * 3),
+                Text(
+                  'Package Info',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
+                Divider(
+                  thickness: 2,
+                ),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildPackageNameField(),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildPackageCategorySelect(),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildPackageTypeSelect(),
+                SizedBox(height: SizeConfig.defaultSize),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: submitForm,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.defaultSize),
+                        child: Text(
+                          'Continue',
+                          style:
+                              Theme.of(context).textTheme.headline6?.copyWith(
+                                    letterSpacing: 1,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
+                      )),
+                ),
+                SizedBox(height: SizeConfig.defaultSize),
+              ],
+            ),
           ),
         ),
       ),

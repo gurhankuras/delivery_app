@@ -77,8 +77,9 @@ class SendPackageConfirmationPage extends StatelessWidget {
       onPressed: () {
         var count = 0;
         Navigator.popUntil(context, (route) {
-          return count++ == 2;
+          return count++ == 3;
         });
+        context.read<OrderFormData>().clearOrder();
       },
       color: buttonColor,
       child: Text(

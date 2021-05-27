@@ -5,16 +5,18 @@ class Indicator extends StatelessWidget {
   final String text;
   final bool isSquare;
   final double size;
+  final EdgeInsets padding;
   final Color textColor;
 
-  const Indicator({
-    Key? key,
-    required this.color,
-    required this.text,
-    required this.isSquare,
-    this.size = 16,
-    this.textColor = const Color(0xff505050),
-  }) : super(key: key);
+  const Indicator(
+      {Key? key,
+      required this.color,
+      required this.text,
+      required this.isSquare,
+      this.size = 16,
+      this.textColor = const Color(0xff505050),
+      this.padding = EdgeInsets.zero})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

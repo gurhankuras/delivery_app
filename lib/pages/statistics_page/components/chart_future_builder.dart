@@ -1,3 +1,4 @@
+import 'package:delivery_app/pages/statistics_page/components/app_pie_chart_placeholder.dart';
 import 'package:flutter/material.dart';
 
 import 'app_bar_chart.dart';
@@ -21,7 +22,8 @@ class ChartFutureBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilderWrapper<Map<String, dynamic>?>(
       future: chartFuture,
-      onWaiting: (context, snapshot) => AppBarChartPlaceholder(),
+      onWaiting: (context, snapshot) =>
+          isPieChart ? AppPieChartPlaceholder() : AppBarChartPlaceholder(),
       onData: (context, snapshot) => isPieChart
           ? AppPieChart(
               values: snapshot.data!.values.cast<int>().toList(),
@@ -33,7 +35,8 @@ class ChartFutureBuilder<T> extends StatelessWidget {
               labels: snapshot.data!.keys.toList(),
             ),
       onError: (_, __) => Center(child: Text('Something went wrong!')),
-      onFallback: (_, __) => AppBarChartPlaceholder(),
+      onFallback: (_, __) =>
+          isPieChart ? AppPieChartPlaceholder() : AppBarChartPlaceholder(),
     );
   }
 }

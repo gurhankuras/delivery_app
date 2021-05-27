@@ -129,6 +129,9 @@ class PieChart2State extends State<AppPieChart> {
         child: Indicator(
           color: AppPieChart.colors[index],
           isSquare: true,
+          padding: index == touchedIndex
+              ? EdgeInsets.zero
+              : EdgeInsets.all(SizeConfig.defaultSize * 0.5),
           text: widget.titles[index],
         ),
       ),

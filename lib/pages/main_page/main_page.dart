@@ -8,8 +8,8 @@ import '../../providers/home_vm.dart';
 import '../../services/order_statistics_service.dart';
 import '../../utils/size_config.dart';
 import '../home_page/home_page.dart';
+import '../multi_choice_page/multi_choice_page.dart';
 import '../orders_page/orders_page.dart';
-import '../send_package_form_page/send_package_form_page.dart';
 import '../statistics_page/statistics_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
   static final List<Widget> _pages = <Widget>[
     HomePage(),
     OrdersPage(),
-    SendPackageFormPage(),
+    MultiChoicePage(),
     Provider(
       create: (context) => OrderStatisticsService(Dio()),
       child: StatisticsPage(),
@@ -47,29 +47,28 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-        bottomNavigationBar: Consumer<HomeVM>(
-          builder: (context, value, child) => BottomNavigationBar(
-            items: _navBarItems,
-            currentIndex: value.currentPage,
-            selectedFontSize: 14,
-            unselectedFontSize: 14,
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) {
-              if (index == value.currentPage) {
-                print('same screen');
-              } else {
-                _pageController.jumpToPage(index);
-              }
-              value.changePage(index);
-            },
-          ),
+      bottomNavigationBar: Consumer<HomeVM>(
+        builder: (context, value, child) => BottomNavigationBar(
+          items: _navBarItems,
+          currentIndex: value.currentPage,
+          selectedFontSize: 14,
+          unselectedFontSize: 14,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            if (index != value.currentPage) {
+              _pageController.jumpToPage(index);
+            }
+            value.changePage(index);
+          },
         ),
-        appBar: appBar(context),
-        body: PageView(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: _pages,
-        ));
+      ),
+      appBar: appBar(context),
+      body: PageView(
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
+    );
   }
 
   final _navBarItems = <BottomNavigationBarItem>[

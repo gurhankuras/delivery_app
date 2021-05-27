@@ -14,9 +14,7 @@ void main() async {
   await CacheService.instance.initPreferences();
   runApp(MultiProvider(providers: [
     Provider(
-      create: (context) => OrderService(
-        dio: Dio(),
-      ),
+      create: (context) => OrderService(),
     ),
     Provider(create: (context) => OrderFormData())
   ], child: MyApp()));

@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     OrdersPage(),
     MultiChoicePage(),
     Provider(
-      create: (context) => OrderStatisticsService(Dio()),
+      create: (context) => OrderStatisticsService(),
       child: StatisticsPage(),
     ),
   ];

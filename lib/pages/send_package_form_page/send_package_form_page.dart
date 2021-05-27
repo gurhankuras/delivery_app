@@ -24,7 +24,8 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
   @override
   void initState() {
     super.initState();
-    order = context.read<OrderFormData>().order ?? Order.empty();
+    order =
+        context.read<OrderFormData>().order ?? Order.fake() /*Order.empty()*/;
     // _formInfo = order!.toJson();
   }
 
@@ -51,6 +52,9 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
       order!.packageCategory = categories[categoryIndex];
 
       context.read<OrderFormData>().saveOrder(order! /*_formInfo*/);
+      print(order!.sender!.toJson());
+      print(order!.receiver!.toJson());
+
       // ignore: unawaited_futures
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -101,6 +105,8 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
                 SizedBox(height: SizeConfig.defaultSize),
                 buildNameField(isSender: true),
                 SizedBox(height: SizeConfig.defaultSize),
+                buildTrIdField(isSender: true),
+                SizedBox(height: SizeConfig.defaultSize),
                 buildPhoneField(isSender: true),
                 SizedBox(height: SizeConfig.defaultSize),
                 buildAddressField(isSender: true),
@@ -117,6 +123,8 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
                 ),
                 SizedBox(height: SizeConfig.defaultSize),
                 buildNameField(isSender: false),
+                SizedBox(height: SizeConfig.defaultSize),
+                buildTrIdField(isSender: false),
                 SizedBox(height: SizeConfig.defaultSize),
                 buildPhoneField(isSender: false),
                 SizedBox(height: SizeConfig.defaultSize),
@@ -189,6 +197,37 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
       keyboardType: TextInputType.name,
       decoration:
           getTextInputDecoration(iconData: Icons.person, labelText: 'Name'),
+    );
+  }
+
+  TextFormField buildTrIdField({required bool isSender}) {
+    return TextFormField(
+      initialValue: isSender ? order!.sender!.trId : order!.receiver!.trId,
+      onSaved: (newValue) {
+        print(newValue);
+
+        if (isSender) {
+          order!.sender!.trId = newValue!;
+        } else {
+          order!.receiver!.trId = newValue!;
+        }
+      },
+      validator: (value) {
+        if (value != null && value.trim() == '') {
+          return 'This field cannot be empty';
+        }
+        return null;
+      },
+      inputFormatters: [
+        MaskTextInputFormatter(
+            mask: '###########', filter: {'#': RegExp(r'[0-9]')})
+      ],
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
+      decoration: getTextInputDecoration(
+          iconData: FontAwesomeIcons.idCard,
+          labelText: 'Tr Id',
+          isFontAwesome: true),
     );
   }
 
@@ -266,9 +305,10 @@ class _SendPackageFormPageState extends State<SendPackageFormPage> {
           fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.5)),
       prefixIcon: isFontAwesome
           ? Padding(
-              padding: EdgeInsets.all(SizeConfig.defaultSize * 1.5),
+              padding: EdgeInsets.all(SizeConfig.defaultSize * 1.3),
               child: FaIcon(
                 iconData,
+                size: 20,
                 color: Colors.black.withOpacity(0.5),
               ),
             )

@@ -31,10 +31,14 @@ class SendPackageConfirmationPage extends StatelessWidget {
 
   void _showPopUp(bool success, BuildContext context) {
     final svgFileName = success ? 'on_the_way' : 'faq';
-    final title = success ? 'Success!' : 'Something went wrong!';
+    final title = success ? 'Success!' : 'Fail!';
+    final description =
+        success ? 'Your order has been received' : 'Something went wrong!';
     final buttonColor =
         success ? Theme.of(context).colorScheme.secondary : Colors.red;
     Alert(
+        closeIcon: Container(),
+        // closeFunction: () => print('hehehehe'),
         context: context,
         title: title,
         content: Column(
@@ -44,7 +48,10 @@ class SendPackageConfirmationPage extends StatelessWidget {
               height: SizeConfig.defaultSize * 17,
               // height: 100,
             ),
-            Text('Your order has been received'),
+            Padding(
+              padding: EdgeInsets.only(top: SizeConfig.defaultSize * 3),
+              child: Text(description),
+            ),
           ],
         ),
         buttons: [
@@ -114,11 +121,8 @@ class SendPackageConfirmationPage extends StatelessWidget {
               SizedBox(height: SizeConfig.defaultSize * 3.5),
               Text('Delivery Details', style: headerStyle),
               SizedBox(height: SizeConfig.defaultSize * 3),
-              Builder(builder: (context) {
-                return SenderReceiverSection(
-                  order: context.read<OrderFormData>().order!,
-                );
-              }),
+              SenderReceiverSection(
+                  order: context.read<OrderFormData>().order!),
               SizedBox(height: SizeConfig.defaultSize * 3.5),
               Text('Package Details', style: headerStyle),
               SizedBox(height: SizeConfig.defaultSize * 2),

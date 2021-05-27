@@ -44,6 +44,10 @@ class Order {
     vehicleType = '';
   }
 
+  static Order fake() {
+    return mockOrder;
+  }
+
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 }

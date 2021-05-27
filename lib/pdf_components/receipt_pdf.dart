@@ -59,8 +59,8 @@ class ReceiptPdfManager implements PdfPageManager {
             _buildFieldRow(
               context: context,
               fieldName: 'TR Id',
-              senderValue: '21484486692',
-              receiverValue: '21553484338',
+              senderValue: order.sender!.trId,
+              receiverValue: order.receiver!.trId,
             ),
             Spacer(flex: 9),
             Lorem(),

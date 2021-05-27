@@ -1,16 +1,17 @@
-import 'package:delivery_app/pdf_components/receipt_pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../components/app_button.dart';
 import '../../components/sender_receiver_section.dart';
 import '../../dao/order.dart';
+import '../../extensions/navigator_extension.dart';
+import '../../pdf_components/receipt_pdf.dart';
 import '../../providers/order_form_data.dart';
 import '../../services/order_service.dart';
 import '../../services/pdf_service.dart';
 import '../../utils/size_config.dart';
+import 'components/order_info_alert.dart';
 
 class SendPackageConfirmationPage extends StatelessWidget {
   const SendPackageConfirmationPage({
@@ -21,7 +22,15 @@ class SendPackageConfirmationPage extends StatelessWidget {
     final id = await sendOrder(context);
     final success = id != null;
     if (success) context.read<OrderFormData>().order!.orderId = id;
-    _showPopUp(success, context);
+    OrderInfoAlert(
+      success: success,
+      onClose: () {
+        Navigator.of(context).popNTimes(3);
+        context.read<OrderFormData>().clearOrder();
+      },
+      onGeneratePdf: () => generateAndShowPdf(context),
+      context: context,
+    ).show();
   }
 
   Future<String?> sendOrder(BuildContext context) async {
@@ -29,49 +38,6 @@ class SendPackageConfirmationPage extends StatelessWidget {
     return context.read<OrderService>().submitOrder(order!);
   }
 
-  void _showPopUp(bool success, BuildContext context) {
-    final svgFileName = success ? 'on_the_way' : 'faq';
-    final title = success ? 'Success!' : 'Fail!';
-    final description =
-        success ? 'Your order has been received' : 'Something went wrong!';
-    final buttonColor =
-        success ? Theme.of(context).colorScheme.secondary : Colors.red;
-    Alert(
-        closeIcon: Container(),
-        // closeFunction: () => print('hehehehe'),
-        context: context,
-        title: title,
-        content: Column(
-          children: <Widget>[
-            SvgPicture.asset(
-              'assets/svgs/$svgFileName.svg',
-              height: SizeConfig.defaultSize * 17,
-              // height: 100,
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: SizeConfig.defaultSize * 3),
-              child: Text(description),
-            ),
-          ],
-        ),
-        buttons: [
-          if (success) _buildGetPdfButton(context),
-          _buildCloseButton(context, buttonColor)
-        ]).show();
-  }
-
-  DialogButton _buildGetPdfButton(BuildContext context) {
-    return DialogButton(
-      onPressed: () => generateAndShowPdf(context),
-      color: Theme.of(context).colorScheme.primary,
-      child: Text(
-        'Get Receipt',
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-    );
-  }
-
-// TODO Move Popup and related functions to a new widget
   Future<void> generateAndShowPdf(BuildContext context) async {
     final pdfService = context.read<PdfService>();
     final order = context.read<OrderFormData>().order;
@@ -79,26 +45,8 @@ class SendPackageConfirmationPage extends StatelessWidget {
     await pdfService.openFile(pdfFile);
   }
 
-  DialogButton _buildCloseButton(BuildContext context, Color buttonColor) {
-    return DialogButton(
-      onPressed: () {
-        var count = 0;
-        Navigator.popUntil(context, (route) {
-          return count++ == 3;
-        });
-        context.read<OrderFormData>().clearOrder();
-      },
-      color: buttonColor,
-      child: Text(
-        'Close',
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    // final order = Provider.of<OrderFormData>(context).order;
     final headerStyle = Theme.of(context)
         .textTheme
         .headline6
@@ -179,10 +127,6 @@ class SendPackageConfirmationPage extends StatelessWidget {
             ],
           ),
         ),
-        // IconButton(
-        //   icon: Icon(Icons.mode_edit_outline),
-        //   onPressed: () {},
-        // )
       ],
     );
   }

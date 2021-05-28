@@ -12,6 +12,7 @@ OrderStatus _$OrderStatusFromJson(Map<String, dynamic> json) {
     timeStamp: json['timeStamp'] == null
         ? null
         : DateTime.parse(json['timeStamp'] as String),
+    status: json['status'] as int?,
   );
 }
 
@@ -19,4 +20,5 @@ Map<String, dynamic> _$OrderStatusToJson(OrderStatus instance) =>
     <String, dynamic>{
       'event': instance.event,
       'timeStamp': instance.timeStamp?.toIso8601String(),
+      'status': instance.status,
     };

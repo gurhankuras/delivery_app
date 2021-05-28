@@ -54,17 +54,14 @@ class OrderService {
     throw response.data;
   }
 
-  // Future<String?> getVendorPhoneNumber() async {
-  //   final url = '$baseUrl/vendor/phone';
-  //   final response = await dio.get(url);
+  Future<bool> updateDeliveryStatus(Map<String, dynamic> payload) async {
+    final url = '/update-order-status';
+    final response = await dio!.post(url, data: payload);
 
-  //   if (response.statusCode == HttpStatus.ok) {
-  //     final phoneNumber = response.data;
-  //     if (phoneNumber is String) {
-  //       return phoneNumber;
-  //     }
-  //     return null;
-  //   }
-  //   return null;
-  // }
+    if (response.statusCode == HttpStatus.ok &&
+        response.data['error'] == null) {
+      return true;
+    }
+    return false;
+  }
 }

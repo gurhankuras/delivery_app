@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/order_info_field.dart';
 import '../../components/sender_receiver_section.dart';
 import '../../dao/order.dart';
 import '../../dao/track_id.dart';
@@ -36,8 +37,6 @@ class _OrderDetailsPageBodyState extends State<OrderDetailsPageBody> {
       future: orderFuture,
       builder: (context, AsyncSnapshot<Order?> snapshot) {
         if (snapshot.hasData) {
-          // CacheService.instance.clear()
-          // ;
           CacheService.instance
               .saveItem<TrackId>(
                   int.parse(widget.trackNo), TrackId(value: widget.trackNo))
@@ -81,22 +80,9 @@ class _OrderDetailsPageBodyState extends State<OrderDetailsPageBody> {
         SizedBox(height: SizeConfig.defaultSize * 3),
         SenderReceiverSection(order: order),
         SizedBox(height: SizeConfig.defaultSize * 3),
-        Text(
-          'Package',
-          style: Theme.of(context)
-              .textTheme
-              .subtitle1
-              ?.copyWith(color: Colors.black.withOpacity(0.6)),
-        ),
-        SizedBox(height: SizeConfig.defaultSize * 0.5),
-        Text(
-          order.packageName ?? 'Not Found',
-          style: Theme.of(context).textTheme.headline6?.copyWith(
-                fontSize: 18,
-              ),
-        ),
+        OrderInfoField(title: 'Package', content: order.packageName!),
         SizedBox(height: SizeConfig.defaultSize * 2),
-        buildAdditionalInfo(context),
+        _buildAdditionalInfo(context),
         SizedBox(height: SizeConfig.defaultSize * 3),
         Text(
           'Order Status',
@@ -124,52 +110,13 @@ class _OrderDetailsPageBodyState extends State<OrderDetailsPageBody> {
     );
   }
 
-  Widget buildAdditionalInfo(BuildContext context) {
+  Widget _buildAdditionalInfo(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        buildAdditionalInfoSubsection(
-          title: 'Category',
-          content: 'Electronics',
-          context: context,
-        ),
-        buildAdditionalInfoSubsection(
-          title: 'Weight',
-          content: '<1 kg',
-          context: context,
-        ),
-        buildAdditionalInfoSubsection(
-          title: 'Vehicle',
-          content: 'Motorcycle',
-          context: context,
-        ),
-      ],
-    );
-  }
-
-  Column buildAdditionalInfoSubsection(
-      {required String title,
-      required String content,
-      required BuildContext context}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context)
-              .textTheme
-              .subtitle1
-              ?.copyWith(color: Colors.black.withOpacity(0.6)),
-        ),
-        SizedBox(
-          height: SizeConfig.defaultSize * 0.5,
-        ),
-        Text(
-          content,
-          style: Theme.of(context).textTheme.headline6?.copyWith(
-                fontSize: 18,
-              ),
-        )
+        OrderInfoField(title: 'Category', content: 'Electronics'),
+        OrderInfoField(title: 'Weight', content: '<1 kg'),
+        OrderInfoField(title: 'Vehicle', content: 'Motorcycle'),
       ],
     );
   }

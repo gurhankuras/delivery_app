@@ -1,3 +1,4 @@
+import 'package:delivery_app/pages/user_selection_page/user_selection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: ChangeNotifierProvider(
-        create: (context) => HomeVM(),
-        child: MainPage(),
-      ),
+      home: UserSelectionPage(),
       theme: appTheme(context),
     );
   }
@@ -40,7 +38,7 @@ class MyApp extends StatelessWidget {
       ),
       colorScheme: ColorScheme.light(
         primary: Color(0xFFef5448),
-        secondary: Color(0xFF038BFA),
+        secondary: Color(0xff2c4260),
       ),
       unselectedWidgetColor: Color(0xFFef5448),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -48,7 +46,7 @@ class MyApp extends StatelessWidget {
         unselectedItemColor: Colors.black.withOpacity(0.3),
         type: BottomNavigationBarType.fixed,
       ),
-      buttonColor: Theme.of(context).colorScheme.primary,
+      buttonColor: Theme.of(context).colorScheme.primaryVariant,
       appBarTheme: AppBarTheme(
         centerTitle: true,
         backgroundColor: Colors.transparent,

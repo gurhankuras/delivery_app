@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
 
   static final List<Widget> _pages = <Widget>[
     HomePage(),
-    OrdersPage(),
+    // OrdersPage(),
     MultiChoicePage(),
     Provider(
       create: (context) => OrderStatisticsService(),
@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    // SizeConfig().init(context);
     return Scaffold(
       bottomNavigationBar: Consumer<HomeVM>(
         builder: (context, value, child) => BottomNavigationBar(
@@ -76,10 +76,10 @@ class _MainPageState extends State<MainPage> {
       icon: Icon(Icons.home_outlined),
       label: 'Home',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.compare_arrows_outlined),
-      label: 'Business',
-    ),
+    // BottomNavigationBarItem(
+    //   icon: Icon(Icons.compare_arrows_outlined),
+    //   label: 'Business',
+    // ),
     BottomNavigationBarItem(
       icon: Icon(Icons.send),
       label: 'Send',

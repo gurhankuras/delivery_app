@@ -49,7 +49,7 @@ class _StageLine extends StatelessWidget {
           gradient: !filled
               ? LinearGradient(colors: [
                   Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                  Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+                  Theme.of(context).colorScheme.primaryVariant.withOpacity(0.5),
                 ], begin: Alignment.centerLeft, end: Alignment.centerRight)
               : null),
     );
@@ -70,7 +70,7 @@ class _StageDot extends StatelessWidget {
   Widget build(BuildContext context) {
     final dotColor = index <= stage
         ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.secondary.withOpacity(0.3);
+        : Theme.of(context).colorScheme.primaryVariant.withOpacity(0.3);
 
     return Container(
       width: SizeConfig.defaultSize * 2,

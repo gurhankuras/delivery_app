@@ -29,7 +29,7 @@ class OrderInfoAlert {
     final description =
         success ? 'Your order has been received' : 'Something went wrong!';
     final buttonColor =
-        success ? Theme.of(context).colorScheme.secondary : Colors.red;
+        success ? Theme.of(context).colorScheme.primaryVariant : Colors.red;
 
     final alert = Alert(
       // closeIcon: Container(),

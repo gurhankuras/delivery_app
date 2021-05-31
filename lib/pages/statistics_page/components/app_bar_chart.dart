@@ -34,7 +34,7 @@ class AppBarChart extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeConfig.defaultSize)),
-        color: const Color(0xff2c4260),
+        color: Theme.of(context).colorScheme.secondary,
         child: BarChart(
           BarChartData(
               axisTitleData:

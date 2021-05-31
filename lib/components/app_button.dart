@@ -5,11 +5,13 @@ import '../utils/size_config.dart';
 class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback click;
+  final Color? color;
 
   const AppButton({
+    Key? key,
     required this.text,
     required this.click,
-    Key? key,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -17,6 +19,9 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                  color ?? Theme.of(context).colorScheme.primary)),
           onPressed: click,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: SizeConfig.defaultSize),

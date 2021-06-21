@@ -4,8 +4,6 @@ import 'package:delivery_app/domain/order/order.dart';
 import 'package:delivery_app/infastructure/order/order_dto.dart';
 import 'package:dio/dio.dart';
 
-import '../../domain/order/i_order_repository.dart';
-
 class OrderService {
   Dio? dio;
 

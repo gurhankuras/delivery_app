@@ -1,7 +1,10 @@
+import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
 import 'package:delivery_app/presentation/core/size_config.dart';
 import 'package:delivery_app/presentation/order/order_details/order_details_page.dart';
 import 'package:delivery_app/presentation/pages/main_page/components/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:string_validator/string_validator.dart';
 
@@ -32,33 +35,45 @@ class _HomePageState extends State<HomePage>
             'assets/svgs/whereis.svg',
             height: SizeConfig.defaultSize * 17,
           ),
-          SearchBar(
-            onInfo: () => showMyDialog(context),
-            onSearch: (value) {
-              final errorMessage = validateTrackId(value);
-              if (errorMessage != null) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(errorMessage)));
-
-                return;
-              }
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => OrderDetailPage(
-                    trackNo: value,
+          BlocConsumer<SearchFieldBloc, SearchFieldState>(
+            listener: (context, state) {
+              if (state.infoButtonPressed) {
+                showInformationDialog(context);
+              } else if (state.searchButtonPressed) {
+                final errorMessage = validateTrackId(state.trackId);
+                if (errorMessage != null) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(errorMessage)));
+                  return;
+                }
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => OrderDetailPage(
+                      trackNo: state.trackId,
+                    ),
                   ),
-                ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return SearchBar(
+                onInfo: () => context
+                    .read<SearchFieldBloc>()
+                    .add(SearchFieldEvent.infoButtonPressed()),
+                onSearch: (value) => context
+                    .read<SearchFieldBloc>()
+                    .add(SearchFieldEvent.searchButtonPressed(value)),
+                keyboardType: TextInputType.number,
+                hintText: 'Gönderi sorgula',
               );
             },
-            keyboardType: TextInputType.number,
-            hintText: 'Gönderi sorgula',
           ),
         ],
       ),
     );
   }
 
-  Future<Object> showMyDialog(BuildContext context) async {
+  Future<Object> showInformationDialog(BuildContext context) async {
     return showGeneralDialog(
       context: context,
       barrierColor: Colors.black12.withOpacity(0.8), // Background color

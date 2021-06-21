@@ -1,15 +1,15 @@
+import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
 import 'package:delivery_app/infastructure/services/order_statistics_service.dart';
 import 'package:delivery_app/presentation/core/widgets/app_logo.dart';
 import 'package:delivery_app/presentation/home_vm.dart';
 import 'package:delivery_app/presentation/order/search_order/home_page/home_page.dart';
 import 'package:delivery_app/presentation/statistics/statistics_page/statistics_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../home_page/home_page.dart';
 import '../multi_choice_page/multi_choice_page.dart';
-import '../statistics_page/statistics_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -33,7 +33,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    HomePage(),
+    BlocProvider<SearchFieldBloc>(
+      create: (context) => SearchFieldBloc(),
+      child: HomePage(),
+    ),
     // OrdersPage(),
     MultiChoicePage(),
     Provider(

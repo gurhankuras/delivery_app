@@ -1,5 +1,6 @@
-import 'package:delivery_app/domain/order/order.dart';
+import 'package:delivery_app/application/core/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -10,13 +11,22 @@ import 'providers/order_form_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheService.instance.initPreferences();
-  runApp(MultiProvider(providers: [
-    Provider(
-      create: (context) => OrderService(),
+  Bloc.observer = SimpleBlocObserver();
+
+  // await CacheService.instance.initPreferences();
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider(
+          create: (context) => OrderService(),
+        ),
+        Provider(
+          create: (context) => OrderFormData(),
+        )
+      ],
+      child: MyApp(),
     ),
-    Provider(create: (context) => OrderFormData())
-  ], child: MyApp()));
+  );
 }
 
 class MyApp extends StatelessWidget {

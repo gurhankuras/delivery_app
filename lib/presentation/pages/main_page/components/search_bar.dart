@@ -35,9 +35,10 @@ class _SearchBarState extends State<SearchBar> {
     if (pattern.isEmpty) {
       return <TrackId>[];
     }
-    return CacheService.instance
-        .getItems<TrackId>(TrackId())
-        .where((id) => id.value.toString().contains(pattern));
+    return [];
+    // return CacheService.instance
+    // .getItems<TrackId>(TrackId())
+    // .where((id) => id.value.toString().contains(pattern));
   }
 
   @override

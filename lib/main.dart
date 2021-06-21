@@ -1,13 +1,12 @@
-import 'package:delivery_app/pages/user_selection_page/user_selection_page.dart';
+import 'package:delivery_app/domain/order/order.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/main_page/main_page.dart';
-import 'providers/home_vm.dart';
+import 'infastructure/services/cache_manager.dart';
+import 'infastructure/services/order_service.dart';
+import 'presentation/pages/user_selection_page/user_selection_page.dart';
 import 'providers/order_form_data.dart';
-import 'services/cache_manager.dart';
-import 'services/order_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

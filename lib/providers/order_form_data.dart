@@ -1,4 +1,4 @@
-import '../dao/order.dart';
+import 'package:delivery_app/domain/order/order.dart';
 
 class OrderFormData {
   Order? order;

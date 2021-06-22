@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
 import 'package:delivery_app/domain/statistics/statistics_failure.dart';
+import 'package:delivery_app/infastructure/statistics/statistics_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/date.dart';
 import 'package:delivery_app/domain/statistics/statistics.dart';
@@ -17,27 +18,48 @@ BaseOptions _defaultDioOptions = BaseOptions(
 
 int PORT = 4000;
 String _baseUrl = Platform.isAndroid
-    ? 'http://10.0.2.2:$PORT/api/stats'
-    : 'http://localhost:$PORT/api/stats';
+    ? 'http://10.0.2.2:$PORT/api/statistics'
+    : 'http://localhost:$PORT/api/statistics';
 
 class StatisticsRepository implements IStatisticsRepository {
-  Dio? dio;
+  Dio dio;
 
   StatisticsRepository({BaseOptions? dioOptions})
       : dio = Dio(dioOptions ?? _defaultDioOptions);
 
   @override
   Future<Either<StatisticsFailure, Statistics>> fetchByDate(
-          Stat stat, DateTime date) async =>
-// TODO
+      Stat stat, DateTime date) async {
+    final dateString = date.toIso8601String();
+    final urlPart = stat.str();
+    final url = '$_baseUrl$urlPart';
 
-      Future.value(right(Statistics(labels: [], values: [])));
+    try {
+      final response =
+          await dio.post('$_baseUrl$urlPart', data: {'date': dateString});
+
+      if (response.statusCode != HttpStatus.ok) {
+        return left(StatisticsFailure.unexpected());
+      }
+      if (response.data is Map) {
+        return right(StatisticsDTO.fromJson(response.data).toDomain());
+      }
+      return left(StatisticsFailure.unexpected());
+    } on DioError catch (e) {
+      print(e);
+      return left(StatisticsFailure.unexpected());
+    }
+  }
+// TODO
 
   @override
   Future<Either<StatisticsFailure, Statistics>> fetchByDateRange(
-          Stat stat, DateTimeRange range) async =>
+      Stat stat, DateTimeRange range) async {
+    await Future.delayed(Duration(seconds: 2));
+    return Future.value(
+        right(Statistics(labels: ['Gurhan', 'Kuras'], values: [64, 22])));
+  }
 // TODO
-      Future.value(right(Statistics(labels: [], values: [])));
 }
 
 

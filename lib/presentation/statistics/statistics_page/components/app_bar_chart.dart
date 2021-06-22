@@ -94,6 +94,7 @@ class AppBarChart extends StatelessWidget {
     return FlTitlesData(
       show: true,
       bottomTitles: SideTitles(
+          rotateAngle: 7,
           showTitles: true,
           getTextStyles: (value) => const TextStyle(
                 color: Colors.white,

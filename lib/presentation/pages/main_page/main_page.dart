@@ -1,5 +1,8 @@
 import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
+import 'package:delivery_app/application/statistics/bloc/statistics_bloc.dart';
+import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
 import 'package:delivery_app/infastructure/services/order_statistics_service.dart';
+import 'package:delivery_app/infastructure/statistics/statistics_repository.dart';
 import 'package:delivery_app/presentation/core/widgets/app_logo.dart';
 import 'package:delivery_app/presentation/home_vm.dart';
 import 'package:delivery_app/presentation/order/search_order/home_page/home_page.dart';
@@ -39,8 +42,15 @@ class _MainPageState extends State<MainPage> {
     ),
     // OrdersPage(),
     MultiChoicePage(),
-    Provider(
-      create: (context) => OrderStatisticsService(),
+    BlocProvider(
+      create: (context) => StatisticsBloc(
+        StatisticsRepository(),
+      )..add(
+          StatisticsEvent.fetchingStarted(
+            stat: Stat.people_who_receives_the_most,
+            date: DateTime.now(),
+          ),
+        ),
       child: StatisticsPage(),
     ),
   ];

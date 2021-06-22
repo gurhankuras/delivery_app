@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:delivery_app/domain/core/json_serializable.dart';
 
 class Person {
@@ -20,8 +22,43 @@ class Person {
         address: '',
       );
 
-  // factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
-  // Map<String, dynamic> toJson() => _$PersonToJson(this);
+  Person copyWith({
+    String? name,
+    String? phoneNumber,
+    String? trId,
+    String? address,
+  }) {
+    return Person(
+      name: name ?? this.name,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      trId: trId ?? this.trId,
+      address: address ?? this.address,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Person(name: $name, phoneNumber: $phoneNumber, trId: $trId, address: $address)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Person &&
+        other.name == name &&
+        other.phoneNumber == phoneNumber &&
+        other.trId == trId &&
+        other.address == address;
+  }
+
+  @override
+  int get hashCode {
+    return name.hashCode ^
+        phoneNumber.hashCode ^
+        trId.hashCode ^
+        address.hashCode;
+  }
 }
 
 class TrackId implements GJsonSerializable<TrackId> {

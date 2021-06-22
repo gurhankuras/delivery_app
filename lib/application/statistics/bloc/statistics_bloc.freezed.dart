@@ -230,23 +230,31 @@ abstract class FetchingStarted implements StatisticsEvent {
 class _$StatisticsStateTearOff {
   const _$StatisticsStateTearOff();
 
-  Initial initial() {
-    return const Initial();
-  }
-
-  Loading loading() {
-    return const Loading();
-  }
-
-  LoadSuccess loadSuccess(Statistics stat) {
-    return LoadSuccess(
-      stat,
+  Initial initial({required DateTime lastPickedDate}) {
+    return Initial(
+      lastPickedDate: lastPickedDate,
     );
   }
 
-  LoadFailure loadFailure(dynamic StatisticsFailure) {
+  Loading loading({required DateTime lastPickedDate}) {
+    return Loading(
+      lastPickedDate: lastPickedDate,
+    );
+  }
+
+  LoadSuccess loadSuccess(
+      {required Statistics stat, required DateTime lastPickedDate}) {
+    return LoadSuccess(
+      stat: stat,
+      lastPickedDate: lastPickedDate,
+    );
+  }
+
+  LoadFailure loadFailure(
+      {required StatisticsFailure failure, required DateTime lastPickedDate}) {
     return LoadFailure(
-      StatisticsFailure,
+      failure: failure,
+      lastPickedDate: lastPickedDate,
     );
   }
 }
@@ -256,20 +264,26 @@ const $StatisticsState = _$StatisticsStateTearOff();
 
 /// @nodoc
 mixin _$StatisticsState {
+  DateTime get lastPickedDate => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Statistics stat) loadSuccess,
-    required TResult Function(dynamic StatisticsFailure) loadFailure,
+    required TResult Function(DateTime lastPickedDate) initial,
+    required TResult Function(DateTime lastPickedDate) loading,
+    required TResult Function(Statistics stat, DateTime lastPickedDate)
+        loadSuccess,
+    required TResult Function(
+            StatisticsFailure failure, DateTime lastPickedDate)
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Statistics stat)? loadSuccess,
-    TResult Function(dynamic StatisticsFailure)? loadFailure,
+    TResult Function(DateTime lastPickedDate)? initial,
+    TResult Function(DateTime lastPickedDate)? loading,
+    TResult Function(Statistics stat, DateTime lastPickedDate)? loadSuccess,
+    TResult Function(StatisticsFailure failure, DateTime lastPickedDate)?
+        loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -290,6 +304,10 @@ mixin _$StatisticsState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $StatisticsStateCopyWith<StatisticsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -297,6 +315,7 @@ abstract class $StatisticsStateCopyWith<$Res> {
   factory $StatisticsStateCopyWith(
           StatisticsState value, $Res Function(StatisticsState) then) =
       _$StatisticsStateCopyWithImpl<$Res>;
+  $Res call({DateTime lastPickedDate});
 }
 
 /// @nodoc
@@ -307,12 +326,27 @@ class _$StatisticsStateCopyWithImpl<$Res>
   final StatisticsState _value;
   // ignore: unused_field
   final $Res Function(StatisticsState) _then;
+
+  @override
+  $Res call({
+    Object? lastPickedDate = freezed,
+  }) {
+    return _then(_value.copyWith(
+      lastPickedDate: lastPickedDate == freezed
+          ? _value.lastPickedDate
+          : lastPickedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class $InitialCopyWith<$Res> {
+abstract class $InitialCopyWith<$Res>
+    implements $StatisticsStateCopyWith<$Res> {
   factory $InitialCopyWith(Initial value, $Res Function(Initial) then) =
       _$InitialCopyWithImpl<$Res>;
+  @override
+  $Res call({DateTime lastPickedDate});
 }
 
 /// @nodoc
@@ -323,48 +357,78 @@ class _$InitialCopyWithImpl<$Res> extends _$StatisticsStateCopyWithImpl<$Res>
 
   @override
   Initial get _value => super._value as Initial;
+
+  @override
+  $Res call({
+    Object? lastPickedDate = freezed,
+  }) {
+    return _then(Initial(
+      lastPickedDate: lastPickedDate == freezed
+          ? _value.lastPickedDate
+          : lastPickedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Initial implements Initial {
-  const _$Initial();
+  const _$Initial({required this.lastPickedDate});
+
+  @override
+  final DateTime lastPickedDate;
 
   @override
   String toString() {
-    return 'StatisticsState.initial()';
+    return 'StatisticsState.initial(lastPickedDate: $lastPickedDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Initial);
+    return identical(this, other) ||
+        (other is Initial &&
+            (identical(other.lastPickedDate, lastPickedDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastPickedDate, lastPickedDate)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(lastPickedDate);
+
+  @JsonKey(ignore: true)
+  @override
+  $InitialCopyWith<Initial> get copyWith =>
+      _$InitialCopyWithImpl<Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Statistics stat) loadSuccess,
-    required TResult Function(dynamic StatisticsFailure) loadFailure,
+    required TResult Function(DateTime lastPickedDate) initial,
+    required TResult Function(DateTime lastPickedDate) loading,
+    required TResult Function(Statistics stat, DateTime lastPickedDate)
+        loadSuccess,
+    required TResult Function(
+            StatisticsFailure failure, DateTime lastPickedDate)
+        loadFailure,
   }) {
-    return initial();
+    return initial(lastPickedDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Statistics stat)? loadSuccess,
-    TResult Function(dynamic StatisticsFailure)? loadFailure,
+    TResult Function(DateTime lastPickedDate)? initial,
+    TResult Function(DateTime lastPickedDate)? loading,
+    TResult Function(Statistics stat, DateTime lastPickedDate)? loadSuccess,
+    TResult Function(StatisticsFailure failure, DateTime lastPickedDate)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(lastPickedDate);
     }
     return orElse();
   }
@@ -397,13 +461,22 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements StatisticsState {
-  const factory Initial() = _$Initial;
+  const factory Initial({required DateTime lastPickedDate}) = _$Initial;
+
+  @override
+  DateTime get lastPickedDate => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $InitialCopyWith<Initial> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoadingCopyWith<$Res> {
+abstract class $LoadingCopyWith<$Res>
+    implements $StatisticsStateCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
+  @override
+  $Res call({DateTime lastPickedDate});
 }
 
 /// @nodoc
@@ -414,48 +487,78 @@ class _$LoadingCopyWithImpl<$Res> extends _$StatisticsStateCopyWithImpl<$Res>
 
   @override
   Loading get _value => super._value as Loading;
+
+  @override
+  $Res call({
+    Object? lastPickedDate = freezed,
+  }) {
+    return _then(Loading(
+      lastPickedDate: lastPickedDate == freezed
+          ? _value.lastPickedDate
+          : lastPickedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Loading implements Loading {
-  const _$Loading();
+  const _$Loading({required this.lastPickedDate});
+
+  @override
+  final DateTime lastPickedDate;
 
   @override
   String toString() {
-    return 'StatisticsState.loading()';
+    return 'StatisticsState.loading(lastPickedDate: $lastPickedDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Loading);
+    return identical(this, other) ||
+        (other is Loading &&
+            (identical(other.lastPickedDate, lastPickedDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastPickedDate, lastPickedDate)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(lastPickedDate);
+
+  @JsonKey(ignore: true)
+  @override
+  $LoadingCopyWith<Loading> get copyWith =>
+      _$LoadingCopyWithImpl<Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Statistics stat) loadSuccess,
-    required TResult Function(dynamic StatisticsFailure) loadFailure,
+    required TResult Function(DateTime lastPickedDate) initial,
+    required TResult Function(DateTime lastPickedDate) loading,
+    required TResult Function(Statistics stat, DateTime lastPickedDate)
+        loadSuccess,
+    required TResult Function(
+            StatisticsFailure failure, DateTime lastPickedDate)
+        loadFailure,
   }) {
-    return loading();
+    return loading(lastPickedDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Statistics stat)? loadSuccess,
-    TResult Function(dynamic StatisticsFailure)? loadFailure,
+    TResult Function(DateTime lastPickedDate)? initial,
+    TResult Function(DateTime lastPickedDate)? loading,
+    TResult Function(Statistics stat, DateTime lastPickedDate)? loadSuccess,
+    TResult Function(StatisticsFailure failure, DateTime lastPickedDate)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(lastPickedDate);
     }
     return orElse();
   }
@@ -488,15 +591,23 @@ class _$Loading implements Loading {
 }
 
 abstract class Loading implements StatisticsState {
-  const factory Loading() = _$Loading;
+  const factory Loading({required DateTime lastPickedDate}) = _$Loading;
+
+  @override
+  DateTime get lastPickedDate => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $LoadingCopyWith<Loading> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoadSuccessCopyWith<$Res> {
+abstract class $LoadSuccessCopyWith<$Res>
+    implements $StatisticsStateCopyWith<$Res> {
   factory $LoadSuccessCopyWith(
           LoadSuccess value, $Res Function(LoadSuccess) then) =
       _$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({Statistics stat});
+  @override
+  $Res call({Statistics stat, DateTime lastPickedDate});
 
   $StatisticsCopyWith<$Res> get stat;
 }
@@ -515,12 +626,17 @@ class _$LoadSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stat = freezed,
+    Object? lastPickedDate = freezed,
   }) {
     return _then(LoadSuccess(
-      stat == freezed
+      stat: stat == freezed
           ? _value.stat
           : stat // ignore: cast_nullable_to_non_nullable
               as Statistics,
+      lastPickedDate: lastPickedDate == freezed
+          ? _value.lastPickedDate
+          : lastPickedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 
@@ -535,14 +651,16 @@ class _$LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadSuccess implements LoadSuccess {
-  const _$LoadSuccess(this.stat);
+  const _$LoadSuccess({required this.stat, required this.lastPickedDate});
 
   @override
   final Statistics stat;
+  @override
+  final DateTime lastPickedDate;
 
   @override
   String toString() {
-    return 'StatisticsState.loadSuccess(stat: $stat)';
+    return 'StatisticsState.loadSuccess(stat: $stat, lastPickedDate: $lastPickedDate)';
   }
 
   @override
@@ -550,12 +668,17 @@ class _$LoadSuccess implements LoadSuccess {
     return identical(this, other) ||
         (other is LoadSuccess &&
             (identical(other.stat, stat) ||
-                const DeepCollectionEquality().equals(other.stat, stat)));
+                const DeepCollectionEquality().equals(other.stat, stat)) &&
+            (identical(other.lastPickedDate, lastPickedDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastPickedDate, lastPickedDate)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(stat);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(stat) ^
+      const DeepCollectionEquality().hash(lastPickedDate);
 
   @JsonKey(ignore: true)
   @override
@@ -565,25 +688,29 @@ class _$LoadSuccess implements LoadSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Statistics stat) loadSuccess,
-    required TResult Function(dynamic StatisticsFailure) loadFailure,
+    required TResult Function(DateTime lastPickedDate) initial,
+    required TResult Function(DateTime lastPickedDate) loading,
+    required TResult Function(Statistics stat, DateTime lastPickedDate)
+        loadSuccess,
+    required TResult Function(
+            StatisticsFailure failure, DateTime lastPickedDate)
+        loadFailure,
   }) {
-    return loadSuccess(stat);
+    return loadSuccess(stat, lastPickedDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Statistics stat)? loadSuccess,
-    TResult Function(dynamic StatisticsFailure)? loadFailure,
+    TResult Function(DateTime lastPickedDate)? initial,
+    TResult Function(DateTime lastPickedDate)? loading,
+    TResult Function(Statistics stat, DateTime lastPickedDate)? loadSuccess,
+    TResult Function(StatisticsFailure failure, DateTime lastPickedDate)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(stat);
+      return loadSuccess(stat, lastPickedDate);
     }
     return orElse();
   }
@@ -616,20 +743,29 @@ class _$LoadSuccess implements LoadSuccess {
 }
 
 abstract class LoadSuccess implements StatisticsState {
-  const factory LoadSuccess(Statistics stat) = _$LoadSuccess;
+  const factory LoadSuccess(
+      {required Statistics stat,
+      required DateTime lastPickedDate}) = _$LoadSuccess;
 
   Statistics get stat => throw _privateConstructorUsedError;
+  @override
+  DateTime get lastPickedDate => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   $LoadSuccessCopyWith<LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoadFailureCopyWith<$Res> {
+abstract class $LoadFailureCopyWith<$Res>
+    implements $StatisticsStateCopyWith<$Res> {
   factory $LoadFailureCopyWith(
           LoadFailure value, $Res Function(LoadFailure) then) =
       _$LoadFailureCopyWithImpl<$Res>;
-  $Res call({dynamic StatisticsFailure});
+  @override
+  $Res call({StatisticsFailure failure, DateTime lastPickedDate});
+
+  $StatisticsFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -645,42 +781,61 @@ class _$LoadFailureCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? StatisticsFailure = freezed,
+    Object? failure = freezed,
+    Object? lastPickedDate = freezed,
   }) {
     return _then(LoadFailure(
-      StatisticsFailure == freezed
-          ? _value.StatisticsFailure
-          : StatisticsFailure,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as StatisticsFailure,
+      lastPickedDate: lastPickedDate == freezed
+          ? _value.lastPickedDate
+          : lastPickedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
+  }
+
+  @override
+  $StatisticsFailureCopyWith<$Res> get failure {
+    return $StatisticsFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$LoadFailure implements LoadFailure {
-  const _$LoadFailure(this.StatisticsFailure);
+  const _$LoadFailure({required this.failure, required this.lastPickedDate});
 
   @override
-  final dynamic StatisticsFailure;
+  final StatisticsFailure failure;
+  @override
+  final DateTime lastPickedDate;
 
   @override
   String toString() {
-    return 'StatisticsState.loadFailure(StatisticsFailure: $StatisticsFailure)';
+    return 'StatisticsState.loadFailure(failure: $failure, lastPickedDate: $lastPickedDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is LoadFailure &&
-            (identical(other.StatisticsFailure, StatisticsFailure) ||
+            (identical(other.failure, failure) ||
                 const DeepCollectionEquality()
-                    .equals(other.StatisticsFailure, StatisticsFailure)));
+                    .equals(other.failure, failure)) &&
+            (identical(other.lastPickedDate, lastPickedDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastPickedDate, lastPickedDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(StatisticsFailure);
+      const DeepCollectionEquality().hash(failure) ^
+      const DeepCollectionEquality().hash(lastPickedDate);
 
   @JsonKey(ignore: true)
   @override
@@ -690,25 +845,29 @@ class _$LoadFailure implements LoadFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(Statistics stat) loadSuccess,
-    required TResult Function(dynamic StatisticsFailure) loadFailure,
+    required TResult Function(DateTime lastPickedDate) initial,
+    required TResult Function(DateTime lastPickedDate) loading,
+    required TResult Function(Statistics stat, DateTime lastPickedDate)
+        loadSuccess,
+    required TResult Function(
+            StatisticsFailure failure, DateTime lastPickedDate)
+        loadFailure,
   }) {
-    return loadFailure(StatisticsFailure);
+    return loadFailure(failure, lastPickedDate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(Statistics stat)? loadSuccess,
-    TResult Function(dynamic StatisticsFailure)? loadFailure,
+    TResult Function(DateTime lastPickedDate)? initial,
+    TResult Function(DateTime lastPickedDate)? loading,
+    TResult Function(Statistics stat, DateTime lastPickedDate)? loadSuccess,
+    TResult Function(StatisticsFailure failure, DateTime lastPickedDate)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
-      return loadFailure(StatisticsFailure);
+      return loadFailure(failure, lastPickedDate);
     }
     return orElse();
   }
@@ -741,9 +900,14 @@ class _$LoadFailure implements LoadFailure {
 }
 
 abstract class LoadFailure implements StatisticsState {
-  const factory LoadFailure(dynamic StatisticsFailure) = _$LoadFailure;
+  const factory LoadFailure(
+      {required StatisticsFailure failure,
+      required DateTime lastPickedDate}) = _$LoadFailure;
 
-  dynamic get StatisticsFailure => throw _privateConstructorUsedError;
+  StatisticsFailure get failure => throw _privateConstructorUsedError;
+  @override
+  DateTime get lastPickedDate => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   $LoadFailureCopyWith<LoadFailure> get copyWith =>
       throw _privateConstructorUsedError;

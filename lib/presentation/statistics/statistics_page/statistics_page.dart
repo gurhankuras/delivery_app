@@ -1,12 +1,19 @@
-import 'package:delivery_app/application/extensions/date_time_extension.dart';
-import 'package:delivery_app/infastructure/services/order_statistics_service.dart';
-import 'package:delivery_app/presentation/core/widgets/app_button.dart';
+import 'package:delivery_app/presentation/statistics/statistics_page/components/app_bar_chart.dart';
+import 'package:delivery_app/presentation/statistics/statistics_page/components/app_bar_chart_placeholder.dart';
+import 'package:delivery_app/presentation/statistics/statistics_page/components/app_pie_chart.dart';
+import 'package:delivery_app/presentation/statistics/statistics_page/components/app_pie_chart_placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'package:delivery_app/application/extensions/date_time_extension.dart';
+import 'package:delivery_app/application/statistics/bloc/statistics_bloc.dart';
+import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
+import 'package:delivery_app/presentation/core/widgets/app_button.dart';
+
 import '../../core/size_config.dart';
-import 'components/chart_future_builder.dart';
 
 class StatisticsPage extends StatefulWidget {
   @override
@@ -15,84 +22,127 @@ class StatisticsPage extends StatefulWidget {
 
 class _StatisticsPageState extends State<StatisticsPage>
     with AutomaticKeepAliveClientMixin {
-  var _date;
-  Future<Map<String, dynamic>?>? quantityChartInfo;
-  Future<Map<String, dynamic>?>? amountChartInfo;
-
   @override
   void initState() {
     super.initState();
-    print('initState');
-    _date = DateTime.now();
-    Future.microtask(() {
-      setFutures();
-      setState(() {});
-    });
-  }
-
-  Future<void> pickDate() async {
-    final date = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: DateTime.now().subtract(Duration(days: 365 * 5)),
-      lastDate: DateTime.now(),
-    );
-
-    if (date == null || date.isSameDate(_date)) {
-      return;
-    }
-    _date = date;
-    quantityChartInfo = null;
-    amountChartInfo = null;
-
-    setFutures();
-    setState(() {});
-  }
-
-  void setFutures() {
-    quantityChartInfo = context
-        .read<OrderStatisticsService>()
-        .fetchCategoryStatByDate(Stats.quantity, _date);
-    amountChartInfo = context
-        .read<OrderStatisticsService>()
-        .fetchCategoryStatByDate(Stats.amount, _date);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          AppButton(text: 'Select Date', click: pickDate),
-          Padding(
-            padding: EdgeInsets.all(SizeConfig.defaultSize),
-            child: Text(
-              DateFormat.yMd().format(_date),
-              style: Theme.of(context).textTheme.headline6,
+      physics: BouncingScrollPhysics(),
+      child: BlocConsumer<StatisticsBloc, StatisticsState>(
+        listener: (context, state) {
+          state.maybeMap(
+              loadSuccess: (successState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Hahahahah'),
+                  backgroundColor: Colors.green,
+                ));
+              },
+              orElse: () {});
+        },
+        builder: (context, state) {
+          return state.map(
+            initial: (state) => Container(),
+            loading: (state) => StatisticsBody(state: state, children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppBarChartPlaceholder(),
+              ),
+              AppPieChartPlaceholder(),
+            ]),
+            loadSuccess: (state) => StatisticsBody(
+              state: state,
+              children: [
+                AppBarChart(
+                  labels: state.stat.labels,
+                  quantities: state.stat.values.map((e) => e.toInt()).toList(),
+                  title: 'Takil kafana gore',
+                ),
+                AppPieChart(
+                  titles: state.stat.labels,
+                  values: state.stat.values.map((e) => e.toInt()).toList(),
+                )
+              ],
             ),
-          ),
-          ChartFutureBuilder(
-            chartFuture: quantityChartInfo,
-            title: 'Total Number Of Products Sent By Categories',
-          ),
-          ChartFutureBuilder(
-            chartFuture: quantityChartInfo,
-            isPieChart: true,
-          ),
-          ChartFutureBuilder(
-            chartFuture: amountChartInfo,
-            title: 'Total Sum Earned By Category',
-          ),
-          ChartFutureBuilder(
-            chartFuture: amountChartInfo,
-            isPieChart: true,
-          ),
-        ],
+            loadFailure: (state) => StatisticsBody(
+              state: state,
+              children: [
+                SvgPicture.asset(
+                  'assets/svgs/network_error.svg',
+                  fit: BoxFit.cover,
+                  width: SizeConfig.screenWidth * 0.6,
+                ),
+                SizedBox(
+                  height: SizeConfig.defaultSize * 2,
+                ),
+                Text(
+                  'Failed',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class StatisticsBody extends StatelessWidget {
+  final StatisticsState state;
+  final List<Widget> children;
+  const StatisticsBody({
+    Key? key,
+    required this.state,
+    required this.children,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppButton(
+          text: 'Select Date',
+          click: () =>
+              pickDate(initialDate: state.lastPickedDate, context: context),
+        ),
+        Padding(
+          padding: EdgeInsets.all(SizeConfig.defaultSize),
+          child: Text(
+            DateFormat.yMd().format(state.lastPickedDate),
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+        ...children
+      ],
+    );
+  }
+
+  Future<void> pickDate(
+      {required DateTime initialDate, required BuildContext context}) async {
+    final date = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime.now().subtract(Duration(days: 365 * 5)),
+      lastDate: DateTime.now(),
+    );
+
+    if (date == null || date.isSameDate(initialDate)) {
+      return;
+    }
+
+    context.read<StatisticsBloc>().add(
+          StatisticsEvent.fetchingStarted(
+            stat: Stat.people_who_receives_the_most,
+            date: date,
+          ),
+        );
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/order/order.dart';
+import 'order.dart';
 
 abstract class IOrderRepository {
   Future<String?> create(Order order);

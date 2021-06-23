@@ -45,6 +45,10 @@ class _$OrderFormPersonEventTearOff {
       address,
     );
   }
+
+  _Validated validated() {
+    return const _Validated();
+  }
 }
 
 /// @nodoc
@@ -59,6 +63,7 @@ mixin _$OrderFormPersonEvent {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +73,7 @@ mixin _$OrderFormPersonEvent {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,6 +84,7 @@ mixin _$OrderFormPersonEvent {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +94,7 @@ mixin _$OrderFormPersonEvent {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,6 +189,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) {
     return initialized(initialOrderOption);
   }
@@ -193,6 +202,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -209,6 +219,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) {
     return initialized(this);
   }
@@ -221,6 +232,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -309,6 +321,7 @@ class _$_NameChanged implements _NameChanged {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) {
     return nameChanged(name);
   }
@@ -321,6 +334,7 @@ class _$_NameChanged implements _NameChanged {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) {
     if (nameChanged != null) {
@@ -337,6 +351,7 @@ class _$_NameChanged implements _NameChanged {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) {
     return nameChanged(this);
   }
@@ -349,6 +364,7 @@ class _$_NameChanged implements _NameChanged {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) {
     if (nameChanged != null) {
@@ -436,6 +452,7 @@ class _$_TcChanged implements _TcChanged {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) {
     return tcChanged(tc);
   }
@@ -448,6 +465,7 @@ class _$_TcChanged implements _TcChanged {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) {
     if (tcChanged != null) {
@@ -464,6 +482,7 @@ class _$_TcChanged implements _TcChanged {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) {
     return tcChanged(this);
   }
@@ -476,6 +495,7 @@ class _$_TcChanged implements _TcChanged {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) {
     if (tcChanged != null) {
@@ -565,6 +585,7 @@ class _$_PhoneNumberChanged implements _PhoneNumberChanged {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) {
     return phoneNumberChanged(phoneNumber);
   }
@@ -577,6 +598,7 @@ class _$_PhoneNumberChanged implements _PhoneNumberChanged {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) {
     if (phoneNumberChanged != null) {
@@ -593,6 +615,7 @@ class _$_PhoneNumberChanged implements _PhoneNumberChanged {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) {
     return phoneNumberChanged(this);
   }
@@ -605,6 +628,7 @@ class _$_PhoneNumberChanged implements _PhoneNumberChanged {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) {
     if (phoneNumberChanged != null) {
@@ -693,6 +717,7 @@ class _$_AddressChanged implements _AddressChanged {
     required TResult Function(String tc) tcChanged,
     required TResult Function(String phoneNumber) phoneNumberChanged,
     required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
   }) {
     return addressChanged(address);
   }
@@ -705,6 +730,7 @@ class _$_AddressChanged implements _AddressChanged {
     TResult Function(String tc)? tcChanged,
     TResult Function(String phoneNumber)? phoneNumberChanged,
     TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
     required TResult orElse(),
   }) {
     if (addressChanged != null) {
@@ -721,6 +747,7 @@ class _$_AddressChanged implements _AddressChanged {
     required TResult Function(_TcChanged value) tcChanged,
     required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
     required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
   }) {
     return addressChanged(this);
   }
@@ -733,6 +760,7 @@ class _$_AddressChanged implements _AddressChanged {
     TResult Function(_TcChanged value)? tcChanged,
     TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
     TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
     required TResult orElse(),
   }) {
     if (addressChanged != null) {
@@ -752,12 +780,124 @@ abstract class _AddressChanged implements OrderFormPersonEvent {
 }
 
 /// @nodoc
+abstract class _$ValidatedCopyWith<$Res> {
+  factory _$ValidatedCopyWith(
+          _Validated value, $Res Function(_Validated) then) =
+      __$ValidatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ValidatedCopyWithImpl<$Res>
+    extends _$OrderFormPersonEventCopyWithImpl<$Res>
+    implements _$ValidatedCopyWith<$Res> {
+  __$ValidatedCopyWithImpl(_Validated _value, $Res Function(_Validated) _then)
+      : super(_value, (v) => _then(v as _Validated));
+
+  @override
+  _Validated get _value => super._value as _Validated;
+}
+
+/// @nodoc
+
+class _$_Validated implements _Validated {
+  const _$_Validated();
+
+  @override
+  String toString() {
+    return 'OrderFormPersonEvent.validated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Validated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Option<Order> initialOrderOption) initialized,
+    required TResult Function(String name) nameChanged,
+    required TResult Function(String tc) tcChanged,
+    required TResult Function(String phoneNumber) phoneNumberChanged,
+    required TResult Function(String address) addressChanged,
+    required TResult Function() validated,
+  }) {
+    return validated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Option<Order> initialOrderOption)? initialized,
+    TResult Function(String name)? nameChanged,
+    TResult Function(String tc)? tcChanged,
+    TResult Function(String phoneNumber)? phoneNumberChanged,
+    TResult Function(String address)? addressChanged,
+    TResult Function()? validated,
+    required TResult orElse(),
+  }) {
+    if (validated != null) {
+      return validated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_NameChanged value) nameChanged,
+    required TResult Function(_TcChanged value) tcChanged,
+    required TResult Function(_PhoneNumberChanged value) phoneNumberChanged,
+    required TResult Function(_AddressChanged value) addressChanged,
+    required TResult Function(_Validated value) validated,
+  }) {
+    return validated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_NameChanged value)? nameChanged,
+    TResult Function(_TcChanged value)? tcChanged,
+    TResult Function(_PhoneNumberChanged value)? phoneNumberChanged,
+    TResult Function(_AddressChanged value)? addressChanged,
+    TResult Function(_Validated value)? validated,
+    required TResult orElse(),
+  }) {
+    if (validated != null) {
+      return validated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Validated implements OrderFormPersonEvent {
+  const factory _Validated() = _$_Validated;
+}
+
+/// @nodoc
 class _$OrderFormPersonStateTearOff {
   const _$OrderFormPersonStateTearOff();
 
-  _OrderFormPersonState call({required Person person}) {
+  _OrderFormPersonState call(
+      {required Person person,
+      required Option<ValueFailure<String>> nameFailure,
+      required Option<ValueFailure<String>> tcFailure,
+      required Option<ValueFailure<String>> addressFailure,
+      required Option<ValueFailure<String>> phoneNumberFailure,
+      required Option<ValueFailure<dynamic>> overallFailure}) {
     return _OrderFormPersonState(
       person: person,
+      nameFailure: nameFailure,
+      tcFailure: tcFailure,
+      addressFailure: addressFailure,
+      phoneNumberFailure: phoneNumberFailure,
+      overallFailure: overallFailure,
     );
   }
 }
@@ -768,6 +908,16 @@ const $OrderFormPersonState = _$OrderFormPersonStateTearOff();
 /// @nodoc
 mixin _$OrderFormPersonState {
   Person get person => throw _privateConstructorUsedError;
+  Option<ValueFailure<String>> get nameFailure =>
+      throw _privateConstructorUsedError;
+  Option<ValueFailure<String>> get tcFailure =>
+      throw _privateConstructorUsedError;
+  Option<ValueFailure<String>> get addressFailure =>
+      throw _privateConstructorUsedError;
+  Option<ValueFailure<String>> get phoneNumberFailure =>
+      throw _privateConstructorUsedError;
+  Option<ValueFailure<dynamic>> get overallFailure =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderFormPersonStateCopyWith<OrderFormPersonState> get copyWith =>
@@ -779,7 +929,13 @@ abstract class $OrderFormPersonStateCopyWith<$Res> {
   factory $OrderFormPersonStateCopyWith(OrderFormPersonState value,
           $Res Function(OrderFormPersonState) then) =
       _$OrderFormPersonStateCopyWithImpl<$Res>;
-  $Res call({Person person});
+  $Res call(
+      {Person person,
+      Option<ValueFailure<String>> nameFailure,
+      Option<ValueFailure<String>> tcFailure,
+      Option<ValueFailure<String>> addressFailure,
+      Option<ValueFailure<String>> phoneNumberFailure,
+      Option<ValueFailure<dynamic>> overallFailure});
 }
 
 /// @nodoc
@@ -794,12 +950,37 @@ class _$OrderFormPersonStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? person = freezed,
+    Object? nameFailure = freezed,
+    Object? tcFailure = freezed,
+    Object? addressFailure = freezed,
+    Object? phoneNumberFailure = freezed,
+    Object? overallFailure = freezed,
   }) {
     return _then(_value.copyWith(
       person: person == freezed
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person,
+      nameFailure: nameFailure == freezed
+          ? _value.nameFailure
+          : nameFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      tcFailure: tcFailure == freezed
+          ? _value.tcFailure
+          : tcFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      addressFailure: addressFailure == freezed
+          ? _value.addressFailure
+          : addressFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      phoneNumberFailure: phoneNumberFailure == freezed
+          ? _value.phoneNumberFailure
+          : phoneNumberFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      overallFailure: overallFailure == freezed
+          ? _value.overallFailure
+          : overallFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<dynamic>>,
     ));
   }
 }
@@ -811,7 +992,13 @@ abstract class _$OrderFormPersonStateCopyWith<$Res>
           $Res Function(_OrderFormPersonState) then) =
       __$OrderFormPersonStateCopyWithImpl<$Res>;
   @override
-  $Res call({Person person});
+  $Res call(
+      {Person person,
+      Option<ValueFailure<String>> nameFailure,
+      Option<ValueFailure<String>> tcFailure,
+      Option<ValueFailure<String>> addressFailure,
+      Option<ValueFailure<String>> phoneNumberFailure,
+      Option<ValueFailure<dynamic>> overallFailure});
 }
 
 /// @nodoc
@@ -828,12 +1015,37 @@ class __$OrderFormPersonStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? person = freezed,
+    Object? nameFailure = freezed,
+    Object? tcFailure = freezed,
+    Object? addressFailure = freezed,
+    Object? phoneNumberFailure = freezed,
+    Object? overallFailure = freezed,
   }) {
     return _then(_OrderFormPersonState(
       person: person == freezed
           ? _value.person
           : person // ignore: cast_nullable_to_non_nullable
               as Person,
+      nameFailure: nameFailure == freezed
+          ? _value.nameFailure
+          : nameFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      tcFailure: tcFailure == freezed
+          ? _value.tcFailure
+          : tcFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      addressFailure: addressFailure == freezed
+          ? _value.addressFailure
+          : addressFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      phoneNumberFailure: phoneNumberFailure == freezed
+          ? _value.phoneNumberFailure
+          : phoneNumberFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<String>>,
+      overallFailure: overallFailure == freezed
+          ? _value.overallFailure
+          : overallFailure // ignore: cast_nullable_to_non_nullable
+              as Option<ValueFailure<dynamic>>,
     ));
   }
 }
@@ -841,14 +1053,30 @@ class __$OrderFormPersonStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_OrderFormPersonState implements _OrderFormPersonState {
-  const _$_OrderFormPersonState({required this.person});
+  const _$_OrderFormPersonState(
+      {required this.person,
+      required this.nameFailure,
+      required this.tcFailure,
+      required this.addressFailure,
+      required this.phoneNumberFailure,
+      required this.overallFailure});
 
   @override
   final Person person;
+  @override
+  final Option<ValueFailure<String>> nameFailure;
+  @override
+  final Option<ValueFailure<String>> tcFailure;
+  @override
+  final Option<ValueFailure<String>> addressFailure;
+  @override
+  final Option<ValueFailure<String>> phoneNumberFailure;
+  @override
+  final Option<ValueFailure<dynamic>> overallFailure;
 
   @override
   String toString() {
-    return 'OrderFormPersonState(person: $person)';
+    return 'OrderFormPersonState(person: $person, nameFailure: $nameFailure, tcFailure: $tcFailure, addressFailure: $addressFailure, phoneNumberFailure: $phoneNumberFailure, overallFailure: $overallFailure)';
   }
 
   @override
@@ -856,12 +1084,33 @@ class _$_OrderFormPersonState implements _OrderFormPersonState {
     return identical(this, other) ||
         (other is _OrderFormPersonState &&
             (identical(other.person, person) ||
-                const DeepCollectionEquality().equals(other.person, person)));
+                const DeepCollectionEquality().equals(other.person, person)) &&
+            (identical(other.nameFailure, nameFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.nameFailure, nameFailure)) &&
+            (identical(other.tcFailure, tcFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.tcFailure, tcFailure)) &&
+            (identical(other.addressFailure, addressFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.addressFailure, addressFailure)) &&
+            (identical(other.phoneNumberFailure, phoneNumberFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.phoneNumberFailure, phoneNumberFailure)) &&
+            (identical(other.overallFailure, overallFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.overallFailure, overallFailure)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(person);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(person) ^
+      const DeepCollectionEquality().hash(nameFailure) ^
+      const DeepCollectionEquality().hash(tcFailure) ^
+      const DeepCollectionEquality().hash(addressFailure) ^
+      const DeepCollectionEquality().hash(phoneNumberFailure) ^
+      const DeepCollectionEquality().hash(overallFailure);
 
   @JsonKey(ignore: true)
   @override
@@ -871,11 +1120,32 @@ class _$_OrderFormPersonState implements _OrderFormPersonState {
 }
 
 abstract class _OrderFormPersonState implements OrderFormPersonState {
-  const factory _OrderFormPersonState({required Person person}) =
+  const factory _OrderFormPersonState(
+          {required Person person,
+          required Option<ValueFailure<String>> nameFailure,
+          required Option<ValueFailure<String>> tcFailure,
+          required Option<ValueFailure<String>> addressFailure,
+          required Option<ValueFailure<String>> phoneNumberFailure,
+          required Option<ValueFailure<dynamic>> overallFailure}) =
       _$_OrderFormPersonState;
 
   @override
   Person get person => throw _privateConstructorUsedError;
+  @override
+  Option<ValueFailure<String>> get nameFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<ValueFailure<String>> get tcFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<ValueFailure<String>> get addressFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<ValueFailure<String>> get phoneNumberFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<ValueFailure<dynamic>> get overallFailure =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$OrderFormPersonStateCopyWith<_OrderFormPersonState> get copyWith =>

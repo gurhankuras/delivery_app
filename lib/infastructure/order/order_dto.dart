@@ -1,5 +1,5 @@
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
+import '../../domain/order/order.dart';
+import '../../domain/order/value_objects.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -72,10 +72,10 @@ class PersonDTO with _$PersonDTO {
       );
 
   Person toDomain() => Person(
-        phoneNumber: phoneNumber,
-        trId: trId,
-        address: address,
-        name: name,
+        phoneNumber: phoneNumber ?? '',
+        trId: trId ?? '',
+        address: address ?? '',
+        name: name ?? '',
       );
 
   factory PersonDTO.fromJson(Map<String, dynamic> json) =>

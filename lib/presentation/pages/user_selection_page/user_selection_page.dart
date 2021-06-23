@@ -1,7 +1,7 @@
-import 'package:delivery_app/presentation/core/widgets/app_logo.dart';
-import 'package:delivery_app/presentation/home_vm.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/order/search_order/home_page/home_widget_with_scaffold/home_widget_with_scaffold.dart';
+import '../../core/widgets/app_logo.dart';
+import '../../home_vm.dart';
+import '../../core/size_config.dart';
+import '../../order/search_order/home_page/home_widget_with_scaffold/home_widget_with_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

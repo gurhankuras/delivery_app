@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:delivery_app/presentation/pages/pdf_components/pdf_page_manager.dart';
+import '../../presentation/pages/pdf_components/pdf_page_manager.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';

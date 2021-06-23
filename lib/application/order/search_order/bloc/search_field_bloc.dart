@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'search_field_event.dart';
-part 'search_field_state.dart';
+import 'package:meta/meta.dart';
 
 part 'search_field_bloc.freezed.dart';
+part 'search_field_event.dart';
+part 'search_field_state.dart';
 
 // TODO revert
 // Gereksiz bloc mantigini anlamak icin yaptim

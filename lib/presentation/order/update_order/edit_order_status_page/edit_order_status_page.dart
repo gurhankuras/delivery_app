@@ -1,9 +1,9 @@
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/infastructure/services/order_service.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/app_button.dart';
-import 'package:delivery_app/presentation/core/widgets/disabled_widget.dart';
-import 'package:delivery_app/presentation/core/widgets/order_info_field.dart';
+import '../../../../domain/order/order.dart';
+import '../../../../infastructure/services/order_service.dart';
+import '../../../core/size_config.dart';
+import '../../../core/widgets/app_button.dart';
+import '../../../core/widgets/disabled_widget.dart';
+import '../../../core/widgets/order_info_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -19,6 +19,10 @@ class _$OrderFormSenderEventTearOff {
   _Saved saved() {
     return const _Saved();
   }
+
+  _Cleaned cleaned() {
+    return const _Cleaned();
+  }
 }
 
 /// @nodoc
@@ -29,22 +33,26 @@ mixin _$OrderFormSenderEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() saved,
+    required TResult Function() cleaned,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? saved,
+    TResult Function()? cleaned,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Saved value) saved,
+    required TResult Function(_Cleaned value) cleaned,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Saved value)? saved,
+    TResult Function(_Cleaned value)? cleaned,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -106,6 +114,7 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() saved,
+    required TResult Function() cleaned,
   }) {
     return saved();
   }
@@ -114,6 +123,7 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? saved,
+    TResult Function()? cleaned,
     required TResult orElse(),
   }) {
     if (saved != null) {
@@ -126,6 +136,7 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Saved value) saved,
+    required TResult Function(_Cleaned value) cleaned,
   }) {
     return saved(this);
   }
@@ -134,6 +145,7 @@ class _$_Saved implements _Saved {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Saved value)? saved,
+    TResult Function(_Cleaned value)? cleaned,
     required TResult orElse(),
   }) {
     if (saved != null) {
@@ -148,134 +160,85 @@ abstract class _Saved implements OrderFormSenderEvent {
 }
 
 /// @nodoc
-class _$OrderFormSenderStateTearOff {
-  const _$OrderFormSenderStateTearOff();
-
-  _OrderFormSenderState call({required bool showErrorMessages}) {
-    return _OrderFormSenderState(
-      showErrorMessages: showErrorMessages,
-    );
-  }
+abstract class _$CleanedCopyWith<$Res> {
+  factory _$CleanedCopyWith(_Cleaned value, $Res Function(_Cleaned) then) =
+      __$CleanedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-const $OrderFormSenderState = _$OrderFormSenderStateTearOff();
-
-/// @nodoc
-mixin _$OrderFormSenderState {
-  bool get showErrorMessages => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $OrderFormSenderStateCopyWith<OrderFormSenderState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $OrderFormSenderStateCopyWith<$Res> {
-  factory $OrderFormSenderStateCopyWith(OrderFormSenderState value,
-          $Res Function(OrderFormSenderState) then) =
-      _$OrderFormSenderStateCopyWithImpl<$Res>;
-  $Res call({bool showErrorMessages});
-}
-
-/// @nodoc
-class _$OrderFormSenderStateCopyWithImpl<$Res>
-    implements $OrderFormSenderStateCopyWith<$Res> {
-  _$OrderFormSenderStateCopyWithImpl(this._value, this._then);
-
-  final OrderFormSenderState _value;
-  // ignore: unused_field
-  final $Res Function(OrderFormSenderState) _then;
+class __$CleanedCopyWithImpl<$Res>
+    extends _$OrderFormSenderEventCopyWithImpl<$Res>
+    implements _$CleanedCopyWith<$Res> {
+  __$CleanedCopyWithImpl(_Cleaned _value, $Res Function(_Cleaned) _then)
+      : super(_value, (v) => _then(v as _Cleaned));
 
   @override
-  $Res call({
-    Object? showErrorMessages = freezed,
-  }) {
-    return _then(_value.copyWith(
-      showErrorMessages: showErrorMessages == freezed
-          ? _value.showErrorMessages
-          : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$OrderFormSenderStateCopyWith<$Res>
-    implements $OrderFormSenderStateCopyWith<$Res> {
-  factory _$OrderFormSenderStateCopyWith(_OrderFormSenderState value,
-          $Res Function(_OrderFormSenderState) then) =
-      __$OrderFormSenderStateCopyWithImpl<$Res>;
-  @override
-  $Res call({bool showErrorMessages});
-}
-
-/// @nodoc
-class __$OrderFormSenderStateCopyWithImpl<$Res>
-    extends _$OrderFormSenderStateCopyWithImpl<$Res>
-    implements _$OrderFormSenderStateCopyWith<$Res> {
-  __$OrderFormSenderStateCopyWithImpl(
-      _OrderFormSenderState _value, $Res Function(_OrderFormSenderState) _then)
-      : super(_value, (v) => _then(v as _OrderFormSenderState));
-
-  @override
-  _OrderFormSenderState get _value => super._value as _OrderFormSenderState;
-
-  @override
-  $Res call({
-    Object? showErrorMessages = freezed,
-  }) {
-    return _then(_OrderFormSenderState(
-      showErrorMessages: showErrorMessages == freezed
-          ? _value.showErrorMessages
-          : showErrorMessages // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+  _Cleaned get _value => super._value as _Cleaned;
 }
 
 /// @nodoc
 
-class _$_OrderFormSenderState implements _OrderFormSenderState {
-  const _$_OrderFormSenderState({required this.showErrorMessages});
-
-  @override
-  final bool showErrorMessages;
+class _$_Cleaned implements _Cleaned {
+  const _$_Cleaned();
 
   @override
   String toString() {
-    return 'OrderFormSenderState(showErrorMessages: $showErrorMessages)';
+    return 'OrderFormSenderEvent.cleaned()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _OrderFormSenderState &&
-            (identical(other.showErrorMessages, showErrorMessages) ||
-                const DeepCollectionEquality()
-                    .equals(other.showErrorMessages, showErrorMessages)));
+    return identical(this, other) || (other is _Cleaned);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(showErrorMessages);
+  int get hashCode => runtimeType.hashCode;
 
-  @JsonKey(ignore: true)
   @override
-  _$OrderFormSenderStateCopyWith<_OrderFormSenderState> get copyWith =>
-      __$OrderFormSenderStateCopyWithImpl<_OrderFormSenderState>(
-          this, _$identity);
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() saved,
+    required TResult Function() cleaned,
+  }) {
+    return cleaned();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? saved,
+    TResult Function()? cleaned,
+    required TResult orElse(),
+  }) {
+    if (cleaned != null) {
+      return cleaned();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Saved value) saved,
+    required TResult Function(_Cleaned value) cleaned,
+  }) {
+    return cleaned(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Saved value)? saved,
+    TResult Function(_Cleaned value)? cleaned,
+    required TResult orElse(),
+  }) {
+    if (cleaned != null) {
+      return cleaned(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _OrderFormSenderState implements OrderFormSenderState {
-  const factory _OrderFormSenderState({required bool showErrorMessages}) =
-      _$_OrderFormSenderState;
-
-  @override
-  bool get showErrorMessages => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$OrderFormSenderStateCopyWith<_OrderFormSenderState> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Cleaned implements OrderFormSenderEvent {
+  const factory _Cleaned() = _$_Cleaned;
 }

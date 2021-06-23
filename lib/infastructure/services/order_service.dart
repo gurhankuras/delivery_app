@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/infastructure/order/order_dto.dart';
 import 'package:dio/dio.dart';
+
+import '../../domain/order/order.dart';
+import '../order/order_dto.dart';
 
 class OrderService {
   Dio? dio;

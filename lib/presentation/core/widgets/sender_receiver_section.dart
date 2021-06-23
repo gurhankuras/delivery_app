@@ -1,5 +1,5 @@
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
+import '../../../domain/order/order.dart';
+import '../../../domain/order/value_objects.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,7 +1,7 @@
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/order_info_field.dart';
-import 'package:delivery_app/presentation/core/widgets/sender_receiver_section.dart';
+import '../../../../domain/order/order.dart';
+import '../../../core/size_config.dart';
+import '../../../core/widgets/order_info_field.dart';
+import '../../../core/widgets/sender_receiver_section.dart';
 import 'package:flutter/material.dart';
 
 class NotEditableOrderInfo extends StatelessWidget {

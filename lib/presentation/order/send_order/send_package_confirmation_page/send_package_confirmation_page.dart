@@ -1,16 +1,16 @@
-import 'package:delivery_app/application/extensions/navigator_extension.dart';
-import 'package:delivery_app/infastructure/order/order_fake_repository.dart';
-import 'package:delivery_app/infastructure/services/order_service.dart';
-import 'package:delivery_app/infastructure/services/pdf_service.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/app_button.dart';
-import 'package:delivery_app/presentation/core/widgets/sender_receiver_section.dart';
-import 'package:delivery_app/presentation/pages/pdf_components/receipt_pdf.dart';
-import 'package:delivery_app/providers/order_form_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../application/extensions/navigator_extension.dart';
+import '../../../../infastructure/order/order_fake_repository.dart';
+import '../../../../infastructure/services/order_service.dart';
+import '../../../../infastructure/services/pdf_service.dart';
+import '../../../../providers/order_form_data.dart';
+import '../../../core/size_config.dart';
+import '../../../core/widgets/app_button.dart';
+import '../../../core/widgets/sender_receiver_section.dart';
+import '../../../pages/pdf_components/receipt_pdf.dart';
 import 'components/order_info_alert.dart';
 
 class SendPackageConfirmationPage extends StatelessWidget {
@@ -21,9 +21,10 @@ class SendPackageConfirmationPage extends StatelessWidget {
   Future<void> confirm(BuildContext context) async {
     final id = await sendOrder(context);
     final success = id != null;
-    if (success)
+    if (success) {
       context.read<OrderFormData>().order =
           context.read<OrderFormData>().order?.copyWith(orderId: id);
+    }
     OrderInfoAlert(
       success: success,
       onClose: () => onCloseHandler(success, context),

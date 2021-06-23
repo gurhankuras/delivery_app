@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
-import 'package:delivery_app/domain/statistics/statistics_failure.dart';
-import 'package:delivery_app/infastructure/statistics/statistics_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/date.dart';
-import 'package:delivery_app/domain/statistics/statistics.dart';
+
+import '../../domain/statistics/i_statistics_repository.dart';
+import '../../domain/statistics/statistics.dart';
+import '../../domain/statistics/statistics_failure.dart';
+import 'statistics_dto.dart';
 
 BaseOptions _defaultDioOptions = BaseOptions(
   baseUrl: _baseUrl,
@@ -32,7 +33,6 @@ class StatisticsRepository implements IStatisticsRepository {
       Stat stat, DateTime date) async {
     final dateString = date.toIso8601String();
     final urlPart = stat.str();
-    final url = '$_baseUrl$urlPart';
 
     try {
       final response =

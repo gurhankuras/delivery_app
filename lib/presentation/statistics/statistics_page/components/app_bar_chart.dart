@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:delivery_app/presentation/core/size_config.dart';
+import '../../../core/size_config.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 

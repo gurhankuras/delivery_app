@@ -10,14 +10,30 @@ part 'order_form_sender_bloc.freezed.dart';
 
 class OrderFormSenderBloc
     extends Bloc<OrderFormSenderEvent, OrderFormSenderState> {
-  OrderFormSenderBloc() : super(OrderFormSenderState.initial());
+  OrderFormSenderBloc()
+      : super(OrderFormSenderState1(showErrorMessages: false));
 
   @override
   Stream<OrderFormSenderState> mapEventToState(
     OrderFormSenderEvent event,
   ) async* {
-    yield* event.map(saved: (e) async* {
-      yield state.copyWith(showErrorMessages: true);
-    });
+    yield* event.map(
+      saved: (e) async* {
+        if (e is OrderFormSenderState1) {
+          yield OrderFormSenderState2(showErrorMessages: true);
+        } else {
+          yield OrderFormSenderState1(showErrorMessages: true);
+        }
+        // if (state.deneme == 1) {
+        //   yield OrderFormSenderState(showErrorMessages: true, deneme: 0);
+        // } else {
+        //   yield OrderFormSenderState(showErrorMessages: true, deneme: 1);
+        // }
+      },
+      cleaned: (e) async* {
+        yield OrderFormSenderCleaned(
+            showErrorMessages: state.showErrorMessages);
+      },
+    );
   }
 }

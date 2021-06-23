@@ -1,12 +1,10 @@
-import 'dart:convert';
-
-import 'package:delivery_app/domain/core/json_serializable.dart';
+import '../core/json_serializable.dart';
 
 class Person {
-  String? name;
-  String? phoneNumber;
-  String? trId;
-  String? address;
+  String name;
+  String phoneNumber;
+  String trId;
+  String address;
 
   Person({
     required this.name,
@@ -36,29 +34,29 @@ class Person {
     );
   }
 
-  @override
-  String toString() {
-    return 'Person(name: $name, phoneNumber: $phoneNumber, trId: $trId, address: $address)';
-  }
+  // @override
+  // String toString() {
+  //   return 'Person(name: $name, phoneNumber: $phoneNumber, trId: $trId, address: $address)';
+  // }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  // @override
+  // bool operator ==(Object other) {
+  //   if (identical(this, other)) return true;
 
-    return other is Person &&
-        other.name == name &&
-        other.phoneNumber == phoneNumber &&
-        other.trId == trId &&
-        other.address == address;
-  }
+  //   return other is Person &&
+  //       other.name == name &&
+  //       other.phoneNumber == phoneNumber &&
+  //       other.trId == trId &&
+  //       other.address == address;
+  // }
 
-  @override
-  int get hashCode {
-    return name.hashCode ^
-        phoneNumber.hashCode ^
-        trId.hashCode ^
-        address.hashCode;
-  }
+  // @override
+  // int get hashCode {
+  //   return name.hashCode ^
+  //       phoneNumber.hashCode ^
+  //       trId.hashCode ^
+  //       address.hashCode;
+  // }
 }
 
 class TrackId implements GJsonSerializable<TrackId> {
@@ -94,3 +92,16 @@ class OrderStatus {
   //     _$OrderStatusFromJson(json);
   // Map<String, dynamic> toJson() => _$OrderStatusToJson(this);
 }
+
+// class NoteBody extends ValueObject<String> {
+//   @override
+//   final Either<ValueFailure<String>, String> value;
+
+//   static const maxLength = 1000;
+
+//   factory NoteBody(String input) {
+//     assert(input != null);
+//     return NoteBody._(
+//       validateMaxStringLength(input, maxLength).flatMap(validateStringNotEmpty),
+//     );
+//   }

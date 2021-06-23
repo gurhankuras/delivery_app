@@ -1,19 +1,18 @@
-import 'package:delivery_app/presentation/statistics/statistics_page/components/app_bar_chart.dart';
-import 'package:delivery_app/presentation/statistics/statistics_page/components/app_bar_chart_placeholder.dart';
-import 'package:delivery_app/presentation/statistics/statistics_page/components/app_pie_chart.dart';
-import 'package:delivery_app/presentation/statistics/statistics_page/components/app_pie_chart_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:delivery_app/application/extensions/date_time_extension.dart';
-import 'package:delivery_app/application/statistics/bloc/statistics_bloc.dart';
-import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
-import 'package:delivery_app/presentation/core/widgets/app_button.dart';
-
+import '../../../application/extensions/date_time_extension.dart';
+import '../../../application/statistics/bloc/statistics_bloc.dart';
+import '../../../domain/statistics/i_statistics_repository.dart';
 import '../../core/size_config.dart';
+import '../../core/widgets/app_button.dart';
+import 'components/app_bar_chart.dart';
+import 'components/app_bar_chart_placeholder.dart';
+import 'components/app_pie_chart.dart';
+import 'components/app_pie_chart_placeholder.dart';
 
 class StatisticsPage extends StatefulWidget {
   @override

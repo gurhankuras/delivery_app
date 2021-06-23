@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/order/order.dart';
+import '../../../domain/order/order.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -38,29 +38,29 @@ class ReceiptPdfManager implements PdfPageBuilder {
             _buildFieldRow(
               context: context,
               fieldName: 'Address',
-              senderValue: order.sender!.address!,
-              receiverValue: order.receiver!.address!,
+              senderValue: order.sender!.address,
+              receiverValue: order.receiver!.address,
             ),
             Container(height: 20),
             _buildFieldRow(
               context: context,
               fieldName: 'Name',
-              senderValue: order.sender!.name!,
-              receiverValue: order.receiver!.name!,
+              senderValue: order.sender!.name,
+              receiverValue: order.receiver!.name,
             ),
             Container(height: 20),
             _buildFieldRow(
               context: context,
               fieldName: 'Phone Number',
-              senderValue: order.sender!.phoneNumber!,
-              receiverValue: order.receiver!.phoneNumber!,
+              senderValue: order.sender!.phoneNumber,
+              receiverValue: order.receiver!.phoneNumber,
             ),
             Container(height: 20),
             _buildFieldRow(
               context: context,
               fieldName: 'TR Id',
-              senderValue: order.sender!.trId!,
-              receiverValue: order.receiver!.trId!,
+              senderValue: order.sender!.trId,
+              receiverValue: order.receiver!.trId,
             ),
             Spacer(flex: 9),
             Lorem(),

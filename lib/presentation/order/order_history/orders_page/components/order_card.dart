@@ -1,6 +1,6 @@
 import 'package:clipboard/clipboard.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/stage/stage_manager.dart';
+import '../../../../core/size_config.dart';
+import '../../../../core/widgets/stage/stage_manager.dart';
 import 'package:flutter/material.dart';
 
 class OrderCard extends StatelessWidget {

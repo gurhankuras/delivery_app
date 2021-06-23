@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
-import 'package:delivery_app/domain/statistics/statistics.dart';
-import 'package:delivery_app/domain/statistics/statistics_failure.dart';
+import '../../../domain/statistics/i_statistics_repository.dart';
+import '../../../domain/statistics/statistics.dart';
+import '../../../domain/statistics/statistics_failure.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

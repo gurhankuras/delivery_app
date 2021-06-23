@@ -1,10 +1,10 @@
-import 'package:delivery_app/application/core/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-import 'infastructure/services/cache_manager.dart';
+import 'application/core/simple_bloc_observer.dart';
 import 'infastructure/services/order_service.dart';
 import 'presentation/pages/user_selection_page/user_selection_page.dart';
 import 'providers/order_form_data.dart';
@@ -12,6 +12,7 @@ import 'providers/order_form_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
+  Logger.level = Level.debug;
 
   // await CacheService.instance.initPreferences();
   runApp(

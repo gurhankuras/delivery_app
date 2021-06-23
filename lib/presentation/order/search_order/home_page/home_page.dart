@@ -1,7 +1,7 @@
-import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/order/order_details/order_details_page.dart';
-import 'package:delivery_app/presentation/pages/main_page/components/search_bar.dart';
+import '../../../../application/order/search_order/bloc/search_field_bloc.dart';
+import '../../../core/size_config.dart';
+import '../../order_details/order_details_page.dart';
+import '../../../pages/main_page/components/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

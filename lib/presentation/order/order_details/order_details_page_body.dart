@@ -1,13 +1,12 @@
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
-import 'package:delivery_app/infastructure/services/order_service.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/order_info_field.dart';
-import 'package:delivery_app/presentation/core/widgets/sender_receiver_section.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../../domain/order/order.dart';
+import '../../../infastructure/services/order_service.dart';
+import '../../core/size_config.dart';
+import '../../core/widgets/order_info_field.dart';
+import '../../core/widgets/sender_receiver_section.dart';
 
 class OrderDetailsPageBody extends StatefulWidget {
   final String trackNo;

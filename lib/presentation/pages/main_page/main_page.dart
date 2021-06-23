@@ -1,17 +1,16 @@
-import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
-import 'package:delivery_app/application/statistics/bloc/statistics_bloc.dart';
-import 'package:delivery_app/domain/statistics/i_statistics_repository.dart';
-import 'package:delivery_app/infastructure/services/order_statistics_service.dart';
-import 'package:delivery_app/infastructure/statistics/statistics_repository.dart';
-import 'package:delivery_app/presentation/core/widgets/app_logo.dart';
-import 'package:delivery_app/presentation/home_vm.dart';
-import 'package:delivery_app/presentation/order/search_order/home_page/home_page.dart';
-import 'package:delivery_app/presentation/statistics/statistics_page/statistics_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../../application/order/search_order/bloc/search_field_bloc.dart';
+import '../../../application/statistics/bloc/statistics_bloc.dart';
+import '../../../domain/statistics/i_statistics_repository.dart';
+import '../../../infastructure/statistics/statistics_repository.dart';
+import '../../core/widgets/app_logo.dart';
+import '../../home_vm.dart';
+import '../../order/search_order/home_page/home_page.dart';
+import '../../statistics/statistics_page/statistics_page.dart';
 import '../multi_choice_page/multi_choice_page.dart';
 
 class MainPage extends StatefulWidget {

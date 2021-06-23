@@ -1,9 +1,9 @@
-import 'package:delivery_app/domain/order/value_objects.dart';
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../domain/order/value_objects.dart';
+import '../../../core/size_config.dart';
 
 class SearchBar extends StatefulWidget {
   final String hintText;

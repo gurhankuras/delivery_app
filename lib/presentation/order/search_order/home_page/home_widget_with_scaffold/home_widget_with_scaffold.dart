@@ -1,5 +1,5 @@
-import 'package:delivery_app/application/order/search_order/bloc/search_field_bloc.dart';
-import 'package:delivery_app/presentation/core/widgets/app_logo.dart';
+import '../../../../../application/order/search_order/bloc/search_field_bloc.dart';
+import '../../../../core/widgets/app_logo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../home_page.dart';

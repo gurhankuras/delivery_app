@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/order/value_objects.dart';
+import '../../../domain/order/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -54,7 +54,7 @@ class SenderRecipientTile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: SizeConfig.defaultSize * 0.5),
-              Text(person.address ?? ''),
+              Text(person.address),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/statistics/statistics.dart';
-import 'package:delivery_app/domain/statistics/statistics_failure.dart';
+import 'statistics.dart';
+import 'statistics_failure.dart';
 import 'package:flutter/material.dart';
 
 abstract class IStatisticsRepository {

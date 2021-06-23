@@ -1,9 +1,10 @@
-import 'package:delivery_app/domain/statistics/statistics.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:quiver/iterables.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'statistics_dto.g.dart';
+
+import '../../domain/statistics/statistics.dart';
+
 part 'statistics_dto.freezed.dart';
+part 'statistics_dto.g.dart';
 
 @freezed
 class StatisticsDTO with _$StatisticsDTO {

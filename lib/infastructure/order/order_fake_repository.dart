@@ -1,6 +1,6 @@
-import 'package:delivery_app/domain/order/i_order_repository.dart';
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
+import '../../domain/order/i_order_repository.dart';
+import '../../domain/order/order.dart';
+import '../../domain/order/value_objects.dart';
 
 class OrderFakeRepository implements IOrderRepository {
   final mockOrders = <Order>[mockOrder];

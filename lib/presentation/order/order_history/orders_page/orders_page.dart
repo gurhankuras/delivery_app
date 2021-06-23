@@ -1,4 +1,4 @@
-import 'package:delivery_app/presentation/core/size_config.dart';
+import '../../../core/size_config.dart';
 import 'package:flutter/material.dart';
 
 import 'components/order_card.dart';

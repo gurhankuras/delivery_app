@@ -10,5 +10,6 @@ class OrderFormPersonEvent with _$OrderFormPersonEvent {
       _PhoneNumberChanged;
   const factory OrderFormPersonEvent.addressChanged(String address) =
       _AddressChanged;
+  const factory OrderFormPersonEvent.validated() = _Validated;
   // const factory OrderFormPersonEvent.saved() = _Saved;
 }

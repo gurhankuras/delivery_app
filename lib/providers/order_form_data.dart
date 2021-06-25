@@ -3,8 +3,7 @@ import '../domain/order/order.dart';
 class OrderFormData {
   Order? order;
 
-  void saveOrder(/*Map<String, dynamic> formData*/ Order order_) {
-    // order = Order.fromJson(formData);
+  void saveOrder(Order order_) {
     order = order_;
   }
 

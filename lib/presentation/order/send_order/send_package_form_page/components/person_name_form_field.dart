@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../application/core/constants.dart';
-import '../../../../../application/order/order_form/bloc/order_form_sender_bloc.dart';
 import '../../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import 'input_decoration.dart';
 
@@ -15,31 +14,33 @@ class PersonNameFormField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     print('PERSON_NAME_FORM_FIELD');
 
-    return BlocBuilder<OrderFormSenderBloc, OrderFormSenderState>(
-      builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.only(top: defaultPadding),
-          child: TextFormField(
-            onChanged: (value) {
-              context
-                  .read<OrderFormPersonBloc<T>>()
-                  .add(OrderFormPersonEvent.nameChanged(value));
-            },
-            validator: (_) {
-              return context
-                  .read<OrderFormPersonBloc<T>>()
-                  .state
-                  .nameFailure
-                  .fold(() => null, (a) => a.message);
-            },
-            textInputAction: TextInputAction.next,
-            textCapitalization: TextCapitalization.words,
-            keyboardType: TextInputType.name,
-            decoration: getTextInputDecoration(
-                iconData: Icons.person, labelText: 'Name'),
-          ),
-        );
-      },
+    // return BlocBuilder<OrderFormSenderBloc, OrderFormSenderState>(
+    //   builder: (context, state) {
+    //     return
+    //   },
+    // );
+    return Padding(
+      padding: EdgeInsets.only(top: defaultPadding),
+      child: TextFormField(
+        initialValue: context.read<OrderFormPersonBloc<T>>().state.person.name,
+        onChanged: (value) {
+          context
+              .read<OrderFormPersonBloc<T>>()
+              .add(OrderFormPersonEvent.nameChanged(value));
+        },
+        validator: (_) {
+          return context
+              .read<OrderFormPersonBloc<T>>()
+              .state
+              .nameFailure
+              .fold(() => null, (a) => a.message);
+        },
+        textInputAction: TextInputAction.next,
+        textCapitalization: TextCapitalization.words,
+        keyboardType: TextInputType.name,
+        decoration:
+            getTextInputDecoration(iconData: Icons.person, labelText: 'Name'),
+      ),
     );
   }
 }

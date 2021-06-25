@@ -1,9 +1,10 @@
+import 'package:delivery_app/application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
+
 import '../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../application/order/order_form/bloc/order_form_sender_bloc.dart';
+import '../../../application/order/order_form/order_form_package_bloc/order_form_package_bloc.dart';
 import '../../core/size_config.dart';
 import '../../order/send_order/send_package_form_page/send_package_form_page.dart';
 import '../../order/update_order/edit_order_status_page/edit_order_status_page.dart';
@@ -35,6 +36,10 @@ class MultiChoicePage extends StatelessWidget {
               lazy: false,
               create: (context) => OrderFormPersonBloc<Receiver>(
                   context.read<OrderFormSenderBloc>()),
+            ),
+            BlocProvider(
+              // lazy: false,
+              create: (context) => OrderFormPackageBloc(),
             ),
           ],
           child: SendPackageFormPage(),

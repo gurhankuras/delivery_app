@@ -9,8 +9,6 @@ class OrderFormPersonState with _$OrderFormPersonState {
     required Option<ValueFailure<String>> addressFailure,
     required Option<ValueFailure<String>> phoneNumberFailure,
     required Option<ValueFailure<dynamic>> overallFailure,
-    // required bool isEditing,
-    // required bool isSaving,
     // required Option<Either<OrderFailure, Unit>> saveFailureOrSuccessOption,
   }) = _OrderFormPersonState;
 

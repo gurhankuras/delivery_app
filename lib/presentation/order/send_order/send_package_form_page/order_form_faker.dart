@@ -10,7 +10,7 @@ final random = Random();
 
 class FormFaker {
   String address() {
-    return """${faker.address.state()} ${faker.address.country()} ${int.parse(faker.address.buildingNumber()) % 20} ${int.parse(faker.address.buildingNumber()) % 20} ${faker.address.neighborhood()} ${faker.address.streetAddress()}""";
+    return '''${faker.address.state()} ${faker.address.country()} ${int.parse(faker.address.buildingNumber()) % 20} ${int.parse(faker.address.buildingNumber()) % 20} ${faker.address.neighborhood()} ${faker.address.streetAddress()}''';
   }
 
   String phoneNumber() {

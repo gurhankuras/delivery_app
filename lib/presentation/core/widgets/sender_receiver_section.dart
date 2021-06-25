@@ -21,48 +21,51 @@ class SenderReceiverSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        buildRouteLine(context),
-        Spacer(),
-        Expanded(
-          flex: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SenderRecipientTile(
-                title: 'Sender',
-                person: order.sender ??
-                    Person(name: '', phoneNumber: '', trId: '', address: ''),
-                editing: editing,
-                onEdit: onEdit,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color: Colors.grey.withOpacity(0.25),
-                      height: SizeConfig.defaultSize * 3,
-                      thickness: 1,
-                      endIndent: SizeConfig.defaultSize * 3,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: SizeConfig.defaultSize * 3),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          buildRouteLine(context),
+          Spacer(),
+          Expanded(
+            flex: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SenderRecipientTile(
+                  title: 'Sender',
+                  person: order.sender ??
+                      Person(name: '', phoneNumber: '', trId: '', address: ''),
+                  editing: editing,
+                  onEdit: onEdit,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.25),
+                        height: SizeConfig.defaultSize * 3,
+                        thickness: 1,
+                        endIndent: SizeConfig.defaultSize * 3,
+                      ),
                     ),
-                  ),
-                  Text('1.1 Km'),
-                ],
-              ),
-              SenderRecipientTile(
-                title: 'Receiver',
-                person: order.receiver ??
-                    Person(name: '', phoneNumber: '', trId: '', address: ''),
-                editing: editing,
-                onEdit: onEdit,
-              ),
-            ],
+                    Text('1.1 Km'),
+                  ],
+                ),
+                SenderRecipientTile(
+                  title: 'Receiver',
+                  person: order.receiver ??
+                      Person(name: '', phoneNumber: '', trId: '', address: ''),
+                  editing: editing,
+                  onEdit: onEdit,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

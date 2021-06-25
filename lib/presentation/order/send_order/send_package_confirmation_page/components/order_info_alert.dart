@@ -1,17 +1,16 @@
-import '../../../../core/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../../../../application/order/confirm_order/bloc/confirm_order_bloc.dart';
+import '../../../../core/size_config.dart';
+
 class OrderInfoAlert {
-  final VoidCallback onPdf;
-  final VoidCallback onClose;
   final BuildContext context;
   final bool success;
 
   const OrderInfoAlert({
-    required this.onPdf,
-    required this.onClose,
     required this.context,
     this.success = true,
   });
@@ -33,13 +32,13 @@ class OrderInfoAlert {
     final alert = Alert(
       // closeIcon: Container(),
       style: alertStyle,
-      closeFunction: onClose,
+      // closeFunction: () => context.read<ConfirmOrderBloc>().add(ConfirmOrderState.pageClosed())/*onCloseHandler(success, context)*/,
       context: context,
       title: title,
       content: _buildContents(svgFileName, description),
       buttons: [
         if (success) _buildGetPdfButton(context),
-        _buildCloseButton(context, buttonColor),
+        _buildCloseButton(success, context, buttonColor),
       ],
     );
 
@@ -63,7 +62,9 @@ class OrderInfoAlert {
 
   DialogButton _buildGetPdfButton(BuildContext context) {
     return DialogButton(
-      onPressed: onPdf,
+      onPressed: () => context
+          .read<ConfirmOrderBloc>()
+          .add(ConfirmOrderEvent.receiptRequested()),
       color: Theme.of(context).colorScheme.primary,
       child: Text(
         'Get Receipt',
@@ -72,9 +73,11 @@ class OrderInfoAlert {
     );
   }
 
-  DialogButton _buildCloseButton(BuildContext context, Color buttonColor) {
+  DialogButton _buildCloseButton(
+      bool success, BuildContext context, Color buttonColor) {
     return DialogButton(
-      onPressed: onClose,
+      onPressed: () =>
+          context.read<ConfirmOrderBloc>().add(ConfirmOrderEvent.close()),
       color: buttonColor,
       child: Text(
         'Close',

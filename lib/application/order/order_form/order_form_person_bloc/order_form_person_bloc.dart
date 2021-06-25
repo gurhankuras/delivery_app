@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
-import '../bloc/order_form_sender_bloc.dart';
+import 'package:delivery_app/application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
 import '../../../../domain/core/failures.dart';
 import '../../../../domain/order/validators.dart';
 import '../../../../domain/order/order.dart';

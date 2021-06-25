@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../application/core/constants.dart';
+import '../../../../core/constants.dart';
 import '../../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import 'input_decoration.dart';
 

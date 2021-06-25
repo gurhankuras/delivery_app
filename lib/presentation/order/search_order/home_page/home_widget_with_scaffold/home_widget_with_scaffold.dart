@@ -1,4 +1,4 @@
-import '../../../../../application/order/search_order/bloc/search_field_bloc.dart';
+import '../../../../../application/order/search_order/bloc/search_order_bloc.dart';
 import '../../../../core/widgets/app_logo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +11,7 @@ class HomePageWithScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: AppLogo()),
       body: BlocProvider(
-        create: (context) => SearchFieldBloc(),
+        create: (context) => SearchOrderBloc(),
         child: HomePage(),
       ),
     );

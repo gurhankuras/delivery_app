@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../../application/order/search_order/bloc/search_field_bloc.dart';
+import '../../../application/order/search_order/bloc/search_order_bloc.dart';
 import '../../../application/statistics/bloc/statistics_bloc.dart';
 import '../../../domain/statistics/i_statistics_repository.dart';
 import '../../../infastructure/statistics/statistics_repository.dart';
@@ -35,8 +35,8 @@ class _MainPageState extends State<MainPage> {
   }
 
   static final List<Widget> _pages = <Widget>[
-    BlocProvider<SearchFieldBloc>(
-      create: (context) => SearchFieldBloc(),
+    BlocProvider(
+      create: (context) => SearchOrderBloc(),
       child: HomePage(),
     ),
     // OrdersPage(),

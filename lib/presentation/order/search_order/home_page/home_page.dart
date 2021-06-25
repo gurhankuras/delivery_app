@@ -1,12 +1,11 @@
-import '../../../../application/order/search_order/bloc/search_field_bloc.dart';
-import '../../../core/size_config.dart';
-import '../../order_details/order_details_page.dart';
-import '../../../pages/main_page/components/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_svg/svg.dart';
-import 'package:string_validator/string_validator.dart';
+
+import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
+import '../../../core/size_config.dart';
+import '../../../pages/main_page/components/search_bar.dart';
+import '../../order_details/order_details_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,16 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  String? validateTrackId(String id) {
-    if (id.trim() == '') {
-      return 'Must be filled!';
-    }
-    if (!isInt(id)) {
-      return 'Invalid track id';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -35,38 +24,42 @@ class _HomePageState extends State<HomePage>
             'assets/svgs/whereis.svg',
             height: SizeConfig.defaultSize * 17,
           ),
-          BlocConsumer<SearchFieldBloc, SearchFieldState>(
+          BlocListener<SearchOrderBloc, SearchOrderState>(
             listener: (context, state) {
-              if (state.infoButtonPressed) {
-                showInformationDialog(context);
-              } else if (state.searchButtonPressed) {
-                final errorMessage = validateTrackId(state.trackId);
-                if (errorMessage != null) {
+              state.maybeMap(
+                orElse: () {},
+                invalidFormat: (state) {
                   ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(errorMessage)));
-                  return;
-                }
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => OrderDetailPage(
-                      trackNo: state.trackId,
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          state.failure.message,
+                        ),
+                      ),
+                    );
+                },
+                navigating: (state) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return OrderDetailPage(
+                          trackNo: state.trackId,
+                        );
+                      },
                     ),
-                  ),
-                );
-              }
-            },
-            builder: (context, state) {
-              return SearchBar(
-                onInfo: () => context
-                    .read<SearchFieldBloc>()
-                    .add(SearchFieldEvent.infoButtonPressed()),
-                onSearch: (value) => context
-                    .read<SearchFieldBloc>()
-                    .add(SearchFieldEvent.searchButtonPressed(value)),
-                keyboardType: TextInputType.number,
-                hintText: 'Gönderi sorgula',
+                  );
+                },
               );
             },
+            child: SearchBar(
+              onInfo: () => showInformationDialog(context),
+              onSearch: (value) => context
+                  .read<SearchOrderBloc>()
+                  .add(SearchOrderEvent.searchButtonPressed(value)),
+              keyboardType: TextInputType.number,
+              hintText: 'Gönderi sorgula',
+            ),
           ),
         ],
       ),

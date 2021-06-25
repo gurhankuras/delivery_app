@@ -34,6 +34,25 @@ class _$ValueFailureTearOff {
       message: message,
     );
   }
+
+  InvalidFormat<T> invalidFormat<T>(
+      {required T failedValue, String message = 'Invalid Format'}) {
+    return InvalidFormat<T>(
+      failedValue: failedValue,
+      message: message,
+    );
+  }
+
+  MustBeNCharacters<T> mustBeNCharacters<T>(
+      {required T failedValue,
+      String message = 'Must be N characters',
+      required int n}) {
+    return MustBeNCharacters<T>(
+      failedValue: failedValue,
+      message: message,
+      n: n,
+    );
+  }
 }
 
 /// @nodoc
@@ -49,12 +68,17 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue, String message, int max)
         exceedingLength,
     required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue, String message, int max)? exceedingLength,
     TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,12 +86,16 @@ mixin _$ValueFailure<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -209,6 +237,9 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue, String message, int max)
         exceedingLength,
     required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
   }) {
     return exceedingLength(failedValue, message, max);
   }
@@ -218,6 +249,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue, String message, int max)? exceedingLength,
     TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -231,6 +264,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
   }) {
     return exceedingLength(this);
   }
@@ -240,6 +275,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -346,6 +383,9 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue, String message, int max)
         exceedingLength,
     required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
   }) {
     return empty(failedValue, message);
   }
@@ -355,6 +395,8 @@ class _$Empty<T> implements Empty<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T failedValue, String message, int max)? exceedingLength,
     TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -368,6 +410,8 @@ class _$Empty<T> implements Empty<T> {
   TResult map<TResult extends Object?>({
     required TResult Function(ExceedingLength<T> value) exceedingLength,
     required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
   }) {
     return empty(this);
   }
@@ -377,6 +421,8 @@ class _$Empty<T> implements Empty<T> {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ExceedingLength<T> value)? exceedingLength,
     TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -396,5 +442,316 @@ abstract class Empty<T> implements ValueFailure<T> {
   @override
   @JsonKey(ignore: true)
   $EmptyCopyWith<T, Empty<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InvalidFormatCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $InvalidFormatCopyWith(
+          InvalidFormat<T> value, $Res Function(InvalidFormat<T>) then) =
+      _$InvalidFormatCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue, String message});
+}
+
+/// @nodoc
+class _$InvalidFormatCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $InvalidFormatCopyWith<T, $Res> {
+  _$InvalidFormatCopyWithImpl(
+      InvalidFormat<T> _value, $Res Function(InvalidFormat<T>) _then)
+      : super(_value, (v) => _then(v as InvalidFormat<T>));
+
+  @override
+  InvalidFormat<T> get _value => super._value as InvalidFormat<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+    Object? message = freezed,
+  }) {
+    return _then(InvalidFormat<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvalidFormat<T> implements InvalidFormat<T> {
+  const _$InvalidFormat(
+      {required this.failedValue, this.message = 'Invalid Format'});
+
+  @override
+  final T failedValue;
+  @JsonKey(defaultValue: 'Invalid Format')
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidFormat(failedValue: $failedValue, message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is InvalidFormat<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(failedValue) ^
+      const DeepCollectionEquality().hash(message);
+
+  @JsonKey(ignore: true)
+  @override
+  $InvalidFormatCopyWith<T, InvalidFormat<T>> get copyWith =>
+      _$InvalidFormatCopyWithImpl<T, InvalidFormat<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, String message, int max)
+        exceedingLength,
+    required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
+  }) {
+    return invalidFormat(failedValue, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, String message, int max)? exceedingLength,
+    TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    required TResult orElse(),
+  }) {
+    if (invalidFormat != null) {
+      return invalidFormat(failedValue, message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+  }) {
+    return invalidFormat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    required TResult orElse(),
+  }) {
+    if (invalidFormat != null) {
+      return invalidFormat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidFormat<T> implements ValueFailure<T> {
+  const factory InvalidFormat({required T failedValue, String message}) =
+      _$InvalidFormat<T>;
+
+  @override
+  T get failedValue => throw _privateConstructorUsedError;
+  @override
+  String get message => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $InvalidFormatCopyWith<T, InvalidFormat<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MustBeNCharactersCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $MustBeNCharactersCopyWith(MustBeNCharacters<T> value,
+          $Res Function(MustBeNCharacters<T>) then) =
+      _$MustBeNCharactersCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue, String message, int n});
+}
+
+/// @nodoc
+class _$MustBeNCharactersCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $MustBeNCharactersCopyWith<T, $Res> {
+  _$MustBeNCharactersCopyWithImpl(
+      MustBeNCharacters<T> _value, $Res Function(MustBeNCharacters<T>) _then)
+      : super(_value, (v) => _then(v as MustBeNCharacters<T>));
+
+  @override
+  MustBeNCharacters<T> get _value => super._value as MustBeNCharacters<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+    Object? message = freezed,
+    Object? n = freezed,
+  }) {
+    return _then(MustBeNCharacters<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      n: n == freezed
+          ? _value.n
+          : n // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MustBeNCharacters<T> implements MustBeNCharacters<T> {
+  const _$MustBeNCharacters(
+      {required this.failedValue,
+      this.message = 'Must be N characters',
+      required this.n});
+
+  @override
+  final T failedValue;
+  @JsonKey(defaultValue: 'Must be N characters')
+  @override
+  final String message;
+  @override
+  final int n;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.mustBeNCharacters(failedValue: $failedValue, message: $message, n: $n)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is MustBeNCharacters<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.n, n) ||
+                const DeepCollectionEquality().equals(other.n, n)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(failedValue) ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(n);
+
+  @JsonKey(ignore: true)
+  @override
+  $MustBeNCharactersCopyWith<T, MustBeNCharacters<T>> get copyWith =>
+      _$MustBeNCharactersCopyWithImpl<T, MustBeNCharacters<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, String message, int max)
+        exceedingLength,
+    required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
+  }) {
+    return mustBeNCharacters(failedValue, message, n);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, String message, int max)? exceedingLength,
+    TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    required TResult orElse(),
+  }) {
+    if (mustBeNCharacters != null) {
+      return mustBeNCharacters(failedValue, message, n);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+  }) {
+    return mustBeNCharacters(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    required TResult orElse(),
+  }) {
+    if (mustBeNCharacters != null) {
+      return mustBeNCharacters(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MustBeNCharacters<T> implements ValueFailure<T> {
+  const factory MustBeNCharacters(
+      {required T failedValue,
+      String message,
+      required int n}) = _$MustBeNCharacters<T>;
+
+  @override
+  T get failedValue => throw _privateConstructorUsedError;
+  @override
+  String get message => throw _privateConstructorUsedError;
+  int get n => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $MustBeNCharactersCopyWith<T, MustBeNCharacters<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

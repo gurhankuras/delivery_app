@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/size_config.dart';
-import 'shimmer_widget.dart';
+import '../../../core/widgets/shimmer_widget.dart';
 
 class AppBarChartPlaceholder extends StatelessWidget {
   @override

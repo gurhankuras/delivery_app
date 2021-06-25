@@ -12,4 +12,15 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.empty(
       {required T failedValue,
       @Default('Value is empty') String message}) = Empty<T>;
+
+  const factory ValueFailure.invalidFormat({
+    required T failedValue,
+    @Default('Invalid Format') String message,
+  }) = InvalidFormat<T>;
+
+  const factory ValueFailure.mustBeNCharacters({
+    required T failedValue,
+    @Default('Must be N characters') String message,
+    required int n,
+  }) = MustBeNCharacters<T>;
 }

@@ -7,24 +7,25 @@ import '../../../../application/order/order_form/order_form_package_bloc/order_f
 import '../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import '../../../../application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
 import '../../../../providers/order_form_data.dart';
-import '../../../core/logger.dart';
+import '../../../core/logger_mixin.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
 import '../send_package_confirmation_page/send_package_confirmation_page.dart';
 import 'components/package_form_section.dart';
 import 'components/person_form_section.dart';
 
-class SendPackageFormPage extends StatelessWidget {
+class SendPackageFormPage extends StatelessWidget
+    with LoggerMixin<SendPackageFormPage> {
   @override
   Widget build(BuildContext context) {
-    log.d('SEND_PACKAGE_FORM_PAGE');
+    logger.d('SEND_PACKAGE_FORM_PAGE');
     return Scaffold(
       appBar: buildAppbar(context),
       body: BlocBuilder<OrderFormSenderBloc, OrderFormSenderState>(
         buildWhen: (previous, current) =>
             previous.showErrorMessages != current.showErrorMessages,
         builder: (context, state) {
-          log.d('SEND_PACKAGE_FORM_PAGE - FORM BUILDER');
+          logger.d('SEND_PACKAGE_FORM_PAGE - FORM BUILDER');
           return Form(
             autovalidateMode: state.showErrorMessages
                 ? AutovalidateMode.always
@@ -66,6 +67,7 @@ class SendPackageFormPage extends StatelessWidget {
     );
   }
 
+// TODO: bu iki fonksiyonu order_form_sender_bloc'a kaydir
   void continueHandler(BuildContext context) {
     context.read<OrderFormSenderBloc>().add(OrderFormSenderEvent.saved());
     context.read<OrderFormPersonBloc<Sender>>().state.overallFailure.fold(

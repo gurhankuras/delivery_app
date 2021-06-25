@@ -1,10 +1,10 @@
-import '../../core/widgets/app_logo.dart';
-import '../../home_vm.dart';
-import '../../core/size_config.dart';
-import '../../order/search_order/home_page/home_widget_with_scaffold/home_widget_with_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/size_config.dart';
+import '../../core/widgets/app_logo.dart';
+import '../../home_vm.dart';
+import '../../order/search_order/home_page/home_widget_with_scaffold/home_widget_with_scaffold.dart';
 import '../main_page/main_page.dart';
 
 class UserSelectionPage extends StatelessWidget {

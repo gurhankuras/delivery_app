@@ -1,4 +1,4 @@
-import 'package:delivery_app/application/core/constants.dart';
+import 'package:delivery_app/presentation/core/constants.dart';
 import 'package:delivery_app/presentation/core/size_config.dart';
 import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/app_select.dart';
 import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/input_decoration.dart';

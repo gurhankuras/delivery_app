@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'application/core/simple_bloc_observer.dart';
 import 'infastructure/services/order_service.dart';
+import 'presentation/core/create_and_log.dart';
 import 'presentation/pages/user_selection_page/user_selection_page.dart';
 import 'providers/order_form_data.dart';
 
@@ -19,7 +20,7 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(
-          create: (context) => OrderService(),
+          create: (context) => createAndLog(() => OrderService()),
         ),
         Provider(
           create: (context) => OrderFormData(),

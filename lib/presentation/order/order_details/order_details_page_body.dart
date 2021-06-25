@@ -1,59 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
+import '../../../application/order/order_details/bloc/fetch_order_bloc.dart';
+import '../../../domain/core/failures.dart';
 import '../../../domain/order/order.dart';
-import '../../../infastructure/services/order_service.dart';
 import '../../core/size_config.dart';
 import '../../core/widgets/order_info_field.dart';
 import '../../core/widgets/sender_receiver_section.dart';
 
-class OrderDetailsPageBody extends StatefulWidget {
-  final String trackNo;
-
+class OrderDetailsPageBody extends StatelessWidget {
   const OrderDetailsPageBody({
-    required this.trackNo,
     Key? key,
   }) : super(key: key);
 
   @override
-  _OrderDetailsPageBodyState createState() => _OrderDetailsPageBodyState();
-}
-
-class _OrderDetailsPageBodyState extends State<OrderDetailsPageBody> {
-  Future<Order>? orderFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    orderFuture = context.read<OrderService>().queryTrackId(widget.trackNo);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Order?>(
-      future: orderFuture,
-      builder: (context, AsyncSnapshot<Order?> snapshot) {
-        if (snapshot.hasData) {
-          // CacheService.instance
-          // .saveItem<TrackId>(
-          // int.parse(widget.trackNo), TrackId(value: widget.trackNo))
-          // .then((value) => print(value ? 'Saved' : 'Fail!'));
-          return buildContent(context, snapshot.data!);
-        } else if (snapshot.hasError) {
-          return _buildError();
-        } else {
-          print(snapshot.connectionState);
-          return Center(child: CircularProgressIndicator());
-        }
+    return BlocBuilder<FetchOrderBloc, FetchOrderState>(
+      builder: (context, state) {
+        return state.map(
+          initial: (state) {
+            return Center(child: CircularProgressIndicator());
+          },
+          loading: (state) {
+            return Center(child: CircularProgressIndicator());
+          },
+          success: (state) {
+            return buildContent(context, state.order);
+          },
+          failure: (state) {
+            return _buildError(state.failure);
+          },
+        );
       },
     );
-    // buildContent(context);
   }
 
-  Center _buildError() {
+  Center _buildError(ValueFailure<String> failure) {
     return Center(
-      child: Text('Order Not found'),
+      child: Text(failure.message),
     );
   }
 

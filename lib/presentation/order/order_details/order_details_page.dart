@@ -1,6 +1,11 @@
-import '../../core/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/core/config.dart';
+import '../../../application/order/order_details/bloc/fetch_order_bloc.dart';
+import '../../../infastructure/order/order_fake_repository.dart';
+import '../../../infastructure/order/order_repository.dart';
+import '../../core/size_config.dart';
 import 'order_details_page_body.dart';
 
 class OrderDetailPage extends StatelessWidget {
@@ -21,9 +26,16 @@ class OrderDetailPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(SizeConfig.defaultSize * 2),
         child: SingleChildScrollView(
-            child: OrderDetailsPageBody(
-          trackNo: trackNo,
-        )),
+          child: BlocProvider(
+            create: (context) => FetchOrderBloc(ORDER_REPO_FAKE_IMPLEMENTATION
+                ? OrderFakeRepository()
+                : OrderRepository())
+              ..add(
+                FetchOrderEvent.fetchingStarted(trackNo),
+              ),
+            child: OrderDetailsPageBody(),
+          ),
+        ),
       ),
     );
   }

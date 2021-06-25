@@ -1,8 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 final log = Logger(printer: AppLogPrinter('ROOT'));
 
 Logger getLogger(String className) => Logger(printer: AppLogPrinter(className));
+
+Logger getWLogger(Widget widget) =>
+    Logger(printer: AppLogPrinter(widget.runtimeType.toString()));
 
 class AppLogPrinter extends LogPrinter {
   final String className;

@@ -30,15 +30,15 @@ class OrderInfoAlert {
         success ? Theme.of(context).colorScheme.primaryVariant : Colors.red;
 
     final alert = Alert(
-      // closeIcon: Container(),
       style: alertStyle,
-      // closeFunction: () => context.read<ConfirmOrderBloc>().add(ConfirmOrderState.pageClosed())/*onCloseHandler(success, context)*/,
+      closeFunction: () =>
+          context.read<ConfirmOrderBloc>().add(ConfirmOrderEvent.close()),
       context: context,
       title: title,
       content: _buildContents(svgFileName, description),
       buttons: [
         if (success) _buildGetPdfButton(context),
-        _buildCloseButton(success, context, buttonColor),
+        _buildCloseButton(context, buttonColor),
       ],
     );
 
@@ -73,8 +73,7 @@ class OrderInfoAlert {
     );
   }
 
-  DialogButton _buildCloseButton(
-      bool success, BuildContext context, Color buttonColor) {
+  DialogButton _buildCloseButton(BuildContext context, Color buttonColor) {
     return DialogButton(
       onPressed: () =>
           context.read<ConfirmOrderBloc>().add(ConfirmOrderEvent.close()),

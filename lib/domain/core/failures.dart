@@ -23,4 +23,10 @@ class ValueFailure<T> with _$ValueFailure<T> {
     @Default('Must be N characters') String message,
     required int n,
   }) = MustBeNCharacters<T>;
+
+  const factory ValueFailure.shortLength({
+    required T failedValue,
+    @Default('Must be at least N characters long') String message,
+    required int min,
+  }) = Short<T>;
 }

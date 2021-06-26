@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/core/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,7 +72,7 @@ class _StatisticsPageState extends State<StatisticsPage>
               state: state,
               children: [
                 SvgPicture.asset(
-                  'assets/svgs/network_error.svg',
+                  ImagePaths.network_error,
                   fit: BoxFit.cover,
                   width: SizeConfig.screenWidth * 0.6,
                 ),

@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
+import '../../../core/image_paths.dart';
 import '../../../core/size_config.dart';
+import '../../../core/widgets/showSnackbar.dart';
 import '../../../pages/main_page/components/search_bar.dart';
 import '../../order_details/order_details_page.dart';
 
@@ -21,7 +23,7 @@ class _HomePageState extends State<HomePage>
       child: Column(
         children: [
           SvgPicture.asset(
-            'assets/svgs/whereis.svg',
+            ImagePaths.where_is,
             height: SizeConfig.defaultSize * 17,
           ),
           BlocListener<SearchOrderBloc, SearchOrderState>(
@@ -29,15 +31,7 @@ class _HomePageState extends State<HomePage>
               state.maybeMap(
                 orElse: () {},
                 invalidFormat: (state) {
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          state.failure.message,
-                        ),
-                      ),
-                    );
+                  showSnackBar(context, state.failure.message);
                 },
                 navigating: (state) {
                   Navigator.of(context).push(
@@ -101,7 +95,7 @@ class _HomePageState extends State<HomePage>
               Expanded(
                 flex: 10,
                 child: SizedBox.expand(
-                    child: Image.asset('assets/svgs/track_id_info.png')),
+                    child: Image.asset(ImagePaths.track_id_info)),
               ),
               Spacer(
                 flex: 2,

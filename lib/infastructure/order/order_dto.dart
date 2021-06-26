@@ -84,9 +84,17 @@ class PersonDTO with _$PersonDTO {
 
 @freezed
 class TrackIdDTO with _$TrackIdDTO {
+  const TrackIdDTO._();
+
   factory TrackIdDTO({String? value}) = _TrackIdDTO;
   factory TrackIdDTO.fromJson(Map<String, dynamic> json) =>
       _$TrackIdDTOFromJson(json);
+  factory TrackIdDTO.fromDomain(TrackId trackId) =>
+      TrackIdDTO(value: trackId.value);
+
+  TrackId toDomain() => TrackId(
+        value: value,
+      );
 }
 
 @freezed

@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/core/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -105,7 +106,7 @@ class SendPackageConfirmationPage extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            'assets/svgs/package.svg',
+            ImagePaths.package,
             color: Theme.of(context).colorScheme.primary,
             height: SizeConfig.defaultSize * 2.5,
           ),

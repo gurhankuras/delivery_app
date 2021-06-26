@@ -1,10 +1,12 @@
-import '../../../../core/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../core/size_config.dart';
 
 InputDecoration getTextInputDecoration({
   String? labelText,
   required IconData iconData,
+  Widget? suffixIcon,
   bool isFontAwesome = false,
 }) {
   return InputDecoration(
@@ -25,6 +27,7 @@ InputDecoration getTextInputDecoration({
             iconData,
             color: Colors.black.withOpacity(0.5),
           ),
+    suffixIcon: suffixIcon,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         SizeConfig.defaultSize * 2,

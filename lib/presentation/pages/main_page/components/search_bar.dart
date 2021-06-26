@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../app_get_it.dart';
 import '../../../../domain/order/value_objects.dart';
+import '../../../../infastructure/order/order_dto.dart';
+import '../../../../infastructure/services/cache_manager.dart';
 import '../../../core/size_config.dart';
 
 class SearchBar extends StatefulWidget {
@@ -31,14 +34,17 @@ class _SearchBarState extends State<SearchBar> {
     _textController = TextEditingController();
   }
 
-  Iterable<TrackId> getSuggestions(String pattern) {
+  List<TrackId> getSuggestions(String pattern) {
     if (pattern.isEmpty) {
       return <TrackId>[];
     }
-    return [];
-    // return CacheService.instance
-    // .getItems<TrackId>(TrackId())
-    // .where((id) => id.value.toString().contains(pattern));
+    // return [];
+    final trackIds = getIt<CacheService>()
+        .getItems<TrackId>()
+        .getOrElse(() => <Map<String, dynamic>>[])
+        .map((e) => TrackIdDTO.fromJson(e).toDomain())
+        .where((e) => e.value!.contains(pattern));
+    return trackIds.toList();
   }
 
   @override
@@ -59,7 +65,6 @@ class _SearchBarState extends State<SearchBar> {
       },
       onSuggestionSelected: (TrackId suggestion) {
         _textController.text = suggestion.value!;
-        print(suggestion.value);
       },
     );
   }

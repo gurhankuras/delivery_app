@@ -4,18 +4,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+import 'app_get_it.dart';
+import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'application/core/simple_bloc_observer.dart';
 import 'infastructure/services/order_service.dart';
+import 'presentation/auth/sign_in_page.dart';
 import 'presentation/core/create_and_log.dart';
-import 'presentation/pages/user_selection_page/user_selection_page.dart';
 import 'providers/order_form_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
+  await setup();
   Logger.level = Level.debug;
 
-  // await CacheService.instance.initPreferences();
   runApp(
     MultiProvider(
       providers: [
@@ -24,7 +26,7 @@ void main() async {
         ),
         Provider(
           create: (context) => OrderFormData(),
-        )
+        ),
       ],
       child: MyApp(),
     ),
@@ -37,7 +39,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: UserSelectionPage(),
+      home: BlocProvider(
+        create: (context) => SignInFormBloc(FakeAuthService()),
+        child: SignInPage(),
+      ),
       theme: appTheme(context),
     );
   }

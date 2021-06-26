@@ -696,8 +696,8 @@ class __$TrackIdDTOCopyWithImpl<$Res> extends _$TrackIdDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TrackIdDTO implements _TrackIdDTO {
-  _$_TrackIdDTO({this.value});
+class _$_TrackIdDTO extends _TrackIdDTO {
+  _$_TrackIdDTO({this.value}) : super._();
 
   factory _$_TrackIdDTO.fromJson(Map<String, dynamic> json) =>
       _$_$_TrackIdDTOFromJson(json);
@@ -733,8 +733,9 @@ class _$_TrackIdDTO implements _TrackIdDTO {
   }
 }
 
-abstract class _TrackIdDTO implements TrackIdDTO {
+abstract class _TrackIdDTO extends TrackIdDTO {
   factory _TrackIdDTO({String? value}) = _$_TrackIdDTO;
+  _TrackIdDTO._() : super._();
 
   factory _TrackIdDTO.fromJson(Map<String, dynamic> json) =
       _$_TrackIdDTO.fromJson;

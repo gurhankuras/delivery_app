@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../size_config.dart';
+import '../image_paths.dart';
+import 'app_title.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({
@@ -16,7 +16,7 @@ class AppLogo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          'assets/svgs/fast-delivery.svg',
+          ImagePaths.fast_delivery,
           fit: BoxFit.cover,
           height: kToolbarHeight,
           color: Color(0xFFef5448),
@@ -24,21 +24,7 @@ class AppLogo extends StatelessWidget {
         SizedBox(
           width: 6,
         ),
-        Text.rich(
-          TextSpan(text: 'Deliver', children: [
-            TextSpan(
-              text: 'it.',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ]),
-          style: GoogleFonts.lato().copyWith(
-            fontSize: SizeConfig.defaultSize * 2,
-            fontWeight: FontWeight.w500,
-          ),
-        )
+        AppTitle()
       ],
     );
   }

@@ -53,6 +53,17 @@ class _$ValueFailureTearOff {
       n: n,
     );
   }
+
+  Short<T> shortLength<T>(
+      {required T failedValue,
+      String message = 'Must be at least N characters long',
+      required int min}) {
+    return Short<T>(
+      failedValue: failedValue,
+      message: message,
+      min: min,
+    );
+  }
 }
 
 /// @nodoc
@@ -71,6 +82,8 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue, String message) invalidFormat,
     required TResult Function(T failedValue, String message, int n)
         mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +92,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, String message)? empty,
     TResult Function(T failedValue, String message)? invalidFormat,
     TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +102,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(InvalidFormat<T> value) invalidFormat,
     required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +111,7 @@ mixin _$ValueFailure<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(InvalidFormat<T> value)? invalidFormat,
     TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -240,6 +256,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue, String message) invalidFormat,
     required TResult Function(T failedValue, String message, int n)
         mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
   }) {
     return exceedingLength(failedValue, message, max);
   }
@@ -251,6 +269,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, String message)? empty,
     TResult Function(T failedValue, String message)? invalidFormat,
     TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -266,6 +285,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(InvalidFormat<T> value) invalidFormat,
     required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
   }) {
     return exceedingLength(this);
   }
@@ -277,6 +297,7 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(InvalidFormat<T> value)? invalidFormat,
     TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
     required TResult orElse(),
   }) {
     if (exceedingLength != null) {
@@ -386,6 +407,8 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(T failedValue, String message) invalidFormat,
     required TResult Function(T failedValue, String message, int n)
         mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
   }) {
     return empty(failedValue, message);
   }
@@ -397,6 +420,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(T failedValue, String message)? empty,
     TResult Function(T failedValue, String message)? invalidFormat,
     TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -412,6 +436,7 @@ class _$Empty<T> implements Empty<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(InvalidFormat<T> value) invalidFormat,
     required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
   }) {
     return empty(this);
   }
@@ -423,6 +448,7 @@ class _$Empty<T> implements Empty<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(InvalidFormat<T> value)? invalidFormat,
     TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -532,6 +558,8 @@ class _$InvalidFormat<T> implements InvalidFormat<T> {
     required TResult Function(T failedValue, String message) invalidFormat,
     required TResult Function(T failedValue, String message, int n)
         mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
   }) {
     return invalidFormat(failedValue, message);
   }
@@ -543,6 +571,7 @@ class _$InvalidFormat<T> implements InvalidFormat<T> {
     TResult Function(T failedValue, String message)? empty,
     TResult Function(T failedValue, String message)? invalidFormat,
     TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
     required TResult orElse(),
   }) {
     if (invalidFormat != null) {
@@ -558,6 +587,7 @@ class _$InvalidFormat<T> implements InvalidFormat<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(InvalidFormat<T> value) invalidFormat,
     required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
   }) {
     return invalidFormat(this);
   }
@@ -569,6 +599,7 @@ class _$InvalidFormat<T> implements InvalidFormat<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(InvalidFormat<T> value)? invalidFormat,
     TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
     required TResult orElse(),
   }) {
     if (invalidFormat != null) {
@@ -693,6 +724,8 @@ class _$MustBeNCharacters<T> implements MustBeNCharacters<T> {
     required TResult Function(T failedValue, String message) invalidFormat,
     required TResult Function(T failedValue, String message, int n)
         mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
   }) {
     return mustBeNCharacters(failedValue, message, n);
   }
@@ -704,6 +737,7 @@ class _$MustBeNCharacters<T> implements MustBeNCharacters<T> {
     TResult Function(T failedValue, String message)? empty,
     TResult Function(T failedValue, String message)? invalidFormat,
     TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
     required TResult orElse(),
   }) {
     if (mustBeNCharacters != null) {
@@ -719,6 +753,7 @@ class _$MustBeNCharacters<T> implements MustBeNCharacters<T> {
     required TResult Function(Empty<T> value) empty,
     required TResult Function(InvalidFormat<T> value) invalidFormat,
     required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
   }) {
     return mustBeNCharacters(this);
   }
@@ -730,6 +765,7 @@ class _$MustBeNCharacters<T> implements MustBeNCharacters<T> {
     TResult Function(Empty<T> value)? empty,
     TResult Function(InvalidFormat<T> value)? invalidFormat,
     TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
     required TResult orElse(),
   }) {
     if (mustBeNCharacters != null) {
@@ -753,5 +789,168 @@ abstract class MustBeNCharacters<T> implements ValueFailure<T> {
   @override
   @JsonKey(ignore: true)
   $MustBeNCharactersCopyWith<T, MustBeNCharacters<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ShortCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $ShortCopyWith(Short<T> value, $Res Function(Short<T>) then) =
+      _$ShortCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue, String message, int min});
+}
+
+/// @nodoc
+class _$ShortCopyWithImpl<T, $Res> extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $ShortCopyWith<T, $Res> {
+  _$ShortCopyWithImpl(Short<T> _value, $Res Function(Short<T>) _then)
+      : super(_value, (v) => _then(v as Short<T>));
+
+  @override
+  Short<T> get _value => super._value as Short<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+    Object? message = freezed,
+    Object? min = freezed,
+  }) {
+    return _then(Short<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      min: min == freezed
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$Short<T> implements Short<T> {
+  const _$Short(
+      {required this.failedValue,
+      this.message = 'Must be at least N characters long',
+      required this.min});
+
+  @override
+  final T failedValue;
+  @JsonKey(defaultValue: 'Must be at least N characters long')
+  @override
+  final String message;
+  @override
+  final int min;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.shortLength(failedValue: $failedValue, message: $message, min: $min)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Short<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.min, min) ||
+                const DeepCollectionEquality().equals(other.min, min)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(failedValue) ^
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(min);
+
+  @JsonKey(ignore: true)
+  @override
+  $ShortCopyWith<T, Short<T>> get copyWith =>
+      _$ShortCopyWithImpl<T, Short<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, String message, int max)
+        exceedingLength,
+    required TResult Function(T failedValue, String message) empty,
+    required TResult Function(T failedValue, String message) invalidFormat,
+    required TResult Function(T failedValue, String message, int n)
+        mustBeNCharacters,
+    required TResult Function(T failedValue, String message, int min)
+        shortLength,
+  }) {
+    return shortLength(failedValue, message, min);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, String message, int max)? exceedingLength,
+    TResult Function(T failedValue, String message)? empty,
+    TResult Function(T failedValue, String message)? invalidFormat,
+    TResult Function(T failedValue, String message, int n)? mustBeNCharacters,
+    TResult Function(T failedValue, String message, int min)? shortLength,
+    required TResult orElse(),
+  }) {
+    if (shortLength != null) {
+      return shortLength(failedValue, message, min);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(InvalidFormat<T> value) invalidFormat,
+    required TResult Function(MustBeNCharacters<T> value) mustBeNCharacters,
+    required TResult Function(Short<T> value) shortLength,
+  }) {
+    return shortLength(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(InvalidFormat<T> value)? invalidFormat,
+    TResult Function(MustBeNCharacters<T> value)? mustBeNCharacters,
+    TResult Function(Short<T> value)? shortLength,
+    required TResult orElse(),
+  }) {
+    if (shortLength != null) {
+      return shortLength(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Short<T> implements ValueFailure<T> {
+  const factory Short(
+      {required T failedValue, String message, required int min}) = _$Short<T>;
+
+  @override
+  T get failedValue => throw _privateConstructorUsedError;
+  @override
+  String get message => throw _privateConstructorUsedError;
+  int get min => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  $ShortCopyWith<T, Short<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

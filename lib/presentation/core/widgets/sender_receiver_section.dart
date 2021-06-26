@@ -1,3 +1,5 @@
+import 'package:delivery_app/presentation/core/image_paths.dart';
+
 import '../../../domain/order/order.dart';
 import '../../../domain/order/value_objects.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -73,7 +75,7 @@ class SenderReceiverSection extends StatelessWidget {
     return Column(
       children: [
         SvgPicture.asset(
-          'assets/svgs/location_circle.svg',
+          ImagePaths.location_circle,
           color: Theme.of(context).colorScheme.primary,
           height: SizeConfig.defaultSize * 1.5,
         ),
@@ -89,7 +91,7 @@ class SenderReceiverSection extends StatelessWidget {
           dashGapRadius: 0.0,
         ),
         SvgPicture.asset(
-          'assets/svgs/location_circle.svg',
+          ImagePaths.location_circle,
           color: Theme.of(context).primaryColor,
           height: SizeConfig.defaultSize * 1.5,
         ),

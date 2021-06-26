@@ -11,10 +11,7 @@ class UserSelectionPage extends StatelessWidget {
   void _navigateToEmployeeApp(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider(
-          create: (context) => HomeVM(),
-          child: MainPage(),
-        ),
+        builder: (context) => MainPage(),
       ),
     );
   }

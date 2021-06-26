@@ -1,4 +1,7 @@
 part of 'auth_bloc.dart';
 
-@immutable
-abstract class AuthEvent {}
+@freezed
+class AuthEvent with _$AuthEvent {
+  const factory AuthEvent.signedOut() = Initial;
+  const factory AuthEvent.gotUserSignedIn() = GotUserSignedIn;
+}

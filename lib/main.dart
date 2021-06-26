@@ -1,3 +1,4 @@
+import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'app_get_it.dart';
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'application/core/simple_bloc_observer.dart';
+import 'infastructure/auth/fake_auth_service.dart';
 import 'infastructure/services/order_service.dart';
 import 'presentation/auth/sign_in_page.dart';
 import 'presentation/core/create_and_log.dart';
@@ -36,14 +38,20 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      home: BlocProvider(
-        create: (context) => SignInFormBloc(FakeAuthService()),
-        child: SignInPage(),
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Material App',
+        home: BlocProvider(
+          create: (context) => SignInFormBloc(
+            FakeAuthService(),
+            context.read<AuthBloc>(),
+          ),
+          child: SignInPage(),
+        ),
+        theme: appTheme(context),
       ),
-      theme: appTheme(context),
     );
   }
 

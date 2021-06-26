@@ -4,38 +4,22 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
+import 'package:delivery_app/domain/auth/auth_service.dart';
+
 import '../../../domain/core/failures.dart';
 
 part 'sign_in_form_bloc.freezed.dart';
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
 
-abstract class AuthService {
-  Future<Either<ValueFailure<String>, Unit>> signIn(
-      String email, String password);
-}
-
-class FakeAuthService implements AuthService {
-  static const fakeEmail = 'gurhankuras@hotmail.com';
-  static const fakePassword = '123456789';
-  @override
-  Future<Either<ValueFailure<String>, Unit>> signIn(
-      String email, String password) async {
-    await Future.delayed(Duration(seconds: 2));
-    if (email == fakeEmail && password == fakePassword) {
-      return Future.value(right(unit));
-    }
-    return Future.value(
-      left(ValueFailure.invalidFormat(failedValue: '')),
-    );
-  }
-}
-
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   AuthService authService;
+  AuthBloc authBloc;
 
   SignInFormBloc(
     this.authService,
+    this.authBloc,
   ) : super(SignInFormState.initial());
 
   @override
@@ -57,7 +41,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       },
       signInPressed: (e) async* {
         yield* validateForm(email: state.email, password: state.password).fold(
-          // valid
+          // valid form
           () async* {
             yield state.copyWith(
               failure: none(),
@@ -66,19 +50,25 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
             );
             final failureOrUnit =
                 await authService.signIn(state.email, state.password);
-            yield* failureOrUnit.fold((failure) async* {
-              yield state.copyWith(
-                isSubmitting: false,
-              );
-              // TODO: show failure in ui
-            }, (_) async* {
-              yield state.copyWith(
-                isSubmitting: false,
-              );
-              // TODO: interact with auth bloc
-            });
+
+            yield* failureOrUnit.fold(
+              // server-app failure
+              (failure) async* {
+                yield state.copyWith(
+                  isSubmitting: false,
+                );
+                // TODO: show failure in ui
+              },
+              // server-app success
+              (_) async* {
+                yield state.copyWith(
+                  isSubmitting: false,
+                );
+                authBloc.add(AuthEvent.gotUserSignedIn());
+              },
+            );
           },
-          // invalid
+          // invalid form
           (failure) async* {
             yield state.copyWith(
               isSubmitting: false,

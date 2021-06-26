@@ -1,6 +1,10 @@
+import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
+import 'package:delivery_app/presentation/home_vm.dart';
+import 'package:delivery_app/presentation/pages/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../application/auth/sign_in_form/sign_in_form_bloc.dart';
 import '../core/image_paths.dart';
@@ -51,7 +55,22 @@ class SignInFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppLogoSection(),
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            state.maybeMap(
+              authenticated: (state) {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                    create: (context) => HomeVM(),
+                    child: MainPage(),
+                  ),
+                ));
+              },
+              orElse: () {},
+            );
+          },
+          child: AppLogoSection(),
+        ),
         SignInEmailFormField(),
         SignInPasswordFormField(),
         BlocConsumer<SignInFormBloc, SignInFormState>(

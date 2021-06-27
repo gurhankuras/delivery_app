@@ -1,3 +1,4 @@
+import 'package:delivery_app/infastructure/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,10 +12,11 @@ import '../../../infastructure/services/cache_manager.dart';
 import '../../core/size_config.dart';
 import '../../order/send_order/send_package_form_page/send_package_form_page.dart';
 import '../../order/update_order/edit_order_status_page/edit_order_status_page.dart';
-import '../user_selection_page/user_selection_page.dart';
 
 class MultiChoicePage extends StatelessWidget {
   void _navigateToEditOrderPage(BuildContext context) {
+    // TODO: delete this line later
+    getIt<CacheService>().clear();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EditOrderStatusPage(),
@@ -95,6 +97,66 @@ class MultiChoicePage extends StatelessWidget {
             flex: 5,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ButtonCard extends StatelessWidget {
+  final Color? color;
+  final String title;
+  final IconData iconData;
+  final double? iconSize;
+  final VoidCallback press;
+  const ButtonCard({
+    Key? key,
+    this.color,
+    required this.title,
+    required this.iconData,
+    this.iconSize,
+    required this.press,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: press,
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        backgroundColor: MaterialStateProperty.all(
+          color ?? Theme.of(context).colorScheme.secondary,
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              SizeConfig.defaultSize * 2.5,
+            ),
+          ),
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(SizeConfig.defaultSize),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(
+            SizeConfig.defaultSize * 2.5,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(
+              iconData,
+              size: iconSize ?? SizeConfig.defaultSize * 9,
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headline5?.copyWith(
+                    color: Colors.white,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }

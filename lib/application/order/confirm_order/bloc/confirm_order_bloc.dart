@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import '../../../../infastructure/services/order_service.dart';
 import '../../../../infastructure/services/pdf_service.dart';
 import '../../../../presentation/pages/pdf_components/receipt_pdf.dart';
-import '../../../../providers/order_form_data.dart';
+import '../../order_form/order_form_data.dart';
 
 part 'confirm_order_bloc.freezed.dart';
 part 'confirm_order_event.dart';

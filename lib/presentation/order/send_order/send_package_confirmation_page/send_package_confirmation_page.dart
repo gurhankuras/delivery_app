@@ -9,7 +9,7 @@ import '../../../../application/order/confirm_order/bloc/confirm_order_bloc.dart
 import '../../../../infastructure/order/order_fake_repository.dart';
 import '../../../../infastructure/services/order_service.dart';
 import '../../../../infastructure/services/pdf_service.dart';
-import '../../../../providers/order_form_data.dart';
+import '../../../../application/order/order_form/order_form_data.dart';
 import '../../../core/constants.dart';
 import '../../../core/logger.dart';
 import '../../../core/size_config.dart';

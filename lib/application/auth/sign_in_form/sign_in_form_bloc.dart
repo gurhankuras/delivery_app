@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:delivery_app/domain/auth/credentials.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
-import 'package:delivery_app/domain/auth/auth_service.dart';
+import 'package:delivery_app/domain/auth/i_auth_service.dart';
 
 import '../../../domain/core/failures.dart';
 
@@ -14,13 +15,13 @@ part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
 
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
-  AuthService authService;
+  IAuthService authService;
   AuthBloc authBloc;
 
-  SignInFormBloc(
-    this.authService,
-    this.authBloc,
-  ) : super(SignInFormState.initial());
+  SignInFormBloc({
+    required this.authService,
+    required this.authBloc,
+  }) : super(SignInFormState.initial());
 
   @override
   Stream<SignInFormState> mapEventToState(
@@ -48,8 +49,12 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
               showErrorMessages: true,
               isSubmitting: true,
             );
-            final failureOrUnit =
-                await authService.signIn(state.email, state.password);
+            final failureOrUnit = await authService.signIn(
+              credentials: Credentials(
+                email: state.email,
+                password: state.password,
+              ),
+            );
 
             yield* failureOrUnit.fold(
               // server-app failure

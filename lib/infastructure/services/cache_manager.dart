@@ -78,6 +78,24 @@ class CacheService {
     });
   }
 
+  Future<Either<GeneralFailure<String>, String>> getString(String key) async {
+    final value = prefs.getString(key);
+
+    if (value == null) {
+      return Future.value(left(GeneralFailure.notFound(notFoundValue: key)));
+    }
+    return Future.value(right(value));
+  }
+
+  Future<Either<GeneralFailure<String>, Unit>> setString(
+    String key,
+    String value,
+  ) async {
+    // always returns true
+    await prefs.setString(key, value);
+    return Future.value(right(unit));
+  }
+
   void clear() {
     prefs.clear();
   }

@@ -6,7 +6,7 @@ import '../../../../application/order/order_assembler.dart';
 import '../../../../application/order/order_form/order_form_package_bloc/order_form_package_bloc.dart';
 import '../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import '../../../../application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
-import '../../../../providers/order_form_data.dart';
+import '../../../../application/order/order_form/order_form_data.dart';
 import '../../../core/logger_mixin.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';

@@ -1,3 +1,4 @@
+import 'package:delivery_app/infastructure/auth/auth_service.dart';
 import 'package:delivery_app/infastructure/services/cache_manager.dart';
 import 'package:delivery_app/infastructure/services/simple_type_key_generator.dart';
 import 'package:get_it/get_it.dart';
@@ -11,4 +12,8 @@ Future<void> setup() async {
     prefs: prefs,
     keyGenerator: SimpleTypeKeyGenerator(),
   ));
+
+  getIt.registerSingleton<AuthService>(
+    AuthService(cacheService: getIt<CacheService>()),
+  );
 }

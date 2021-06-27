@@ -1,4 +1,8 @@
 import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
+import 'package:delivery_app/infastructure/auth/auth_service.dart';
+import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import 'package:delivery_app/presentation/core/size_config.dart';
+import 'package:delivery_app/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +16,7 @@ import 'infastructure/auth/fake_auth_service.dart';
 import 'infastructure/services/order_service.dart';
 import 'presentation/auth/sign_in_page.dart';
 import 'presentation/core/create_and_log.dart';
-import 'providers/order_form_data.dart';
+import 'application/order/order_form/order_form_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,18 +42,25 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(
+            cacheService: getIt<CacheService>(),
+            authService: getIt<AuthService>(),
+          )..add(AuthEvent.authCheckRequested()),
+        ),
+        BlocProvider(
+          create: (context) => SignInFormBloc(
+            authService: getIt<AuthService>(),
+            authBloc: context.read<AuthBloc>(),
+          ),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: BlocProvider(
-          create: (context) => SignInFormBloc(
-            FakeAuthService(),
-            context.read<AuthBloc>(),
-          ),
-          child: SignInPage(),
-        ),
+        home: SplashPage(),
         theme: appTheme(context),
       ),
     );

@@ -60,6 +60,19 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
               (failure) async* {
                 yield state.copyWith(
                   isSubmitting: false,
+                  failure: failure.map(
+                    serverError: (f) => some(ValueFailure.empty(
+                        failedValue: '', message: 'Server Error')),
+                    emailAlreadyInUse: (f) => some(ValueFailure.empty(
+                        failedValue: '', message: 'Server Error')),
+                    invalidEmailAndPasswordCombination: (f) => some(
+                        ValueFailure.empty(
+                            failedValue: '', message: 'Server Error')),
+                    tokenNotFound: (f) => some(ValueFailure.empty(
+                        failedValue: '', message: 'Server Error')),
+                    unexpected: (f) => some(ValueFailure.empty(
+                        failedValue: '', message: 'Server Error')),
+                  ),
                 );
                 // TODO: show failure in ui
               },

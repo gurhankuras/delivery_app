@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/core/general_failures.dart';
-import 'package:delivery_app/domain/core/i_key_generator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../domain/core/failures.dart';
+import '../../domain/core/general_failures.dart';
+import '../../domain/core/i_key_generator.dart';
 
 class CacheService {
   IKeyGenerator keyGenerator;
@@ -98,5 +97,9 @@ class CacheService {
 
   void clear() {
     prefs.clear();
+  }
+
+  Future<bool> remove(String key) async {
+    return prefs.remove(key);
   }
 }

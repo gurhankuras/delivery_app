@@ -64,7 +64,6 @@ class OrderService {
     // }
   }
 
-  @override
   Future<Order?> read(String id) async {
     final url = '/track/$id';
     final response = await dio!.get(url);
@@ -76,7 +75,6 @@ class OrderService {
   }
 
 // TODO
-  @override
   Future<void> update(Order order) {
     return updateDeliveryStatus({});
   }

@@ -1,17 +1,17 @@
-import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
-import 'package:delivery_app/presentation/home_vm.dart';
-import 'package:delivery_app/presentation/pages/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../application/auth/auth/auth_bloc.dart';
 import '../../application/auth/sign_in_form/sign_in_form_bloc.dart';
 import '../core/image_paths.dart';
 import '../core/size_config.dart';
 import '../core/widgets/app_button.dart';
 import '../core/widgets/app_title.dart';
 import '../core/widgets/showSnackbar.dart';
+import '../home_vm.dart';
+import '../pages/main_page/main_page.dart';
 import 'widgets/sign_in_email_form_field.dart';
 import 'widgets/sign_in_password_form_field.dart';
 

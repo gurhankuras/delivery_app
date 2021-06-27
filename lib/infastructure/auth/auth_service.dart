@@ -1,17 +1,16 @@
 import 'dart:io';
 
-import 'package:delivery_app/application/auth/config.dart';
-import 'package:delivery_app/domain/auth/auth_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/auth/credentials.dart';
-import 'package:delivery_app/domain/auth/i_auth_service.dart';
-import 'package:delivery_app/infastructure/auth/credentials_dto.dart';
-import 'package:delivery_app/infastructure/auth/user_tokens_dto.dart';
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../../domain/auth/auth_failure.dart';
+import '../../domain/auth/credentials.dart';
+import '../../domain/auth/i_auth_service.dart';
+import '../../domain/auth/i_token_cache_service.dart';
+import 'credentials_dto.dart';
+import 'user_tokens_dto.dart';
 
 BaseOptions _defaultDioOptions = BaseOptions(
   baseUrl: _baseUrl,
@@ -29,33 +28,45 @@ String _baseUrl = Platform.isAndroid
 // TODO: REFACTOR
 class AuthService implements IAuthService {
   Dio dio;
-  final CacheService cacheService;
+  final ITokenCacheService tokenService;
 
   AuthService({
     BaseOptions? dioOptions,
-    required CacheService cacheService,
+    required ITokenCacheService tokenService,
   })  : dio = Dio(dioOptions ?? _defaultDioOptions),
-        cacheService = cacheService {
-    dio.interceptors.add(PrettyDioLogger());
+        tokenService = tokenService {
+    kDebugMode ? dio.interceptors.add(PrettyDioLogger(
+        // error: true,
+        // logPrint: log.i,
+        // maxWidth: 200,
+        // request: true,
+        // requestBody: true,
+        // requestHeader: true,
+        // responseBody: true,
+        // responseHeader: true,
+        // compact: false,
+        )) : null;
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final failureOrRefreshToken =
-              await cacheService.getString(TokenKeys.REFRESH_TOKEN_KEY);
-          failureOrRefreshToken.fold((failure) => null,
-              (token) => options.headers['x-refresh'] = token);
+          final failureOrRefreshToken = await tokenService.getRefreshToken();
+          failureOrRefreshToken.fold(
+            (failure) => null,
+            (token) => options.headers['x-refresh'] = token,
+          );
 
-          final failureOrAccessToken =
-              await cacheService.getString(TokenKeys.ACCESS_TOKEN_KEY);
-          failureOrAccessToken.fold((failure) => null,
-              (token) => options.headers['Authorization'] = token);
+          final failureOrAccessToken = await tokenService.getAccessToken();
+          failureOrAccessToken.fold(
+            (failure) => null,
+            (token) => options.headers['Authorization'] = token,
+          );
 
           handler.next(options);
         },
         onResponse: (e, handler) {
           final accessToken = e.headers.value('x-access-token');
           if (accessToken != null) {
-            cacheService.setString(TokenKeys.ACCESS_TOKEN_KEY, accessToken);
+            tokenService.setAccessToken(accessToken);
           }
           handler.next(e);
         },
@@ -63,14 +74,13 @@ class AuthService implements IAuthService {
     );
   }
 
-  // when we have no accessToken and refreshToken in cache
-  // so, when either
-  // - app has downloaded first time
+  // when
+  // - app has been downloaded first time
   // or
   // - refresh token expired
   // or
   // - user logged out explicitly
-  // We going to use this in this circumstances
+  // We going to use this in these circumstances
 
   @override
   Future<Either<AuthFailure, Unit>> signIn(
@@ -90,25 +100,16 @@ class AuthService implements IAuthService {
       }
       if (response.data is Map) {
         final tokens = UserTokensDTO.fromJson(response.data).toDomain();
-
         // ignore: unawaited_futures
-        cacheService.setString(
-          TokenKeys.ACCESS_TOKEN_KEY,
-          tokens.accessToken,
-        );
-
-        log.i(tokens);
+        tokenService.setAccessToken(tokens.accessToken);
         // ignore: unawaited_futures
-        cacheService.setString(
-          TokenKeys.REFRESH_TOKEN_KEY,
-          tokens.refreshToken,
-        );
+        tokenService.setRefreshToken(tokens.refreshToken);
         return right(unit);
       }
       return left(AuthFailure.serverError());
     } on DioError catch (e) {
       print(e);
-      return left(AuthFailure.serverError());
+      return left(AuthFailure.unexpected());
     }
   }
 
@@ -117,39 +118,6 @@ class AuthService implements IAuthService {
     // TODO: implement signUp
     throw UnimplementedError();
   }
-
-  // - we have valid refresh token but invalid access token
-  // - then we going to use this
-  // @override
-  // Future<Either<AuthFailure, Unit>> refreshAccessToken() async {
-  //   try {
-  //     final response = await dio.post(
-  //       '$_baseUrl/refresh',
-  //     );
-
-  //     if (response.statusCode != HttpStatus.ok) {
-  //       return left(AuthFailure.serverError());
-  //     }
-  //     log.i(response.data);
-  //     final data = response.data;
-  //     if (data is Map) {
-  //       final accessToken = data['accessToken'];
-  //       // ignore: unawaited_futures
-  //       cacheService.setString(
-  //         TokenKeys.ACCESS_TOKEN_KEY,
-  //         accessToken,
-  //       );
-
-  //       return right(unit);
-  //     }
-  //     return left(AuthFailure.serverError());
-  //   }
-  //   // return left(AuthFailure.serverError());
-  //   on DioError catch (e) {
-  //     print(e);
-  //     return left(AuthFailure.serverError());
-  //   }
-  // }
 
   Future<Either<AuthFailure, Unit>> getUserSignedIn() async {
     try {
@@ -170,12 +138,9 @@ class AuthService implements IAuthService {
       return left(AuthFailure.unexpected());
     }
   }
-  // return left(AuthFailure.serverError());
 
-  // @override
-  // Future<Either<AuthFailure, Unit>> refreshAccessToken() {
-  //   // TODO: implement refreshAccessToken
-  //   throw UnimplementedError();
-  // }
-  // }
+  @override
+  Future<void> logOut() async {
+    await tokenService.clear();
+  }
 }

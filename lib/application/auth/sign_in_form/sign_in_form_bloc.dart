@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/auth/credentials.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
-import 'package:delivery_app/domain/auth/i_auth_service.dart';
-
+import '../../../domain/auth/credentials.dart';
+import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/core/failures.dart';
+import '../auth/auth_bloc.dart';
 
 part 'sign_in_form_bloc.freezed.dart';
 part 'sign_in_form_event.dart';

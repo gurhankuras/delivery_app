@@ -4,9 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
-import 'package:delivery_app/application/auth/config.dart';
-import 'package:delivery_app/infastructure/auth/auth_service.dart';
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import '../../../infastructure/auth/auth_service.dart';
+import '../../../infastructure/services/cache_manager.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
@@ -29,6 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthState.authenticated();
       },
       signedOut: (e) async* {
+        await authService.logOut();
         yield AuthState.unauthenticated();
       },
       authCheckRequested: (e) async* {

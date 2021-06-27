@@ -24,7 +24,7 @@ class StatisticsDTO with _$StatisticsDTO {
         values: values ?? [],
       );
 
-// TODO
+// TODO: find a better way
   factory StatisticsDTO.fromJson(Map<String, dynamic> json) =>
       StatisticsDTOConverter().fromJson(json);
 

@@ -1,3 +1,6 @@
+import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
+import 'package:delivery_app/presentation/auth/sign_in_page.dart';
+import 'package:delivery_app/presentation/core/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,6 +61,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     // SizeConfig().init(context);
     return Scaffold(
+      appBar: appBar(context),
       bottomNavigationBar: Consumer<HomeVM>(
         builder: (context, value, child) => BottomNavigationBar(
           items: _navBarItems,
@@ -73,11 +77,24 @@ class _MainPageState extends State<MainPage> {
           },
         ),
       ),
-      appBar: appBar(context),
-      body: PageView(
-        controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
-        children: _pages,
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          state.maybeMap(
+            orElse: () => null,
+            unauthenticated: (value) =>
+                Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => SignInPage(),
+              ),
+              (route) => false,
+            ),
+          );
+        },
+        child: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          children: _pages,
+        ),
       ),
     );
   }
@@ -104,6 +121,14 @@ class _MainPageState extends State<MainPage> {
   AppBar appBar(BuildContext context) {
     return AppBar(
       title: AppLogo(),
+      actions: [
+        GestureDetector(
+            onTap: () => context.read<AuthBloc>().add(AuthEvent.signedOut()),
+            child: Padding(
+              padding: EdgeInsets.only(right: SizeConfig.defaultSize),
+              child: Icon(Icons.logout_rounded),
+            ))
+      ],
     );
   }
 }

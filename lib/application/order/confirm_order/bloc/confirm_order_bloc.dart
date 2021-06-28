@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../infastructure/services/order_service.dart';
@@ -14,6 +16,7 @@ part 'confirm_order_bloc.freezed.dart';
 part 'confirm_order_event.dart';
 part 'confirm_order_state.dart';
 
+@injectable
 class ConfirmOrderBloc extends Bloc<ConfirmOrderEvent, ConfirmOrderState> {
   final OrderService orderRepository;
   final OrderFormData orderFormData;
@@ -22,7 +25,9 @@ class ConfirmOrderBloc extends Bloc<ConfirmOrderEvent, ConfirmOrderState> {
     required this.orderRepository,
     required this.orderFormData,
     required this.pdfService,
-  }) : super(ConfirmOrderState.initial());
+  }) : super(ConfirmOrderState.initial()) {
+    log.w('ConfirmOrderBloc created');
+  }
 
   @override
   Stream<ConfirmOrderState> mapEventToState(
@@ -69,20 +74,3 @@ class ConfirmOrderBloc extends Bloc<ConfirmOrderEvent, ConfirmOrderState> {
     );
   }
 }
-
-
-  // void onCloseHandler(bool success, BuildContext context) {
-  //   if (!success) {
-  //     Navigator.of(context).popNTimes(1);
-  //     return;
-  //   }
-  //   Navigator.of(context).popNTimes(3);
-  //   context.read<OrderFormData>().clearOrder();
-  // }
-
-  // Future<void> generateAndShowPdf(BuildContext context) async {
-  //   final pdfService = context.read<PdfService>();
-  //   final order = context.read<OrderFormData>().order;
-  //   final pdfFile = await pdfService.generate(ReceiptPdfManager(order!));
-  //   await pdfService.openFile(pdfFile);
-  // }

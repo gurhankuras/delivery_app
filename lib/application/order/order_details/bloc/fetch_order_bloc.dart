@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:delivery_app/domain/order/value_objects.dart';
 import 'package:delivery_app/infastructure/order/order_dto.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../domain/core/failures.dart';
 import '../../../../domain/order/i_order_repository.dart';
@@ -15,13 +17,16 @@ part 'fetch_order_bloc.freezed.dart';
 part 'fetch_order_event.dart';
 part 'fetch_order_state.dart';
 
+@injectable
 class FetchOrderBloc extends Bloc<FetchOrderEvent, FetchOrderState> {
   final IOrderRepository orderRepository;
   final CacheService cache;
   FetchOrderBloc({
     required this.orderRepository,
     required this.cache,
-  }) : super(FetchOrderState.initial());
+  }) : super(FetchOrderState.initial()) {
+    log.w('FetchOrderBloc created');
+  }
 
   @override
   Stream<FetchOrderState> mapEventToState(

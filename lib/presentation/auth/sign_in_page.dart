@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../../application/auth/auth/auth_bloc.dart';
 import '../../application/auth/sign_in_form/sign_in_form_bloc.dart';
+import '../../domain/auth/i_auth_service.dart';
+import '../../injection.dart';
 import '../core/image_paths.dart';
 import '../core/size_config.dart';
 import '../core/widgets/app_button.dart';
@@ -22,23 +24,45 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         // appBar: AppBar(),
-        body: Center(
-      child: SingleChildScrollView(
-        child: BlocBuilder<SignInFormBloc, SignInFormState>(
-          buildWhen: (previous, current) =>
-              previous.showErrorMessages != current.showErrorMessages,
-          builder: (context, state) {
-            return Form(
-              autovalidateMode: state.showErrorMessages
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.defaultSize * 2),
-                child: SignInFormBody(),
-              ),
-            );
-          },
+        body: BlocProvider(
+      create: (context) => SignInFormBloc(
+        authService: getIt<IAuthService>(),
+        authBloc: context.read<AuthBloc>(),
+      ),
+      child: Center(
+        child: SingleChildScrollView(
+          child: BlocBuilder<SignInFormBloc, SignInFormState>(
+            buildWhen: (previous, current) =>
+                previous.showErrorMessages != current.showErrorMessages,
+            builder: (context, state) {
+              return Form(
+                autovalidateMode: state.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.defaultSize * 2),
+                  child: BlocListener<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      state.maybeMap(
+                        authenticated: (state) {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                              create: (context) => HomeVM(),
+                              child: MainPage(),
+                            ),
+                          ));
+                        },
+                        orElse: () {},
+                      );
+                    },
+                    child: SignInFormBody(),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     ));
@@ -54,22 +78,7 @@ class SignInFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            state.maybeMap(
-              authenticated: (state) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (context) => HomeVM(),
-                    child: MainPage(),
-                  ),
-                ));
-              },
-              orElse: () {},
-            );
-          },
-          child: AppLogoSection(),
-        ),
+        AppLogoSection(),
         SignInEmailFormField(),
         SignInPasswordFormField(),
         BlocConsumer<SignInFormBloc, SignInFormState>(

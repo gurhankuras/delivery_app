@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:injectable/injectable.dart';
+
 import '../../presentation/pages/pdf_components/pdf_page_manager.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
 
+@LazySingleton()
 class PdfService {
   Future<File> generate(PdfPageBuilder pageBuilder) async {
     final pdf = Document();

@@ -11,5 +11,5 @@ abstract class ImagePaths {
   static const package = 'assets/svgs/package.svg';
   static const where_is = 'assets/svgs/whereis.svg';
 
-  static const track_id_info = 'assets/svgs/email_sent.png';
+  static const track_id_info = 'assets/svgs/track_id_info.png';
 }

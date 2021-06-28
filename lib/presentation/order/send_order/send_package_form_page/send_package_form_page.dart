@@ -7,6 +7,7 @@ import '../../../../application/order/order_form/order_form_package_bloc/order_f
 import '../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import '../../../../application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
 import '../../../../application/order/order_form/order_form_data.dart';
+import '../../../../injection.dart';
 import '../../../core/logger_mixin.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
@@ -81,6 +82,16 @@ class SendPackageFormPage extends StatelessWidget
               ),
           (a) => null,
         );
+    // context
+    //     .read<OrderFormPersonBloc<Sender>>()
+    //     .state
+    //     .overallFailure
+    //     .orElse(() =>
+    //         context.read<OrderFormPersonBloc<Receiver>>().state.overallFailure)
+    //     .fold(
+    //       () => setOrder(context),
+    //       (a) => null,
+    //     );
   }
 
   void setOrder(BuildContext context) {
@@ -90,7 +101,7 @@ class SendPackageFormPage extends StatelessWidget
       receiver: context.read<OrderFormPersonBloc<Receiver>>().state.person,
       packageInfo: context.read<OrderFormPackageBloc>().state.package,
     );
-    context.read<OrderFormData>().saveOrder(order);
+    getIt<OrderFormData>().saveOrder(order);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SendPackageConfirmationPage(),

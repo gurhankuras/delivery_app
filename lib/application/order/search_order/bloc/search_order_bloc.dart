@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../../../../domain/core/failures.dart';
@@ -11,6 +12,7 @@ part 'search_order_bloc.freezed.dart';
 part 'search_order_event.dart';
 part 'search_order_state.dart';
 
+@injectable
 class SearchOrderBloc extends Bloc<SearchOrderEvent, SearchOrderState> {
   SearchOrderBloc() : super(SearchOrderState.initial());
 

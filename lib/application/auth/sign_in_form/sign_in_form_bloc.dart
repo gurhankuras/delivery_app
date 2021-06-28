@@ -3,16 +3,19 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../domain/auth/credentials.dart';
 import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/core/failures.dart';
+import '../../../presentation/core/logger.dart';
 import '../auth/auth_bloc.dart';
 
 part 'sign_in_form_bloc.freezed.dart';
 part 'sign_in_form_event.dart';
 part 'sign_in_form_state.dart';
 
+@injectable
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   IAuthService authService;
   AuthBloc authBloc;
@@ -20,7 +23,9 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   SignInFormBloc({
     required this.authService,
     required this.authBloc,
-  }) : super(SignInFormState.initial());
+  }) : super(SignInFormState.initial()) {
+    log.w('SignInFormBloc created');
+  }
 
   @override
   Stream<SignInFormState> mapEventToState(
@@ -121,6 +126,7 @@ Option<ValueFailure<String>> validateForm({
   required String email,
   required String password,
 }) {
+  final a = validateEmail(email).orElse(() => validatePassword(password));
   return validateEmail(email).fold(
     () => validatePassword(password).fold(
       () => none(),

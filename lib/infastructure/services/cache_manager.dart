@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/core/general_failures.dart';
 import '../../domain/core/i_key_generator.dart';
 
+@Singleton()
 class CacheService {
   IKeyGenerator keyGenerator;
   SharedPreferences prefs;

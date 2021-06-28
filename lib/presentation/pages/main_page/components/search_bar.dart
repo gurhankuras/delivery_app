@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../app_get_it.dart';
 import '../../../../domain/order/value_objects.dart';
 import '../../../../infastructure/order/order_dto.dart';
 import '../../../../infastructure/services/cache_manager.dart';
+import '../../../../injection.dart';
 import '../../../core/size_config.dart';
 
 class SearchBar extends StatefulWidget {

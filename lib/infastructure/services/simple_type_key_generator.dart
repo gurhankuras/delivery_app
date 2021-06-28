@@ -1,7 +1,10 @@
 import 'package:delivery_app/domain/core/i_key_generator.dart';
+import 'package:injectable/injectable.dart';
 
 /// [T] is important!! Don't omit it
 /// works with id that's composed of numeric characters only
+///
+@LazySingleton(as: IKeyGenerator)
 class SimpleTypeKeyGenerator extends IKeyGenerator {
   @override
   String fromString(String str) {

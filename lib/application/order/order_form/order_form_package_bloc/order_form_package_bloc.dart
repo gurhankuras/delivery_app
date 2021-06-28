@@ -1,9 +1,11 @@
 import 'dart:async';
 
 // import 'package:bloc/bloc.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:delivery_app/application/order/order_assembler.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,9 +13,12 @@ part 'order_form_package_bloc.freezed.dart';
 part 'order_form_package_event.dart';
 part 'order_form_package_state.dart';
 
+@injectable
 class OrderFormPackageBloc
     extends Bloc<OrderFormPackageEvent, OrderFormPackageState> {
-  OrderFormPackageBloc() : super(OrderFormPackageState.initial());
+  OrderFormPackageBloc() : super(OrderFormPackageState.initial()) {
+    log.w('OrderFormPackageBloc created');
+  }
 
   @override
   Stream<OrderFormPackageState> mapEventToState(

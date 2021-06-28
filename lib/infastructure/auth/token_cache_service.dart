@@ -3,7 +3,9 @@ import 'package:delivery_app/application/auth/config.dart';
 import 'package:delivery_app/domain/auth/i_token_cache_service.dart';
 import 'package:delivery_app/domain/core/general_failures.dart';
 import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import 'package:injectable/injectable.dart';
 
+@Singleton(as: ITokenCacheService)
 class TokenCacheService extends ITokenCacheService {
   final CacheService cacheService;
 

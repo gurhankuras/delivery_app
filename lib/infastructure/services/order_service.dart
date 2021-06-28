@@ -2,32 +2,32 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/order/order.dart';
 import '../order/order_dto.dart';
 
+final _baseUrl =
+    Platform.isAndroid ? 'http://10.0.2.2:5000' : 'http://localhost:5000';
+
+final _baseOptions = BaseOptions(
+  baseUrl: _baseUrl,
+  receiveDataWhenStatusError: true,
+  receiveTimeout: 3000,
+  connectTimeout: 3000,
+  sendTimeout: 3000,
+);
+
+@LazySingleton()
 class OrderService {
-  Dio? dio;
+  final Dio dio = Dio(_baseOptions);
 
-  OrderService({this.dio}) {
-    dio ??= Dio(getDefaultDioOptions);
-  }
-
-  BaseOptions get getDefaultDioOptions => BaseOptions(
-        baseUrl: baseUrl,
-        receiveDataWhenStatusError: true,
-        receiveTimeout: 3000,
-        connectTimeout: 3000,
-        sendTimeout: 3000,
-      );
-
-  String get baseUrl =>
-      Platform.isAndroid ? 'http://10.0.2.2:5000' : 'http://localhost:5000';
+  OrderService();
 
 // TODO
   Future<bool> updateDeliveryStatus(Map<String, dynamic> payload) async {
     final url = '/update-order-status';
-    final response = await dio!.post(url, data: payload);
+    final response = await dio.post(url, data: payload);
 
     if (response.statusCode == HttpStatus.ok &&
         response.data['error'] == null) {
@@ -66,7 +66,7 @@ class OrderService {
 
   Future<Order?> read(String id) async {
     final url = '/track/$id';
-    final response = await dio!.get(url);
+    final response = await dio.get(url);
 
     if (response.statusCode == HttpStatus.ok) {
       return OrderDTO.fromJson(response.data).toDomain();

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../domain/auth/auth_failure.dart';
@@ -26,14 +27,15 @@ String _baseUrl = Platform.isAndroid
     : 'http://localhost:$PORT/api';
 
 // TODO: REFACTOR
+
+@Singleton(as: IAuthService)
 class AuthService implements IAuthService {
   Dio dio;
   final ITokenCacheService tokenService;
 
   AuthService({
-    BaseOptions? dioOptions,
     required ITokenCacheService tokenService,
-  })  : dio = Dio(dioOptions ?? _defaultDioOptions),
+  })  : dio = Dio(_defaultDioOptions),
         tokenService = tokenService {
     kDebugMode ? dio.interceptors.add(PrettyDioLogger(
         // error: true,
@@ -119,6 +121,7 @@ class AuthService implements IAuthService {
     throw UnimplementedError();
   }
 
+  @override
   Future<Either<AuthFailure, Unit>> getUserSignedIn() async {
     try {
       final response = await dio.get(

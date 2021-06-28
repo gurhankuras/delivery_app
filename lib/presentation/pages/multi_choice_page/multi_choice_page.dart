@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../app_get_it.dart';
 import '../../../application/order/order_form/order_form_package_bloc/order_form_package_bloc.dart';
 import '../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import '../../../application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
-import '../../../domain/order/value_objects.dart';
-import '../../../infastructure/services/cache_manager.dart';
+import '../../../injection.dart';
 import '../../core/size_config.dart';
 import '../../order/send_order/send_package_form_page/send_package_form_page.dart';
 import '../../order/update_order/edit_order_status_page/edit_order_status_page.dart';
 
 class MultiChoicePage extends StatelessWidget {
   void _navigateToEditOrderPage(BuildContext context) {
-    // TODO: delete this line later
-    getIt<CacheService>().clear();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EditOrderStatusPage(),
@@ -24,14 +20,11 @@ class MultiChoicePage extends StatelessWidget {
   }
 
   void _navigateToSendPackagePage(BuildContext context) {
-    getIt<CacheService>().clearAll<TrackId>();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (context) => OrderFormSenderBloc(),
-            ),
+            BlocProvider(create: (context) => OrderFormSenderBloc()),
             BlocProvider(
               lazy: false,
               create: (context) => OrderFormPersonBloc<Sender>(
@@ -44,7 +37,7 @@ class MultiChoicePage extends StatelessWidget {
             ),
             BlocProvider(
               // lazy: false,
-              create: (context) => OrderFormPackageBloc(),
+              create: (context) => getIt<OrderFormPackageBloc>(),
             ),
           ],
           child: SendPackageFormPage(),

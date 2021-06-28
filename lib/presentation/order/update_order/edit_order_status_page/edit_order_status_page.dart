@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../domain/order/order.dart';
 import '../../../../infastructure/services/order_service.dart';
+import '../../../../injection.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/disabled_widget.dart';
@@ -31,7 +32,7 @@ class _EditOrderStatusPageState extends State<EditOrderStatusPage> {
   @override
   void initState() {
     super.initState();
-    context.read<OrderService>().read('123456').then((value) {
+    getIt<OrderService>().read('123456').then((value) {
       setState(() {
         isLoading = false;
         order = value;

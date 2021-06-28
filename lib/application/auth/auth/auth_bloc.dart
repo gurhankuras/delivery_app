@@ -2,22 +2,27 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
-import '../../../infastructure/auth/auth_service.dart';
+import '../../../domain/auth/i_auth_service.dart';
 import '../../../infastructure/services/cache_manager.dart';
+import '../../../presentation/core/logger.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final CacheService cacheService;
-  final AuthService authService;
+  final IAuthService authService;
   AuthBloc({
     required this.cacheService,
     required this.authService,
-  }) : super(AuthState.initial());
+  }) : super(AuthState.initial()) {
+    log.w('AuthBloc created');
+  }
 
   @override
   Stream<AuthState> mapEventToState(

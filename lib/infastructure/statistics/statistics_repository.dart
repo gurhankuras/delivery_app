@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/date.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/statistics/i_statistics_repository.dart';
 import '../../domain/statistics/statistics.dart';
@@ -22,11 +23,11 @@ String _baseUrl = Platform.isAndroid
     ? 'http://10.0.2.2:$PORT/api/statistics'
     : 'http://localhost:$PORT/api/statistics';
 
+@LazySingleton(as: IStatisticsRepository)
 class StatisticsRepository implements IStatisticsRepository {
-  Dio dio;
+  Dio dio = Dio(_defaultDioOptions);
 
-  StatisticsRepository({BaseOptions? dioOptions})
-      : dio = Dio(dioOptions ?? _defaultDioOptions);
+  StatisticsRepository();
 
   @override
   Future<Either<StatisticsFailure, Statistics>> fetchByDate(

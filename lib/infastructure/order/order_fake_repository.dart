@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart' hide Order;
+import 'package:injectable/injectable.dart';
 
 import '../../domain/core/failures.dart';
 import '../../domain/order/i_order_repository.dart';
 import '../../domain/order/order.dart';
 import '../../domain/order/value_objects.dart';
 
+@LazySingleton(as: IOrderRepository)
 class OrderFakeRepository implements IOrderRepository {
   final mockOrders = <Order>[mockOrder];
 

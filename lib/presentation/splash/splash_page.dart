@@ -1,6 +1,7 @@
 import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
 import 'package:delivery_app/presentation/auth/sign_in_page.dart';
 import 'package:delivery_app/presentation/core/image_paths.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:delivery_app/presentation/core/size_config.dart';
 import 'package:delivery_app/presentation/home_vm.dart';
 import 'package:delivery_app/presentation/pages/main_page/main_page.dart';
@@ -14,15 +15,14 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log.v('SPLASH');
     SizeConfig().init(context);
 
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           state.map(
-            initial: (state) {
-              // context.read<AuthBloc>().;
-            },
+            initial: (state) {},
             authenticated: (state) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(

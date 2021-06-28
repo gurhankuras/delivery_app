@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:delivery_app/application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
+import 'package:injectable/injectable.dart';
 import '../../../../domain/core/failures.dart';
 import '../../../../domain/order/validators.dart';
 import '../../../../domain/order/order.dart';
@@ -18,12 +20,14 @@ class Sender {}
 
 class Receiver {}
 
+@injectable
 class OrderFormPersonBloc<T>
     extends Bloc<OrderFormPersonEvent, OrderFormPersonState> {
   StreamSubscription? subs;
   OrderFormSenderBloc bloc;
 
   OrderFormPersonBloc(this.bloc) : super(OrderFormPersonState.initial()) {
+    log.w('OrderFormPersonBloc created');
     add(OrderFormPersonEvent.validated());
     subs = bloc.stream.listen((state) {
       print('BURAYA GIRDI');
@@ -107,13 +111,10 @@ class OrderFormPersonBloc<T>
   }
 
   Option<ValueFailure<dynamic>> validateAllPerson(PersonValidator validator) {
-    return (validator.address().isSome() ||
-            validator.name().isSome() ||
-            validator.phoneNumber().isSome() ||
-            validator.trId().isSome())
-        ? some(
-            ValueFailure.empty(failedValue: 'FAILED'),
-          )
-        : none();
+    return validator
+        .address()
+        .orElse(() => validator.name())
+        .orElse(() => validator.phoneNumber())
+        .orElse(() => validator.trId());
   }
 }

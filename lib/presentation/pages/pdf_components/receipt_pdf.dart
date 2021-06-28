@@ -1,11 +1,10 @@
-import 'package:delivery_app/presentation/core/image_paths.dart';
-
-import '../../../domain/order/order.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../../../domain/order/order.dart';
+import '../../core/assets_constants.dart';
 import 'pdf_page_manager.dart';
 
 class ReceiptPdfManager implements PdfPageBuilder {
@@ -18,7 +17,7 @@ class ReceiptPdfManager implements PdfPageBuilder {
 
   @override
   Future<Page> build() async {
-    final logoSvg = await rootBundle.loadString(ImagePaths.fast_delivery);
+    final logoSvg = await rootBundle.loadString(Assets.fast_delivery);
     return Page(
       build: (context) => Container(
         child: Column(

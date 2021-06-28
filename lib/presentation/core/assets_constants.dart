@@ -1,4 +1,4 @@
-abstract class ImagePaths {
+abstract class Assets {
   static const email_sent = 'assets/svgs/email_sent.svg';
   static const faq = 'assets/svgs/faq.svg';
   static const fast_delivery = 'assets/svgs/fast-delivery.svg';

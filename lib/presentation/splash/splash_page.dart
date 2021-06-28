@@ -1,14 +1,15 @@
-import 'package:delivery_app/application/auth/auth/auth_bloc.dart';
-import 'package:delivery_app/presentation/auth/sign_in_page.dart';
-import 'package:delivery_app/presentation/core/image_paths.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/home_vm.dart';
-import 'package:delivery_app/presentation/pages/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+
+import '../../application/auth/auth/auth_bloc.dart';
+import '../auth/sign_in_page.dart';
+import '../core/assets_constants.dart';
+import '../core/logger.dart';
+import '../core/size_config.dart';
+import '../home_vm.dart';
+import '../pages/main_page/main_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class SplashPage extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 1,
                   child: SvgPicture.asset(
-                    ImagePaths.fast_delivery,
+                    Assets.fast_delivery,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),

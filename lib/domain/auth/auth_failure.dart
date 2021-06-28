@@ -10,4 +10,5 @@ class AuthFailure with _$AuthFailure {
       InvalidEmailAndPasswordCombination;
   const factory AuthFailure.tokenNotFound() = TokenNotFound;
   const factory AuthFailure.unexpected() = Unexpected;
+  const factory AuthFailure.notConnected() = NotConnected;
 }

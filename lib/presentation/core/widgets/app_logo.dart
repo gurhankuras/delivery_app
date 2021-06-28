@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../image_paths.dart';
+import '../assets_constants.dart';
 import 'app_title.dart';
 
 class AppLogo extends StatelessWidget {
@@ -16,7 +16,7 @@ class AppLogo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          ImagePaths.fast_delivery,
+          Assets.fast_delivery,
           fit: BoxFit.cover,
           height: kToolbarHeight,
           color: Color(0xFFef5448),

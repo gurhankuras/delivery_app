@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
-import '../../../core/image_paths.dart';
+import '../../../core/assets_constants.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/showSnackbar.dart';
 import '../../../pages/main_page/components/search_bar.dart';
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage>
       child: Column(
         children: [
           SvgPicture.asset(
-            ImagePaths.where_is,
+            Assets.where_is,
             height: SizeConfig.defaultSize * 17,
           ),
           BlocListener<SearchOrderBloc, SearchOrderState>(
@@ -94,8 +94,8 @@ class _HomePageState extends State<HomePage>
               ),
               Expanded(
                 flex: 10,
-                child: SizedBox.expand(
-                    child: Image.asset(ImagePaths.track_id_info)),
+                child:
+                    SizedBox.expand(child: Image.asset(Assets.track_id_info)),
               ),
               Spacer(
                 flex: 2,

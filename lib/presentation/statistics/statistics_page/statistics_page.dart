@@ -1,4 +1,3 @@
-import 'package:delivery_app/presentation/core/image_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../application/extensions/date_time_extension.dart';
 import '../../../application/statistics/bloc/statistics_bloc.dart';
 import '../../../domain/statistics/i_statistics_repository.dart';
+import '../../core/assets_constants.dart';
 import '../../core/size_config.dart';
 import '../../core/widgets/app_button.dart';
 import 'components/app_bar_chart.dart';
@@ -31,7 +31,6 @@ class _StatisticsPageState extends State<StatisticsPage>
   Widget build(BuildContext context) {
     super.build(context);
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
       child: BlocConsumer<StatisticsBloc, StatisticsState>(
         listener: (context, state) {
           state.maybeMap(
@@ -72,7 +71,7 @@ class _StatisticsPageState extends State<StatisticsPage>
               state: state,
               children: [
                 SvgPicture.asset(
-                  ImagePaths.network_error,
+                  Assets.network_error,
                   fit: BoxFit.cover,
                   width: SizeConfig.screenWidth * 0.6,
                 ),

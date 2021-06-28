@@ -1,11 +1,10 @@
-import 'package:delivery_app/presentation/core/image_paths.dart';
-
-import '../../../domain/order/order.dart';
-import '../../../domain/order/value_objects.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../domain/order/order.dart';
+import '../../../domain/order/value_objects.dart';
+import '../assets_constants.dart';
 import '../size_config.dart';
 import 'sender_reciepient_tile.dart';
 
@@ -75,7 +74,7 @@ class SenderReceiverSection extends StatelessWidget {
     return Column(
       children: [
         SvgPicture.asset(
-          ImagePaths.location_circle,
+          Assets.location_circle,
           color: Theme.of(context).colorScheme.primary,
           height: SizeConfig.defaultSize * 1.5,
         ),
@@ -91,7 +90,7 @@ class SenderReceiverSection extends StatelessWidget {
           dashGapRadius: 0.0,
         ),
         SvgPicture.asset(
-          ImagePaths.location_circle,
+          Assets.location_circle,
           color: Theme.of(context).primaryColor,
           height: SizeConfig.defaultSize * 1.5,
         ),

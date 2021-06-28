@@ -35,6 +35,10 @@ class _$AuthFailureTearOff {
   Unexpected unexpected() {
     return const Unexpected();
   }
+
+  NotConnected notConnected() {
+    return const NotConnected();
+  }
 }
 
 /// @nodoc
@@ -49,6 +53,7 @@ mixin _$AuthFailure {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +63,7 @@ mixin _$AuthFailure {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +75,7 @@ mixin _$AuthFailure {
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +86,7 @@ mixin _$AuthFailure {
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,6 +152,7 @@ class _$ServerError implements ServerError {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) {
     return serverError();
   }
@@ -156,6 +165,7 @@ class _$ServerError implements ServerError {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -173,6 +183,7 @@ class _$ServerError implements ServerError {
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) {
     return serverError(this);
   }
@@ -186,6 +197,7 @@ class _$ServerError implements ServerError {
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -244,6 +256,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) {
     return emailAlreadyInUse();
   }
@@ -256,6 +269,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -273,6 +287,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -286,6 +301,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -349,6 +365,7 @@ class _$InvalidEmailAndPasswordCombination
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -361,6 +378,7 @@ class _$InvalidEmailAndPasswordCombination
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -378,6 +396,7 @@ class _$InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -391,6 +410,7 @@ class _$InvalidEmailAndPasswordCombination
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -449,6 +469,7 @@ class _$TokenNotFound implements TokenNotFound {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) {
     return tokenNotFound();
   }
@@ -461,6 +482,7 @@ class _$TokenNotFound implements TokenNotFound {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (tokenNotFound != null) {
@@ -478,6 +500,7 @@ class _$TokenNotFound implements TokenNotFound {
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) {
     return tokenNotFound(this);
   }
@@ -491,6 +514,7 @@ class _$TokenNotFound implements TokenNotFound {
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) {
     if (tokenNotFound != null) {
@@ -547,6 +571,7 @@ class _$Unexpected implements Unexpected {
     required TResult Function() invalidEmailAndPasswordCombination,
     required TResult Function() tokenNotFound,
     required TResult Function() unexpected,
+    required TResult Function() notConnected,
   }) {
     return unexpected();
   }
@@ -559,6 +584,7 @@ class _$Unexpected implements Unexpected {
     TResult Function()? invalidEmailAndPasswordCombination,
     TResult Function()? tokenNotFound,
     TResult Function()? unexpected,
+    TResult Function()? notConnected,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -576,6 +602,7 @@ class _$Unexpected implements Unexpected {
         invalidEmailAndPasswordCombination,
     required TResult Function(TokenNotFound value) tokenNotFound,
     required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
   }) {
     return unexpected(this);
   }
@@ -589,6 +616,7 @@ class _$Unexpected implements Unexpected {
         invalidEmailAndPasswordCombination,
     TResult Function(TokenNotFound value)? tokenNotFound,
     TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -600,4 +628,107 @@ class _$Unexpected implements Unexpected {
 
 abstract class Unexpected implements AuthFailure {
   const factory Unexpected() = _$Unexpected;
+}
+
+/// @nodoc
+abstract class $NotConnectedCopyWith<$Res> {
+  factory $NotConnectedCopyWith(
+          NotConnected value, $Res Function(NotConnected) then) =
+      _$NotConnectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NotConnectedCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
+    implements $NotConnectedCopyWith<$Res> {
+  _$NotConnectedCopyWithImpl(
+      NotConnected _value, $Res Function(NotConnected) _then)
+      : super(_value, (v) => _then(v as NotConnected));
+
+  @override
+  NotConnected get _value => super._value as NotConnected;
+}
+
+/// @nodoc
+
+class _$NotConnected implements NotConnected {
+  const _$NotConnected();
+
+  @override
+  String toString() {
+    return 'AuthFailure.notConnected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is NotConnected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() tokenNotFound,
+    required TResult Function() unexpected,
+    required TResult Function() notConnected,
+  }) {
+    return notConnected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? tokenNotFound,
+    TResult Function()? unexpected,
+    TResult Function()? notConnected,
+    required TResult orElse(),
+  }) {
+    if (notConnected != null) {
+      return notConnected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ServerError value) serverError,
+    required TResult Function(EmailAlreadyInUse value) emailAlreadyInUse,
+    required TResult Function(InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(TokenNotFound value) tokenNotFound,
+    required TResult Function(Unexpected value) unexpected,
+    required TResult Function(NotConnected value) notConnected,
+  }) {
+    return notConnected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ServerError value)? serverError,
+    TResult Function(EmailAlreadyInUse value)? emailAlreadyInUse,
+    TResult Function(InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(TokenNotFound value)? tokenNotFound,
+    TResult Function(Unexpected value)? unexpected,
+    TResult Function(NotConnected value)? notConnected,
+    required TResult orElse(),
+  }) {
+    if (notConnected != null) {
+      return notConnected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NotConnected implements AuthFailure {
+  const factory NotConnected() = _$NotConnected;
 }

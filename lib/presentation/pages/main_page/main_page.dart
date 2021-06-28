@@ -58,7 +58,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // SizeConfig().init(context);
     return Scaffold(
       appBar: appBar(context),
       bottomNavigationBar: Consumer<HomeVM>(

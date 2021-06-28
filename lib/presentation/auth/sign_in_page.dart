@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,11 +8,10 @@ import '../../application/auth/auth/auth_bloc.dart';
 import '../../application/auth/sign_in_form/sign_in_form_bloc.dart';
 import '../../domain/auth/i_auth_service.dart';
 import '../../injection.dart';
-import '../core/image_paths.dart';
+import '../core/assets_constants.dart';
 import '../core/size_config.dart';
 import '../core/widgets/app_button.dart';
 import '../core/widgets/app_title.dart';
-import '../core/widgets/showSnackbar.dart';
 import '../home_vm.dart';
 import '../pages/main_page/main_page.dart';
 import 'widgets/sign_in_email_form_field.dart';
@@ -89,7 +89,9 @@ class SignInFormBody extends StatelessWidget {
           listener: (context, state) {
             state.failure.fold(
               () => null,
-              (failure) => showSnackBar(context, failure.message),
+              (failure) => FlushbarHelper.createError(
+                      message: failure.message, duration: Duration(seconds: 1))
+                  .show(context),
             );
           },
           builder: (context, state) {
@@ -130,7 +132,7 @@ class AppLogoSection extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 1,
                   child: SvgPicture.asset(
-                    ImagePaths.fast_delivery,
+                    Assets.fast_delivery,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),

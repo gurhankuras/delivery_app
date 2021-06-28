@@ -13,7 +13,6 @@ class AppBarChartPlaceholder extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeConfig.defaultSize)),
-        // color: ,
         child: Column(
           children: [
             _buildTitlePlaceholder(),

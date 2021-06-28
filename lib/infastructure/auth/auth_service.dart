@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:delivery_app/domain/core/general_failures.dart';
+import 'package:delivery_app/domain/core/i_network_connectivity.dart';
+import 'package:delivery_app/domain/statistics/statistics_failure.dart';
+import 'package:delivery_app/infastructure/core/network_connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -26,17 +30,20 @@ String _baseUrl = Platform.isAndroid
     ? 'http://10.0.2.2:$PORT/api'
     : 'http://localhost:$PORT/api';
 
-// TODO: REFACTOR
+// TODO: REFACTOR these interceptors and take care of common dioOptions
 
 @Singleton(as: IAuthService)
 class AuthService implements IAuthService {
   Dio dio;
   final ITokenCacheService tokenService;
+  final INetworkConnectivity connectivity;
 
   AuthService({
     required ITokenCacheService tokenService,
+    required INetworkConnectivity connectivity,
   })  : dio = Dio(_defaultDioOptions),
-        tokenService = tokenService {
+        tokenService = tokenService,
+        connectivity = connectivity {
     kDebugMode ? dio.interceptors.add(PrettyDioLogger(
         // error: true,
         // logPrint: log.i,
@@ -48,6 +55,18 @@ class AuthService implements IAuthService {
         // responseHeader: true,
         // compact: false,
         )) : null;
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        final hasConnection = await connectivity.hasConnection();
+        if (!hasConnection) {
+          return handler.reject(DioError(
+            requestOptions: options,
+            error: AuthFailure.notConnected(),
+          ));
+        }
+        handler.next(options);
+      },
+    ));
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
@@ -110,7 +129,13 @@ class AuthService implements IAuthService {
       }
       return left(AuthFailure.serverError());
     } on DioError catch (e) {
+      if (e.error is NotConnected) {
+        return left(e.error);
+      }
       print(e);
+
+      return left(AuthFailure.unexpected());
+    } catch (e) {
       return left(AuthFailure.unexpected());
     }
   }
@@ -135,6 +160,9 @@ class AuthService implements IAuthService {
       }
       return right(unit);
     } on DioError catch (e) {
+      if (e.error is NotConnected) {
+        return left(e.error);
+      }
       print(e);
       return left(AuthFailure.serverError());
     } catch (e) {
@@ -142,6 +170,7 @@ class AuthService implements IAuthService {
     }
   }
 
+  //TODO:  delete session
   @override
   Future<void> logOut() async {
     await tokenService.clear();

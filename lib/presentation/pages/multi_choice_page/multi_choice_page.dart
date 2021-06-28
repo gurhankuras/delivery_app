@@ -64,7 +64,6 @@ class MultiChoicePage extends StatelessWidget {
             child: ButtonCard(
               title: 'Edit Order Status',
               iconSize: SizeConfig.defaultSize * 5,
-              // color: Theme.of(context).colorScheme.primaryVariant,
               iconData: Icons.edit,
               press: () => _navigateToEditOrderPage(context),
             ),

@@ -77,6 +77,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
                         failedValue: '', message: 'Server Error')),
                     unexpected: (f) => some(ValueFailure.empty(
                         failedValue: '', message: 'Server Error')),
+                    notConnected: (f) => some(ValueFailure.empty(
+                        failedValue: '', message: 'No Internet Connection')),
                   ),
                 );
                 // TODO: show failure in ui
@@ -106,32 +108,28 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
 Option<ValueFailure<String>> validatePassword(String password) {
   const minLength = 6;
-  if (password.length < minLength) {
-    return some(
-        ValueFailure.shortLength(failedValue: password, min: minLength));
-  }
-  return none();
+  return option(
+    password.length < minLength,
+    ValueFailure.shortLength(failedValue: password, min: minLength),
+  );
 }
 
 final emailRegex = RegExp(
     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
 
 Option<ValueFailure<String>> validateEmail(String email) {
-  return emailRegex.hasMatch(email)
-      ? none()
-      : some(ValueFailure.invalidFormat(failedValue: email));
+  return option(
+    !emailRegex.hasMatch(email),
+    ValueFailure.invalidFormat(failedValue: email),
+  );
+  // return emailRegex.hasMatch(email)
+  // ? none()
+  // : ;
 }
 
 Option<ValueFailure<String>> validateForm({
   required String email,
   required String password,
 }) {
-  final a = validateEmail(email).orElse(() => validatePassword(password));
-  return validateEmail(email).fold(
-    () => validatePassword(password).fold(
-      () => none(),
-      (failure) => some(failure),
-    ),
-    (failure) => some(failure),
-  );
+  return validateEmail(email).orElse(() => validatePassword(password));
 }

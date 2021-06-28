@@ -9,8 +9,8 @@ import '../../../../application/order/order_form/order_form_data.dart';
 import '../../../../infastructure/order/order_fake_repository.dart';
 import '../../../../infastructure/services/pdf_service.dart';
 import '../../../../injection.dart';
+import '../../../core/assets_constants.dart';
 import '../../../core/constants.dart';
-import '../../../core/image_paths.dart';
 import '../../../core/logger.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
@@ -99,7 +99,7 @@ class SendPackageConfirmationPage extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            ImagePaths.package,
+            Assets.package,
             color: Theme.of(context).colorScheme.primary,
             height: SizeConfig.defaultSize * 2.5,
           ),

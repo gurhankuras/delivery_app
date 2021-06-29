@@ -6,15 +6,15 @@ import 'package:provider/provider.dart';
 import '../../../application/auth/auth/auth_bloc.dart';
 import '../../../application/order/search_order/bloc/search_order_bloc.dart';
 import '../../../application/statistics/bloc/statistics_bloc.dart';
-import '../../../domain/statistics/i_statistics_repository.dart';
+import '../../../infastructure/statistics/statistics_repository.dart';
 import '../../../injection.dart';
-import '../../auth/sign_in_page.dart';
-import '../../core/size_config.dart';
-import '../../core/widgets/app_logo.dart';
-import '../../home_vm.dart';
-import '../../order/search_order/home_page/home_page.dart';
-import '../../statistics/statistics_page/statistics_page.dart';
-import '../multi_choice_page/multi_choice_page.dart';
+import '../auth/sign_in_page.dart';
+import '../core/size_config.dart';
+import '../core/widgets/app_logo.dart';
+import '../home_vm.dart';
+import '../order/search_order/home_page/home_page.dart';
+import '../pages/multi_choice_page/multi_choice_page.dart';
+import '../statistics/statistics_page/statistics_page.dart';
 
 class MainPage extends StatefulWidget {
   @override

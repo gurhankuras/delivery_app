@@ -6,13 +6,13 @@ import 'package:logger/logger.dart';
 import 'application/auth/auth/auth_bloc.dart';
 import 'application/core/simple_bloc_observer.dart';
 import 'injection.dart';
+import 'presentation/core/constants.dart';
 import 'presentation/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   Bloc.observer = SimpleBlocObserver();
-  // await setup();
   Logger.level = Level.debug;
 
   runApp(
@@ -41,12 +41,12 @@ class MyApp extends StatelessWidget {
         color: Colors.black.withOpacity(0.5),
       ),
       colorScheme: ColorScheme.light(
-        primary: Color(0xFFef5448),
+        primary: kPrimaryColor,
         secondary: Color(0xff2c4260),
       ),
-      unselectedWidgetColor: Color(0xFFef5448),
+      unselectedWidgetColor: kPrimaryColor,
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: Color(0xFFef5448),
+        selectedItemColor: kPrimaryColor,
         unselectedItemColor: Colors.black.withOpacity(0.3),
         type: BottomNavigationBarType.fixed,
       ),
@@ -61,10 +61,10 @@ class MyApp extends StatelessWidget {
           color: Colors.black.withOpacity(0.7),
         ),
       ),
-      indicatorColor: Color(0xFFef5448),
+      indicatorColor: kPrimaryColor,
       tabBarTheme: TabBarTheme(
         unselectedLabelColor: Colors.black.withOpacity(0.4),
-        labelColor: Color(0xFFef5448),
+        labelColor: kPrimaryColor,
       ),
       textTheme: GoogleFonts.latoTextTheme().copyWith(
           headline6: TextStyle(

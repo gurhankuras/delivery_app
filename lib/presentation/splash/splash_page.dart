@@ -9,7 +9,7 @@ import '../core/assets_constants.dart';
 import '../core/logger.dart';
 import '../core/size_config.dart';
 import '../home_vm.dart';
-import '../pages/main_page/main_page.dart';
+import '../main_page/main_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);

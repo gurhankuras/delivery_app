@@ -9,11 +9,12 @@ import '../../application/auth/sign_in_form/sign_in_form_bloc.dart';
 import '../../domain/auth/i_auth_service.dart';
 import '../../injection.dart';
 import '../core/assets_constants.dart';
+import '../core/constants.dart';
 import '../core/size_config.dart';
 import '../core/widgets/app_button.dart';
 import '../core/widgets/app_title.dart';
 import '../home_vm.dart';
-import '../pages/main_page/main_page.dart';
+import '../main_page/main_page.dart';
 import 'widgets/sign_in_email_form_field.dart';
 import 'widgets/sign_in_password_form_field.dart';
 
@@ -90,7 +91,8 @@ class SignInFormBody extends StatelessWidget {
             state.failure.fold(
               () => null,
               (failure) => FlushbarHelper.createError(
-                      message: failure.message, duration: Duration(seconds: 1))
+                      message: failure.message,
+                      duration: kSnackBarDefaultDuration)
                   .show(context),
             );
           },

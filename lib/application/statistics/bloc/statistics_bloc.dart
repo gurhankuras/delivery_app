@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart';
+
 import '../../../domain/statistics/i_statistics_repository.dart';
 import '../../../domain/statistics/statistics.dart';
 import '../../../domain/statistics/statistics_failure.dart';
-import 'package:meta/meta.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../infastructure/statistics/statistics_repository.dart';
+import '../../../presentation/core/logger.dart';
 
+part 'statistics_bloc.freezed.dart';
 part 'statistics_event.dart';
 part 'statistics_state.dart';
-part 'statistics_bloc.freezed.dart';
 
 @injectable
 class StatisticsBloc extends Bloc<StatisticsEvent, StatisticsState> {

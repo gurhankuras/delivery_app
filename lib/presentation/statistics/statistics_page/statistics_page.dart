@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../application/extensions/date_time_extension.dart';
 import '../../../application/statistics/bloc/statistics_bloc.dart';
-import '../../../domain/statistics/i_statistics_repository.dart';
+import '../../../infastructure/statistics/statistics_repository.dart';
 import '../../core/assets_constants.dart';
 import '../../core/size_config.dart';
 import '../../core/widgets/app_button.dart';

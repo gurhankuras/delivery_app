@@ -7,22 +7,11 @@ import 'package:injectable/injectable.dart';
 import '../../domain/order/order.dart';
 import '../order/order_dto.dart';
 
-final _baseUrl =
-    Platform.isAndroid ? 'http://10.0.2.2:5000' : 'http://localhost:5000';
-
-final _baseOptions = BaseOptions(
-  baseUrl: _baseUrl,
-  receiveDataWhenStatusError: true,
-  receiveTimeout: 3000,
-  connectTimeout: 3000,
-  sendTimeout: 3000,
-);
-
 @LazySingleton()
 class OrderService {
-  final Dio dio = Dio(_baseOptions);
+  final Dio dio;
 
-  OrderService();
+  OrderService({required this.dio});
 
 // TODO
   Future<bool> updateDeliveryStatus(Map<String, dynamic> payload) async {
@@ -39,29 +28,6 @@ class OrderService {
   Future<Option<String>> create(Order order) async {
     await Future.delayed(Duration(seconds: 2));
     return Future.value(some('34533345556'));
-    // try {
-    //   final response = await dio!.post(
-    //     '/new-order',
-    //     data: OrderDTO.fromDomain(order).toJson(),
-    //   );
-    //   if (response.statusCode == HttpStatus.ok) {
-    //     final id = response.data['id'];
-    //     if (id is int) {
-    //       return some(id.toString());
-    //     }
-    //     return none();
-    //   }
-    //   return none();
-    // } on DioError catch (_) {
-    //   print('Timeout Error occured!!!!!');
-    //   return none();
-    // } on SocketException catch (_) {
-    //   print('Socket Error occured!!!!!');
-    //   return none();
-    // } catch (_) {
-    //   print('General Error occured!!!!!');
-    //   return none();
-    // }
   }
 
   Future<Order?> read(String id) async {

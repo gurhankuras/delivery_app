@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
 import '../auth/sign_in_page.dart' as _i4;
+import '../main_page/main_page.dart' as _i5;
 import '../order/order_details/order_details_page.dart' as _i7;
 import '../order/order_history/orders_page/orders_page.dart' as _i8;
 import '../order/search_order/home_page/home_page.dart' as _i6;
@@ -17,7 +18,6 @@ import '../order/send_order/send_package_form_page/send_package_form_page.dart'
     as _i9;
 import '../order/update_order/edit_order_status_page/edit_order_status_page.dart'
     as _i11;
-import '../pages/main_page/main_page.dart' as _i5;
 import '../pages/multi_choice_page/multi_choice_page.dart' as _i12;
 import '../splash/splash_page.dart' as _i3;
 import '../statistics/statistics_page/statistics_page.dart' as _i13;

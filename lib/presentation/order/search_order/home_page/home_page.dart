@@ -6,7 +6,7 @@ import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
 import '../../../core/assets_constants.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/showSnackbar.dart';
-import '../../../pages/main_page/components/search_bar.dart';
+import '../../../main_page/components/search_bar.dart';
 import '../../order_details/order_details_page.dart';
 
 class HomePage extends StatefulWidget {

@@ -6,7 +6,7 @@ import '../../../../domain/order/value_objects.dart';
 import '../../../../infastructure/order/order_dto.dart';
 import '../../../../infastructure/services/cache_manager.dart';
 import '../../../../injection.dart';
-import '../../../core/size_config.dart';
+import '../../core/size_config.dart';
 
 class SearchBar extends StatefulWidget {
   final String hintText;

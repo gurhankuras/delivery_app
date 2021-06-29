@@ -4,30 +4,23 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/date.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../domain/statistics/i_statistics_repository.dart';
 import '../../domain/statistics/statistics.dart';
 import '../../domain/statistics/statistics_failure.dart';
+import '../../injection.dart';
+import '../core/connectivity_dio_checker_interceptor.dart';
 import 'statistics_dto.dart';
-
-BaseOptions _defaultDioOptions = BaseOptions(
-  baseUrl: _baseUrl,
-  receiveDataWhenStatusError: true,
-  receiveTimeout: 3000,
-  connectTimeout: 3000,
-  sendTimeout: 3000,
-);
-
-int PORT = 4000;
-String _baseUrl = Platform.isAndroid
-    ? 'http://10.0.2.2:$PORT/api/statistics'
-    : 'http://localhost:$PORT/api/statistics';
 
 @LazySingleton(as: IStatisticsRepository)
 class StatisticsRepository implements IStatisticsRepository {
-  Dio dio = Dio(_defaultDioOptions);
+  final Dio dio;
 
-  StatisticsRepository();
+  StatisticsRepository({required this.dio}) {
+    dio.interceptors.add(PrettyDioLogger());
+    dio.interceptors.add(getIt<ConnectivityDioChecker>());
+  }
 
   @override
   Future<Either<StatisticsFailure, Statistics>> fetchByDate(
@@ -37,7 +30,7 @@ class StatisticsRepository implements IStatisticsRepository {
 
     try {
       final response =
-          await dio.post('$_baseUrl$urlPart', data: {'date': dateString});
+          await dio.post('/statistics/$urlPart', data: {'date': dateString});
 
       if (response.statusCode != HttpStatus.ok) {
         return left(StatisticsFailure.unexpected());
@@ -63,57 +56,23 @@ class StatisticsRepository implements IStatisticsRepository {
 // TODO
 }
 
+enum Stat {
+  people_who_sends_the_most,
+  people_who_receives_the_most,
+  people_who_spends_the_most,
+}
 
-/*
-
-Dio? dio;
-
-  OrderStatisticsService({this.dio}) {
-    dio ??= Dio(_getDefaultDioOptions);
-  }
-
-  BaseOptions get _getDefaultDioOptions => BaseOptions(
-        baseUrl: _baseUrl,
-        receiveDataWhenStatusError: true,
-        receiveTimeout: 3000,
-        connectTimeout: 3000,
-        sendTimeout: 3000,
-      );
-
-  String get _baseUrl => Platform.isAndroid
-      ? 'http://10.0.2.2:5000/stats/category'
-      : 'http://localhost:5000/stats/category';
-
-  Future<Map<String, dynamic>?> fetchCategoryStatByDate(
-      Stats stat, DateTime date) async {
-    final dateString = date.toIso8601String();
-    final url = stat.urlPart;
-
-    final response = await dio!.post(url, data: {'date': dateString});
-
-    if (response.statusCode == HttpStatus.ok) {
-      return response.data;
+extension StatToUrlPart on Stat {
+  String str() {
+    switch (this) {
+      case Stat.people_who_receives_the_most:
+        return '/1';
+      case Stat.people_who_sends_the_most:
+        return '/2';
+      case Stat.people_who_spends_the_most:
+        return '/3';
+      default:
+        throw Error();
     }
-    throw Exception();
   }
-
-  Future<void> fetchCategoryStatByDateRange(
-      Stats stat, DateTimeRange range) async {
-    final startDateString = range.start.toIso8601String();
-    final endDateString = range.end.toIso8601String();
-
-    final url = stat.urlPart;
-
-    final response = await dio!.post(url,
-        data: {'startDate': startDateString, 'endDate': endDateString});
-
-    if (response.statusCode == HttpStatus.ok) {
-      if (response is Map<String, dynamic>) {
-        return response.data;
-      }
-    }
-    throw Exception();
-  }
-
-
- */
+}

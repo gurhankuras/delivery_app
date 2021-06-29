@@ -15,7 +15,7 @@ _$_OrderDTO _$_$_OrderDTOFromJson(Map<String, dynamic> json) {
     receiver: json['receiver'] == null
         ? null
         : PersonDTO.fromJson(json['receiver'] as Map<String, dynamic>),
-    orderStates: (json['orderStates'] as List<dynamic>?)
+    orderStates: (json['states'] as List<dynamic>?)
         ?.map((e) => OrderStatusDTO.fromJson(e as Map<String, dynamic>))
         .toList(),
     packageName: json['packageName'] as String?,
@@ -31,7 +31,7 @@ Map<String, dynamic> _$_$_OrderDTOToJson(_$_OrderDTO instance) =>
       'orderId': instance.orderId,
       'sender': instance.sender,
       'receiver': instance.receiver,
-      'orderStates': instance.orderStates,
+      'states': instance.orderStates,
       'packageName': instance.packageName,
       'packageCategory': instance.packageCategory,
       'packageType': instance.packageType,

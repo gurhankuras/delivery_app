@@ -35,7 +35,7 @@ class SearchOrderBloc extends Bloc<SearchOrderEvent, SearchOrderState> {
 }
 
 Either<ValueFailure<String>, Unit> validateTrackId(String id) {
-  const trackIdLength = 10;
+  const trackIdLength = 24;
   if (id.trim() == '') {
     return left(ValueFailure.empty(failedValue: id));
   }
@@ -46,8 +46,8 @@ Either<ValueFailure<String>, Unit> validateTrackId(String id) {
       n: trackIdLength,
     ));
   }
-  if (!isInt(id)) {
-    return left(ValueFailure.invalidFormat(failedValue: id));
-  }
+  // if (!isInt(id)) {
+  //   return left(ValueFailure.invalidFormat(failedValue: id));
+  // }
   return right(unit);
 }

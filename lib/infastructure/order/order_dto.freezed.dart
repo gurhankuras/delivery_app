@@ -24,7 +24,7 @@ class _$OrderDTOTearOff {
       {String? orderId,
       PersonDTO? sender,
       PersonDTO? receiver,
-      List<OrderStatusDTO>? orderStates,
+      @JsonKey(name: 'states') List<OrderStatusDTO>? orderStates,
       String? packageName,
       String? packageCategory,
       String? packageType,
@@ -56,6 +56,7 @@ mixin _$OrderDTO {
   String? get orderId => throw _privateConstructorUsedError;
   PersonDTO? get sender => throw _privateConstructorUsedError;
   PersonDTO? get receiver => throw _privateConstructorUsedError;
+  @JsonKey(name: 'states')
   List<OrderStatusDTO>? get orderStates => throw _privateConstructorUsedError;
   String? get packageName => throw _privateConstructorUsedError;
   String? get packageCategory => throw _privateConstructorUsedError;
@@ -77,7 +78,7 @@ abstract class $OrderDTOCopyWith<$Res> {
       {String? orderId,
       PersonDTO? sender,
       PersonDTO? receiver,
-      List<OrderStatusDTO>? orderStates,
+      @JsonKey(name: 'states') List<OrderStatusDTO>? orderStates,
       String? packageName,
       String? packageCategory,
       String? packageType,
@@ -180,7 +181,7 @@ abstract class _$OrderDTOCopyWith<$Res> implements $OrderDTOCopyWith<$Res> {
       {String? orderId,
       PersonDTO? sender,
       PersonDTO? receiver,
-      List<OrderStatusDTO>? orderStates,
+      @JsonKey(name: 'states') List<OrderStatusDTO>? orderStates,
       String? packageName,
       String? packageCategory,
       String? packageType,
@@ -262,7 +263,7 @@ class _$_OrderDTO extends _OrderDTO {
       {this.orderId,
       this.sender,
       this.receiver,
-      this.orderStates,
+      @JsonKey(name: 'states') this.orderStates,
       this.packageName,
       this.packageCategory,
       this.packageType,
@@ -280,6 +281,7 @@ class _$_OrderDTO extends _OrderDTO {
   @override
   final PersonDTO? receiver;
   @override
+  @JsonKey(name: 'states')
   final List<OrderStatusDTO>? orderStates;
   @override
   final String? packageName;
@@ -357,7 +359,7 @@ abstract class _OrderDTO extends OrderDTO {
       {String? orderId,
       PersonDTO? sender,
       PersonDTO? receiver,
-      List<OrderStatusDTO>? orderStates,
+      @JsonKey(name: 'states') List<OrderStatusDTO>? orderStates,
       String? packageName,
       String? packageCategory,
       String? packageType,
@@ -374,6 +376,7 @@ abstract class _OrderDTO extends OrderDTO {
   @override
   PersonDTO? get receiver => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'states')
   List<OrderStatusDTO>? get orderStates => throw _privateConstructorUsedError;
   @override
   String? get packageName => throw _privateConstructorUsedError;

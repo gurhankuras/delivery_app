@@ -13,7 +13,7 @@ class OrderDTO with _$OrderDTO {
     String? orderId,
     PersonDTO? sender,
     PersonDTO? receiver,
-    List<OrderStatusDTO>? orderStates,
+    @JsonKey(name: 'states') List<OrderStatusDTO>? orderStates,
     String? packageName,
     String? packageCategory,
     String? packageType,

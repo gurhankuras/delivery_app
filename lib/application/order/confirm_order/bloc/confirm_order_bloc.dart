@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:delivery_app/domain/order/i_order_repository.dart';
 import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -18,7 +19,7 @@ part 'confirm_order_state.dart';
 
 @injectable
 class ConfirmOrderBloc extends Bloc<ConfirmOrderEvent, ConfirmOrderState> {
-  final OrderService orderRepository;
+  final IOrderRepository orderRepository;
   final OrderFormData orderFormData;
   final PdfService pdfService;
   ConfirmOrderBloc({
@@ -39,7 +40,7 @@ class ConfirmOrderBloc extends Bloc<ConfirmOrderEvent, ConfirmOrderState> {
         yield ConfirmOrderState.loading();
         final idOption = await orderRepository.create(order!);
         yield* idOption.fold(
-          () async* {
+          (f) async* {
             yield ConfirmOrderState.failure();
           },
           (id) async* {

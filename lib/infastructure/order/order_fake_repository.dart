@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart' hide Order;
+import 'package:delivery_app/infastructure/core/env.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/core/failures.dart';
@@ -6,18 +7,18 @@ import '../../domain/order/i_order_repository.dart';
 import '../../domain/order/order.dart';
 import '../../domain/order/value_objects.dart';
 
-@LazySingleton(as: IOrderRepository)
+@LazySingleton(as: IOrderRepository, env: [Env.fake])
 class OrderFakeRepository implements IOrderRepository {
   final mockOrders = <Order>[mockOrder];
 
   void f() {}
 
   @override
-  Future<Either<ValueFailure<String>, Unit>> create(Order order) async {
+  Future<Either<ValueFailure<String>, String>> create(Order order) async {
     await Future.delayed(Duration(seconds: 2));
 
     mockOrders.add(order);
-    return Future.value(right(unit));
+    return Future.value(right('1234567800'));
   }
 
   @override

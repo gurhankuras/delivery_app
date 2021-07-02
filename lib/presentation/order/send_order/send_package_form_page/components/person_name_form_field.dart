@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants.dart';
 import '../../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
+import '../../../../core/constants.dart';
+import '../../../../langs/locale_keys.dart';
 import 'input_decoration.dart';
 
 class PersonNameFormField<T> extends StatelessWidget {
@@ -32,8 +34,10 @@ class PersonNameFormField<T> extends StatelessWidget {
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.name,
-        decoration:
-            getTextInputDecoration(iconData: Icons.person, labelText: 'Name'),
+        decoration: getTextInputDecoration(
+          iconData: Icons.person,
+          labelText: LocaleKeys.name.tr(),
+        ),
       ),
     );
   }

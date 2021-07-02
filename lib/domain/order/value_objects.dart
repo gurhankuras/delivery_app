@@ -84,6 +84,12 @@ class OrderStatus {
     this.status,
   });
 
+  factory OrderStatus.empty() => OrderStatus(
+        event: '',
+        status: 0,
+        timeStamp: DateTime.now(),
+      );
+
   bool operator <(OrderStatus other) {
     return status! < other.status!;
   }
@@ -91,6 +97,22 @@ class OrderStatus {
   // factory OrderStatus.fromJson(Map<String, dynamic> json) =>
   //     _$OrderStatusFromJson(json);
   // Map<String, dynamic> toJson() => _$OrderStatusToJson(this);
+
+  OrderStatus copyWith({
+    String? event,
+    DateTime? timeStamp,
+    int? status,
+  }) {
+    return OrderStatus(
+      event: event ?? this.event,
+      timeStamp: timeStamp ?? this.timeStamp,
+      status: status ?? this.status,
+    );
+  }
+
+  @override
+  String toString() =>
+      'OrderStatus(event: $event, timeStamp: $timeStamp, status: $status)';
 }
 
 // class NoteBody extends ValueObject<String> {

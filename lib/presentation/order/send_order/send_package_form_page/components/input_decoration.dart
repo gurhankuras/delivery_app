@@ -37,13 +37,13 @@ InputDecoration getTextInputDecoration({
       borderRadius: BorderRadius.circular(
         SizeConfig.defaultSize * 2,
       ),
-      borderSide: BorderSide(color: Colors.black.withOpacity(0.1)),
+      borderSide: BorderSide(color: Colors.black.withOpacity(0.2)),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(
         SizeConfig.defaultSize * 2,
       ),
-      borderSide: BorderSide(color: Colors.black.withOpacity(0.1)),
+      borderSide: BorderSide(color: Colors.black.withOpacity(0.2)),
     ),
   );
 }

@@ -1,0 +1,19 @@
+{
+  "hello_text": "merhaba",
+  "edit_order_status": "Kargo Durumu Güncelle",
+  "send_package": "Paket Gönder",
+  "search_package": "Gönderi Sorgula",
+  "home": "Ana Sayfa",
+  "send": "Gönder",
+  "statistics": "İstatistikler",
+  "name": "Ad",
+  "select_date": "Tarih Seç",
+  "tr_id": "T.C Numarası",
+  "phone_number": "Telefon Numarası",
+  "address": "Adres",
+  "form_info_title": "{} Bilgisi",
+  "package": "Gönderi",
+  "sender": "Gönderici",
+  "receiver": "Alıcı",
+  "continue_text": "Devam Et"
+}

@@ -1,16 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../application/order/order_assembler.dart';
+import '../../../../application/order/order_form/order_form_data.dart';
 import '../../../../application/order/order_form/order_form_package_bloc/order_form_package_bloc.dart';
 import '../../../../application/order/order_form/order_form_person_bloc/order_form_person_bloc.dart';
 import '../../../../application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
-import '../../../../application/order/order_form/order_form_data.dart';
 import '../../../../injection.dart';
 import '../../../core/logger_mixin.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
+import '../../../langs/locale_keys.dart';
 import '../send_package_confirmation_page/send_package_confirmation_page.dart';
 import 'components/package_form_section.dart';
 import 'components/person_form_section.dart';
@@ -47,7 +49,7 @@ class SendPackageFormPage extends StatelessWidget
   AppBar buildAppbar(BuildContext context) {
     return AppBar(
       title: Text(
-        'Send Package',
+        LocaleKeys.send_package.tr(),
         style: Theme.of(context).textTheme.headline6,
       ),
     );
@@ -56,11 +58,17 @@ class SendPackageFormPage extends StatelessWidget
   Widget buildBody(BuildContext context) {
     return Column(
       children: [
-        PersonFormSection<Sender>(title: 'Sender Info'),
-        PersonFormSection<Receiver>(title: 'Receiver Info'),
+        PersonFormSection<Sender>(
+            title: LocaleKeys.form_info_title.tr(args: [
+          LocaleKeys.sender.tr(),
+        ])),
+        PersonFormSection<Receiver>(
+            title: LocaleKeys.form_info_title.tr(args: [
+          LocaleKeys.receiver.tr(),
+        ])),
         PackageFormSection(),
         AppButton(
-          text: 'Continue',
+          text: LocaleKeys.continue_text.tr(),
           click: () => continueHandler(context),
         ),
         SizedBox(height: SizeConfig.defaultSize),

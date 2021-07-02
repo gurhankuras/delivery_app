@@ -11,13 +11,13 @@ import '../../core/size_config.dart';
 class SearchBar extends StatefulWidget {
   final String hintText;
   final void Function(String value) onSearch;
-  final VoidCallback onInfo;
+  final VoidCallback? onInfo;
   final TextInputType keyboardType;
   const SearchBar({
     Key? key,
     required this.hintText,
     required this.onSearch,
-    required this.onInfo,
+    this.onInfo,
     this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
@@ -94,16 +94,17 @@ class _SearchBarState extends State<SearchBar> {
       suffixIcon: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconButton(
-            onPressed: () {
-              widget.onInfo();
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.questionCircle,
-              size: SizeConfig.defaultSize * 2,
-              color: Colors.black.withOpacity(0.5),
+          if (widget.onInfo != null)
+            IconButton(
+              onPressed: () {
+                widget.onInfo?.call();
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.questionCircle,
+                size: SizeConfig.defaultSize * 2,
+                color: Colors.black.withOpacity(0.5),
+              ),
             ),
-          ),
           IconButton(
             onPressed: () {
               widget.onSearch(_textController.text);

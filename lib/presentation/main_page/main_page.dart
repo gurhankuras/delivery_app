@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,6 +13,7 @@ import '../auth/sign_in_page.dart';
 import '../core/size_config.dart';
 import '../core/widgets/app_logo.dart';
 import '../home_vm.dart';
+import '../langs/locale_keys.dart';
 import '../order/search_order/home_page/home_page.dart';
 import '../pages/multi_choice_page/multi_choice_page.dart';
 import '../statistics/statistics_page/statistics_page.dart';
@@ -100,7 +102,7 @@ class _MainPageState extends State<MainPage> {
   final _navBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Icon(Icons.home_outlined),
-      label: 'Home',
+      label: LocaleKeys.home.tr(),
     ),
     // BottomNavigationBarItem(
     //   icon: Icon(Icons.compare_arrows_outlined),
@@ -108,24 +110,38 @@ class _MainPageState extends State<MainPage> {
     // ),
     BottomNavigationBarItem(
       icon: Icon(Icons.send),
-      label: 'Send',
+      label: LocaleKeys.send.tr(),
     ),
     BottomNavigationBarItem(
       icon: FaIcon(FontAwesomeIcons.solidChartBar),
-      label: 'Statistics',
+      label: LocaleKeys.statistics.tr(),
     ),
   ];
 
   AppBar appBar(BuildContext context) {
+    // EasyLocalization
     return AppBar(
       title: AppLogo(),
+      leading: Row(
+        children: [
+          GestureDetector(
+            onTap: () => context.setLocale(Locale('tr', 'TR')),
+            child: Icon(Icons.language),
+          ),
+          GestureDetector(
+            onTap: () => context.setLocale(Locale('en', 'US')),
+            child: Icon(Icons.language),
+          ),
+        ],
+      ),
       actions: [
         GestureDetector(
-            onTap: () => context.read<AuthBloc>().add(AuthEvent.signedOut()),
-            child: Padding(
-              padding: EdgeInsets.only(right: SizeConfig.defaultSize),
-              child: Icon(Icons.logout_rounded),
-            ))
+          onTap: () => context.read<AuthBloc>().add(AuthEvent.signedOut()),
+          child: Padding(
+            padding: EdgeInsets.only(right: SizeConfig.defaultSize),
+            child: Icon(Icons.logout_rounded),
+          ),
+        )
       ],
     );
   }

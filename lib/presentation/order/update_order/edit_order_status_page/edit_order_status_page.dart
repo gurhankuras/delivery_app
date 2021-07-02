@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import 'package:delivery_app/application/order/order_details/bloc/fetch_order_bloc.dart';
+import 'package:delivery_app/application/order/update_order/bloc/update_order_bloc.dart';
+import 'package:delivery_app/domain/order/i_order_repository.dart';
+import 'package:delivery_app/domain/order/value_objects.dart';
+import 'package:delivery_app/presentation/order/update_order/edit_order_status_page/add_update_fullscreen_dialog.dart';
 
 import '../../../../domain/order/order.dart';
 import '../../../../infastructure/services/order_service.dart';
@@ -22,152 +30,158 @@ class EditOrderStatusPage extends StatefulWidget {
 // TODO REFACTOr
 
 class _EditOrderStatusPageState extends State<EditOrderStatusPage> {
-  Order? order;
-  bool isLoading = true;
-  final DeliveryStatus _currentDeliveryState = DeliveryStatus.ordered;
-  DeliveryStatus _updatedDeliveryState = DeliveryStatus.ordered;
-
-  bool couldntDelivered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    getIt<OrderService>().read('123456').then((value) {
-      setState(() {
-        isLoading = false;
-        order = value;
-      });
-    }).catchError((_) {
-      isLoading = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _currentDeliveryState == _updatedDeliveryState
-          ? () async => true
-          : _onWilPopScopeEditedHandler,
+      onWillPop: () async => true,
+      // _currentDeliveryState == _updatedDeliveryState
+      //     ? () async => true
+      //     : _onWilPopScopeEditedHandler,
       child: Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.08),
-            child: !isLoading
-                ? buildContent(context, order!)
-                : Center(
-                    child: CircularProgressIndicator(),
-                  ),
+            child: BlocConsumer<FetchOrderBloc, FetchOrderState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return state.map(
+                  initial: (state) =>
+                      Center(child: CircularProgressIndicator()),
+                  loading: (state) =>
+                      Center(child: CircularProgressIndicator()),
+                  success: (state) {
+                    return BlocProvider(
+                      create: (context) => UpdateOrderBloc(
+                        order: state.order,
+                        repository: getIt<IOrderRepository>(),
+                      ),
+                      child: LoadedContent(),
+                    );
+                  },
+                  failure: (state) => Text('Fail'),
+                );
+              },
+            ),
           ),
         ),
       ),
     );
   }
 
-  Future<bool> _onWilPopScopeEditedHandler() async {
-    final exit = await showDialog(
-      context: context,
-      builder: (context) => EditingDialog(),
-    );
-    return exit ? true : false;
-  }
+  // Future<bool> _onWilPopScopeEditedHandler() async {
+  //   final exit = await showDialog(
+  //     context: context,
+  //     builder: (context) => EditingDialog(),
+  //   );
+  //   return exit ? true : false;
+  // }
+}
 
-  Column buildContent(BuildContext context, Order order) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        NotEditableOrderInfo(order: order),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            OrderInfoField(
-              title: 'Delivery Status',
-              content: _currentDeliveryState.str(),
-              alignment: CrossAxisAlignment.center,
-            ),
-            Icon(
-              Icons.arrow_right_alt_outlined,
-              size: SizeConfig.defaultSize * 3,
-            ),
-            OrderInfoField(
-              title: 'Updated Delivery Status',
-              content: _updatedDeliveryState.str(),
-              alignment: CrossAxisAlignment.center,
-            )
-          ],
-        ),
-        SizedBox(height: SizeConfig.defaultSize * 3),
-        ..._buildDeliveryStatusButtons(),
-        AppButton(
-          text: 'Update',
-          click: () async {
-            final success = await context
-                .read<OrderService>()
-                .updateDeliveryStatus({'orderId': 123456, 'state': 2});
-            print(success);
-            Navigator.of(context).pop();
-          },
-        ),
-        SizedBox(height: SizeConfig.defaultSize * 2),
-      ],
-    );
-  }
+class LoadedContent extends StatelessWidget {
+  const LoadedContent({Key? key}) : super(key: key);
 
-  List<Widget> _buildDeliveryStatusButtons() {
-    return List.generate(
-      DeliveryStatus.values.length,
-      (index) {
-        final radioTile = RadioListTile<DeliveryStatus>(
-          activeColor: Theme.of(context).colorScheme.primary,
-          secondary: getCorrectIconAndColor(index),
-          title: Text(DeliveryStatus.values[index].str()),
-          value: DeliveryStatus.values[index],
-          groupValue: _updatedDeliveryState,
-          onChanged: (DeliveryStatus? value) {
-            if (value == DeliveryStatus.not_home) {
-              couldntDelivered = true;
-            } else {
-              couldntDelivered = false;
-            }
-            setState(() {
-              _updatedDeliveryState = value!;
-            });
-          },
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UpdateOrderBloc, UpdateOrderState>(
+      builder: (context, state) {
+        final updateOrderBloc = Provider.of<UpdateOrderBloc>(
+          context,
+          listen: false,
         );
-        if (index < _currentDeliveryState.index) {
-          return Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.grey),
-            child: DisabledWidget(
-              opacity: 0.1,
-              child: radioTile,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NotEditableOrderInfo(order: state.editedOrder),
+            OrderStateTransitionInfo(
+              currentState: state.fetchedOrder.orderStates?.last.status ?? 0,
+              nextState: state.fetchedOrder.orderStates?.last.status ?? 0,
             ),
-          );
-        }
-        return radioTile;
+            Column(
+                children: state.editedOrder.orderStates
+                        ?.map((orderState) => OrderMovementTile(orderState))
+                        .toList() ??
+                    []),
+            AppButton(
+              text: 'Update',
+              click: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => BlocProvider.value(
+                      value: updateOrderBloc,
+                      child: AddUpdateFullScreenDialog(),
+                    ),
+                    fullscreenDialog: true,
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: SizeConfig.defaultSize * 2),
+          ],
+        );
       },
     );
   }
+}
 
-  FaIcon? getCorrectIconAndColor(int index) {
-    if (couldntDelivered && index == _updatedDeliveryState.index) {
-      return FaIcon(FontAwesomeIcons.times,
-          color: Theme.of(context).errorColor);
-    }
-    if (index < _currentDeliveryState.index) {
-      return FaIcon(FontAwesomeIcons.check,
-          color: Theme.of(context).iconTheme.color);
-    }
-    if (couldntDelivered) {
-      return null;
-    }
-    if (index < _updatedDeliveryState.index) {
-      return FaIcon(FontAwesomeIcons.check,
-          color: Theme.of(context).iconTheme.color);
-    }
-    if (index == _updatedDeliveryState.index) {
-      return FaIcon(FontAwesomeIcons.check, color: Colors.lightGreen);
-    }
-    return null;
+class OrderStateTransitionInfo extends StatelessWidget {
+  final int currentState;
+  final int nextState;
+
+  const OrderStateTransitionInfo({
+    Key? key,
+    required this.currentState,
+    required this.nextState,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: SizeConfig.defaultSize * 3),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          OrderInfoField(
+            title: 'Delivery Status',
+            content: '$currentState',
+            alignment: CrossAxisAlignment.center,
+          ),
+          Icon(
+            Icons.arrow_right_alt_outlined,
+            size: SizeConfig.defaultSize * 3,
+          ),
+          OrderInfoField(
+            title: 'Updated Delivery Status',
+            content: '$nextState',
+            alignment: CrossAxisAlignment.center,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class OrderMovementTile extends StatelessWidget {
+  final OrderStatus orderState;
+  const OrderMovementTile(
+    this.orderState, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(orderState.event ?? ''),
+      trailing: Tooltip(
+          message: DeliveryStatus.values[orderState.status!].str(),
+          child: Text(DeliveryStatus.values[orderState.status!].str())),
+      subtitle: Text(
+        orderState.timeStamp != null
+            ? DateFormat('yyyy-MM-dd HH:mm:ss').format(orderState.timeStamp!)
+            : '',
+      ),
+    );
   }
 }

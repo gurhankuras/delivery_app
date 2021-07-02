@@ -1,0 +1,19 @@
+{
+  "hello_text": "hello",
+  "edit_order_status": "Edit Order Status",
+  "send_package": "Send Package",
+  "search_package": "Search Package",
+  "home": "Home",
+  "send": "Send",
+  "statistics": "Statistics",
+  "name": "Name",
+  "select_date": "Select Date",
+  "tr_id": "Tr ID",
+  "phone_number": "Phone Number",
+  "address": "Address",
+  "form_info_title": "{} Info",
+  "package": "Package",
+  "sender": "Sender",
+  "receiver": "Receiver",
+  "continue_text": "Continue"
+}

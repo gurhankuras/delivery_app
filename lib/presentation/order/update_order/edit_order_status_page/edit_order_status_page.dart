@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -9,17 +8,12 @@ import '../../../../application/order/order_details/bloc/fetch_order_bloc.dart';
 import '../../../../application/order/update_order/bloc/update_order_bloc.dart';
 import '../../../../domain/order/i_order_repository.dart';
 import '../../../../domain/order/value_objects.dart';
-import 'add_update_fullscreen_dialog.dart';
-
-import '../../../../domain/order/order.dart';
-import '../../../../infastructure/services/order_service.dart';
 import '../../../../injection.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/app_button.dart';
-import '../../../core/widgets/disabled_widget.dart';
 import '../../../core/widgets/order_info_field.dart';
+import 'add_update_fullscreen_dialog.dart';
 import 'delivery_status.dart';
-import 'editing_dialog.dart';
 import 'not_editable_order_info.dart';
 
 class EditOrderStatusPage extends StatefulWidget {

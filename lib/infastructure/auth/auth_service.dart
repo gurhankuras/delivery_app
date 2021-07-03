@@ -16,8 +16,6 @@ import '../core/token_dio_interceptor.dart';
 import 'credentials_dto.dart';
 import 'user_tokens_dto.dart';
 
-// TODO: take care of common dioOptions
-
 @Singleton(as: IAuthService)
 class AuthService implements IAuthService {
   final Dio dio;
@@ -94,7 +92,7 @@ class AuthService implements IAuthService {
       if (response.statusCode == HttpStatus.ok) {
         await tokenService.clear();
       }
-    } on DioError catch (e) {
+    } on DioError catch (_) {
       //   if (e.error is NotConnected) {
       //     return left(e.error);
       //   }

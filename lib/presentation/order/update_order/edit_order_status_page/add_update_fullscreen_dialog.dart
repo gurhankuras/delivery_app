@@ -1,13 +1,13 @@
-import '../../../../application/order/update_order/bloc/update_order_bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/size_config.dart';
-import '../../../core/widgets/app_button.dart';
-import '../../send_order/send_package_form_page/components/input_decoration.dart';
-import 'delivery_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/order/update_order/bloc/update_order_bloc.dart';
+import '../../../core/size_config.dart';
+import '../../../core/widgets/app_button.dart';
+import '../../../map/map_page.dart';
+import '../../send_order/send_package_form_page/components/input_decoration.dart';
 import '../context_update_order_bloc_x.dart';
+import 'delivery_status.dart';
 
 class AddUpdateFullScreenDialog extends StatefulWidget {
   const AddUpdateFullScreenDialog({Key? key}) : super(key: key);
@@ -67,6 +67,21 @@ class UpdateDialogBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              OutlinedButton(
+                  onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MapPage(),
+                        ),
+                      ),
+                  child: Text('Get Current Location')),
+            ],
+          ),
+        ),
         MessageTextField(),
         OrderStatusOptions(
           onSelect: (status) => context.updateOrderBloc

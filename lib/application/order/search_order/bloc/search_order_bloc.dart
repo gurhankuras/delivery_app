@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:string_validator/string_validator.dart';
 
 import '../../../../domain/core/failures.dart';
 

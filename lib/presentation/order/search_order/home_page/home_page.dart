@@ -1,17 +1,16 @@
-import '../../../../domain/barcode/i_barcode_scanner_service.dart';
-import '../../../../infastructure/barcode/barcode_scanner_service.dart';
-import '../../../../infastructure/barcode/fake_barcode_scanner_service.dart';
-import '../../../core/logger.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
+import '../../../../domain/barcode/i_barcode_scanner_service.dart';
 import '../../../../injection.dart';
 import '../../../core/assets_constants.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/showSnackbar.dart';
 import '../../../main_page/components/search_bar.dart';
+import '../../../map/map_page.dart';
 import '../../order_details/order_details_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,7 +51,12 @@ class _HomePageState extends State<HomePage>
               );
             },
             child: SearchBar(
-              onInfo: () => showInformationDialog(context),
+              onInfo: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => MapPage(),
+                ));
+                // showInformationDialog(context);
+              },
               onSearch: (value) => context
                   .read<SearchOrderBloc>()
                   .add(SearchOrderEvent.searchButtonPressed(value)),

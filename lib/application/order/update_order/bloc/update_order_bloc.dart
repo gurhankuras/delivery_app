@@ -1,16 +1,17 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:delivery_app/domain/order/i_order_repository.dart';
-import 'package:delivery_app/domain/order/order.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:meta/meta.dart';
 
+import '../../../../domain/order/i_order_repository.dart';
+import '../../../../domain/order/order.dart';
+import '../../../../domain/order/value_objects.dart';
+import '../../../../presentation/core/logger.dart';
+
+part 'update_order_bloc.freezed.dart';
 part 'update_order_event.dart';
 part 'update_order_state.dart';
-part 'update_order_bloc.freezed.dart';
 
 class UpdateOrderBloc extends Bloc<UpdateOrderEvent, UpdateOrderState> {
   final IOrderRepository repository;

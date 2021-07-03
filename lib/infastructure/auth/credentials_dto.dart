@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/auth/credentials.dart';
+import '../../domain/auth/credentials.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credentials_dto.freezed.dart';

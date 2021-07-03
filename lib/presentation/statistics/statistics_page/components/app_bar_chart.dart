@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import '../../../core/size_config.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/size_config.dart';
 
 class AppBarChart extends StatelessWidget {
   final List<int> quantities;

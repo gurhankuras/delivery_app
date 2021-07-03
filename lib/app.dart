@@ -1,6 +1,6 @@
-import 'package:delivery_app/injection.dart';
-import 'package:delivery_app/presentation/core/constants.dart';
-import 'package:delivery_app/presentation/splash/splash_page.dart';
+import 'injection.dart';
+import 'presentation/core/constants.dart';
+import 'presentation/splash/splash_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

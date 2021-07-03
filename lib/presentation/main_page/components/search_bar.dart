@@ -12,12 +12,15 @@ class SearchBar extends StatefulWidget {
   final String hintText;
   final void Function(String value) onSearch;
   final VoidCallback? onInfo;
+  final VoidCallback? onScan;
+
   final TextInputType keyboardType;
   const SearchBar({
     Key? key,
     required this.hintText,
     required this.onSearch,
     this.onInfo,
+    this.onScan,
     this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
@@ -94,6 +97,17 @@ class _SearchBarState extends State<SearchBar> {
       suffixIcon: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (widget.onScan != null)
+            IconButton(
+              onPressed: () {
+                widget.onScan?.call();
+              },
+              icon: Icon(
+                Icons.qr_code_2,
+                // size: SizeConfig.defaultSize * 2,
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
           if (widget.onInfo != null)
             IconButton(
               onPressed: () {

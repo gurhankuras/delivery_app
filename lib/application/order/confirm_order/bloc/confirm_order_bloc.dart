@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:delivery_app/domain/order/i_order_repository.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
+import '../../../../domain/order/i_order_repository.dart';
+import '../../../../presentation/core/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';

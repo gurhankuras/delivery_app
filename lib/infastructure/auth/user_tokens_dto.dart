@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/auth/user_tokens.dart';
+import '../../domain/auth/user_tokens.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_tokens_dto.freezed.dart';

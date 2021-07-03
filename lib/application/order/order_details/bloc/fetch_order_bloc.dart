@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
-import 'package:delivery_app/infastructure/order/order_dto.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
+import '../../../../domain/order/value_objects.dart';
+import '../../../../infastructure/order/order_dto.dart';
+import '../../../../presentation/core/logger.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import '../../../../infastructure/services/cache_manager.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../domain/core/failures.dart';

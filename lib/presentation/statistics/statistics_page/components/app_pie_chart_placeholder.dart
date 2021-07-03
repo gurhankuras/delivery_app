@@ -1,6 +1,6 @@
-import '../../../core/size_config.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/size_config.dart';
 import '../../../core/widgets/shimmer_widget.dart';
 
 class AppPieChartPlaceholder extends StatelessWidget {

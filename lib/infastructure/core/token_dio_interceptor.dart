@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/auth/i_token_cache_service.dart';
+import '../../domain/auth/i_token_cache_service.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

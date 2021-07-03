@@ -124,13 +124,19 @@ class _MainPageState extends State<MainPage> {
       title: AppLogo(),
       leading: Row(
         children: [
-          GestureDetector(
-            onTap: () => context.setLocale(Locale('tr', 'TR')),
-            child: Icon(Icons.language),
+          SizedBox(
+            width: SizeConfig.defaultSize
           ),
-          GestureDetector(
-            onTap: () => context.setLocale(Locale('en', 'US')),
-            child: Icon(Icons.language),
+          const Icon(Icons.language),
+          DropdownButton<Locale>(
+            value: context.locale,
+            icon: Container(),
+            style: const TextStyle(color: Colors.deepPurple),
+            onChanged: (value) => context.setLocale(value!),
+            items: [
+              DropdownMenuItem(value: Locale('en', 'US'), child: Text('EN')),
+              DropdownMenuItem(value: Locale('tr', 'TR'), child: Text('TR'))
+            ],
           ),
         ],
       ),

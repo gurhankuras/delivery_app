@@ -1,3 +1,6 @@
+import '../../../../langs/locale_keys.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +39,7 @@ class PersonPhoneNumberFormField<T> extends StatelessWidget {
               mask: '+90 (###) ### ## ##', filter: {'#': RegExp(r'[0-9]')})
         ],
         decoration: getTextInputDecoration(
-          labelText: 'Phone number',
+          labelText: LocaleKeys.phone_number.tr(),
           iconData: Icons.phone,
         ),
       ),

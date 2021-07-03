@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart' hide Order;
-import 'package:delivery_app/domain/auth/auth_failure.dart';
-import 'package:delivery_app/infastructure/core/connectivity_dio_checker_interceptor.dart';
-import 'package:delivery_app/infastructure/core/token_dio_interceptor.dart';
-import 'package:delivery_app/infastructure/order/order_dto.dart';
+import '../../domain/auth/auth_failure.dart';
+import '../core/connectivity_dio_checker_interceptor.dart';
+import '../core/token_dio_interceptor.dart';
+import 'order_dto.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

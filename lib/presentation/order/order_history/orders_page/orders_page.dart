@@ -1,6 +1,6 @@
-import '../../../core/size_config.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/size_config.dart';
 import 'components/order_card.dart';
 
 class OrdersPage extends StatefulWidget {

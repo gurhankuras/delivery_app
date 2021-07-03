@@ -1,5 +1,5 @@
-import 'package:delivery_app/domain/auth/auth_failure.dart';
-import 'package:delivery_app/domain/core/i_network_connectivity.dart';
+import '../../domain/auth/auth_failure.dart';
+import '../../domain/core/i_network_connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

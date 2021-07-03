@@ -1,9 +1,9 @@
-import 'package:delivery_app/presentation/core/constants.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/person_address_form_field.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/person_name_form_field.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/person_phone_number_form_field.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/person_tc_form_field.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/size_config.dart';
+import 'person_address_form_field.dart';
+import 'person_name_form_field.dart';
+import 'person_phone_number_form_field.dart';
+import 'person_tc_form_field.dart';
 import 'package:flutter/material.dart';
 
 class PersonFormSection<T> extends StatelessWidget {

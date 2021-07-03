@@ -1,10 +1,12 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:delivery_app/application/order/order_details/bloc/fetch_order_bloc.dart';
-import 'package:delivery_app/application/order/search_order/bloc/search_order_bloc.dart';
-import 'package:delivery_app/injection.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/main_page/components/search_bar.dart';
-import 'package:delivery_app/presentation/order/update_order/edit_order_status_page/edit_order_status_page.dart';
+import '../../../../application/order/order_details/bloc/fetch_order_bloc.dart';
+import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
+import '../../../../domain/barcode/i_barcode_scanner_service.dart';
+import '../../../../infastructure/barcode/fake_barcode_scanner_service.dart';
+import '../../../../injection.dart';
+import '../../../core/size_config.dart';
+import '../../../main_page/components/search_bar.dart';
+import '../edit_order_status_page/edit_order_status_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -58,6 +60,13 @@ class EditOrderSearchBody extends StatelessWidget {
           },
           child: SearchBar(
             hintText: 'Search',
+            onScan: () async {
+              final s = await getIt<IBarcodeScannerService>().scan();
+              context
+                  .read<SearchOrderBloc>()
+                  .add(SearchOrderEvent.searchButtonPressed(s));
+              FocusScope.of(context).unfocus();
+            },
             onSearch: (trackId) {
               context
                   .read<SearchOrderBloc>()

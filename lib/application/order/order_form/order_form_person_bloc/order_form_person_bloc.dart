@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Order;
-import 'package:delivery_app/application/order/order_form/order_form_sender_bloc/order_form_sender_bloc.dart';
-import 'package:delivery_app/presentation/core/logger.dart';
+import '../order_form_sender_bloc/order_form_sender_bloc.dart';
+import '../../../../presentation/core/logger.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../domain/core/failures.dart';
 import '../../../../domain/order/validators.dart';

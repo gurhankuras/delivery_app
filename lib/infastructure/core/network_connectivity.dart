@@ -1,5 +1,5 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:delivery_app/domain/core/i_network_connectivity.dart';
+import '../../domain/core/i_network_connectivity.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: INetworkConnectivity)

@@ -1,3 +1,6 @@
+import '../../../../langs/locale_keys.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +40,7 @@ class PersonTCFormField<T> extends StatelessWidget {
         keyboardType: TextInputType.number,
         decoration: getTextInputDecoration(
           iconData: FontAwesomeIcons.idCard,
-          labelText: 'Tr Id',
+          labelText: LocaleKeys.tr_id.tr(),
           isFontAwesome: true,
         ),
       ),

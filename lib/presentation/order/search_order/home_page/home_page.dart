@@ -1,8 +1,13 @@
+import '../../../../domain/barcode/i_barcode_scanner_service.dart';
+import '../../../../infastructure/barcode/barcode_scanner_service.dart';
+import '../../../../infastructure/barcode/fake_barcode_scanner_service.dart';
+import '../../../core/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../application/order/search_order/bloc/search_order_bloc.dart';
+import '../../../../injection.dart';
 import '../../../core/assets_constants.dart';
 import '../../../core/size_config.dart';
 import '../../../core/widgets/showSnackbar.dart';
@@ -51,6 +56,13 @@ class _HomePageState extends State<HomePage>
               onSearch: (value) => context
                   .read<SearchOrderBloc>()
                   .add(SearchOrderEvent.searchButtonPressed(value)),
+              onScan: () async {
+                final trackId = await getIt<IBarcodeScannerService>().scan();
+                context
+                    .read<SearchOrderBloc>()
+                    .add(SearchOrderEvent.searchButtonPressed(trackId));
+                FocusScope.of(context).unfocus();
+              },
               keyboardType: TextInputType.number,
               hintText: 'Gönderi sorgula',
             ),

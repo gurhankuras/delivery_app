@@ -1,7 +1,9 @@
-import 'package:delivery_app/presentation/core/constants.dart';
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/app_select.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/input_decoration.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/size_config.dart';
+import '../../../../langs/locale_keys.dart';
+import 'app_select.dart';
+import 'input_decoration.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,7 +28,8 @@ class PackageFormSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Package Info', style: sectionTextStyle(context)),
+        Text(LocaleKeys.form_info_title.tr(args: [LocaleKeys.package.tr()]),
+            style: sectionTextStyle(context)),
         const Divider(thickness: 2),
         buildPackageNameField(context),
         Padding(

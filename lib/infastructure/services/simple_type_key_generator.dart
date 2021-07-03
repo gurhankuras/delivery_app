@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/core/i_key_generator.dart';
+import '../../domain/core/i_key_generator.dart';
 import 'package:injectable/injectable.dart';
 
 /// [T] is important!! Don't omit it

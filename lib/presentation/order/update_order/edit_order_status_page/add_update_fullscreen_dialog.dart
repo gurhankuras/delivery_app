@@ -1,10 +1,10 @@
-import 'package:delivery_app/application/order/update_order/bloc/update_order_bloc.dart';
+import '../../../../application/order/update_order/bloc/update_order_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:delivery_app/presentation/core/size_config.dart';
-import 'package:delivery_app/presentation/core/widgets/app_button.dart';
-import 'package:delivery_app/presentation/order/send_order/send_package_form_page/components/input_decoration.dart';
-import 'package:delivery_app/presentation/order/update_order/edit_order_status_page/delivery_status.dart';
+import '../../../core/size_config.dart';
+import '../../../core/widgets/app_button.dart';
+import '../../send_order/send_package_form_page/components/input_decoration.dart';
+import 'delivery_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../context_update_order_bloc_x.dart';

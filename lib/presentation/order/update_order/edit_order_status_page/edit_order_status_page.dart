@@ -5,11 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:delivery_app/application/order/order_details/bloc/fetch_order_bloc.dart';
-import 'package:delivery_app/application/order/update_order/bloc/update_order_bloc.dart';
-import 'package:delivery_app/domain/order/i_order_repository.dart';
-import 'package:delivery_app/domain/order/value_objects.dart';
-import 'package:delivery_app/presentation/order/update_order/edit_order_status_page/add_update_fullscreen_dialog.dart';
+import '../../../../application/order/order_details/bloc/fetch_order_bloc.dart';
+import '../../../../application/order/update_order/bloc/update_order_bloc.dart';
+import '../../../../domain/order/i_order_repository.dart';
+import '../../../../domain/order/value_objects.dart';
+import 'add_update_fullscreen_dialog.dart';
 
 import '../../../../domain/order/order.dart';
 import '../../../../infastructure/services/order_service.dart';

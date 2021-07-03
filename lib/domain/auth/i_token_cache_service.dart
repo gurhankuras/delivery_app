@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/domain/core/general_failures.dart';
+import '../core/general_failures.dart';
 
 abstract class ITokenCacheService {
   Future<Either<GeneralFailure, String>> getRefreshToken();

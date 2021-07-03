@@ -1,3 +1,6 @@
+import '../../../../langs/locale_keys.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../../../core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +34,7 @@ class PersonAddressFormField<T> extends StatelessWidget {
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.streetAddress,
         decoration: getTextInputDecoration(
-          labelText: 'Address',
+          labelText: LocaleKeys.address.tr(),
           iconData: Icons.location_on,
         ),
       ),

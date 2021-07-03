@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:delivery_app/application/auth/config.dart';
-import 'package:delivery_app/domain/auth/i_token_cache_service.dart';
-import 'package:delivery_app/domain/core/general_failures.dart';
-import 'package:delivery_app/infastructure/services/cache_manager.dart';
+import '../../application/auth/config.dart';
+import '../../domain/auth/i_token_cache_service.dart';
+import '../../domain/core/general_failures.dart';
+import '../services/cache_manager.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: ITokenCacheService)

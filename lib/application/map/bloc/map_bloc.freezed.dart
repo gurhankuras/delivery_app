@@ -26,8 +26,16 @@ class _$MapEventTearOff {
     );
   }
 
+  _CurrentLocationDetected currentLocationRequested() {
+    return const _CurrentLocationDetected();
+  }
+
   _Confirmed confirmed() {
     return const _Confirmed();
+  }
+
+  _ControllerInitialized controllerInitialized() {
+    return const _ControllerInitialized();
   }
 }
 
@@ -40,14 +48,18 @@ mixin _$MapEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() startedFetchingLocations,
     required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
     required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startedFetchingLocations,
     TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
     TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,14 +68,20 @@ mixin _$MapEvent {
     required TResult Function(_StartedFetchingLocations value)
         startedFetchingLocations,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
     required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
     TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +145,9 @@ class _$_StartedFetchingLocations implements _StartedFetchingLocations {
   TResult when<TResult extends Object?>({
     required TResult Function() startedFetchingLocations,
     required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
     required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
   }) {
     return startedFetchingLocations();
   }
@@ -137,7 +157,9 @@ class _$_StartedFetchingLocations implements _StartedFetchingLocations {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startedFetchingLocations,
     TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
     TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
     required TResult orElse(),
   }) {
     if (startedFetchingLocations != null) {
@@ -152,7 +174,11 @@ class _$_StartedFetchingLocations implements _StartedFetchingLocations {
     required TResult Function(_StartedFetchingLocations value)
         startedFetchingLocations,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
     required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
   }) {
     return startedFetchingLocations(this);
   }
@@ -162,7 +188,9 @@ class _$_StartedFetchingLocations implements _StartedFetchingLocations {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
     TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
     required TResult orElse(),
   }) {
     if (startedFetchingLocations != null) {
@@ -243,7 +271,9 @@ class _$_LocationSelected implements _LocationSelected {
   TResult when<TResult extends Object?>({
     required TResult Function() startedFetchingLocations,
     required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
     required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
   }) {
     return locationSelected(location);
   }
@@ -253,7 +283,9 @@ class _$_LocationSelected implements _LocationSelected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startedFetchingLocations,
     TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
     TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
     required TResult orElse(),
   }) {
     if (locationSelected != null) {
@@ -268,7 +300,11 @@ class _$_LocationSelected implements _LocationSelected {
     required TResult Function(_StartedFetchingLocations value)
         startedFetchingLocations,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
     required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
   }) {
     return locationSelected(this);
   }
@@ -278,7 +314,9 @@ class _$_LocationSelected implements _LocationSelected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
     TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
     required TResult orElse(),
   }) {
     if (locationSelected != null) {
@@ -295,6 +333,108 @@ abstract class _LocationSelected implements MapEvent {
   @JsonKey(ignore: true)
   _$LocationSelectedCopyWith<_LocationSelected> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$CurrentLocationDetectedCopyWith<$Res> {
+  factory _$CurrentLocationDetectedCopyWith(_CurrentLocationDetected value,
+          $Res Function(_CurrentLocationDetected) then) =
+      __$CurrentLocationDetectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$CurrentLocationDetectedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements _$CurrentLocationDetectedCopyWith<$Res> {
+  __$CurrentLocationDetectedCopyWithImpl(_CurrentLocationDetected _value,
+      $Res Function(_CurrentLocationDetected) _then)
+      : super(_value, (v) => _then(v as _CurrentLocationDetected));
+
+  @override
+  _CurrentLocationDetected get _value =>
+      super._value as _CurrentLocationDetected;
+}
+
+/// @nodoc
+
+class _$_CurrentLocationDetected implements _CurrentLocationDetected {
+  const _$_CurrentLocationDetected();
+
+  @override
+  String toString() {
+    return 'MapEvent.currentLocationRequested()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _CurrentLocationDetected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startedFetchingLocations,
+    required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
+    required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
+  }) {
+    return currentLocationRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startedFetchingLocations,
+    TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
+    TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
+    required TResult orElse(),
+  }) {
+    if (currentLocationRequested != null) {
+      return currentLocationRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_StartedFetchingLocations value)
+        startedFetchingLocations,
+    required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
+    required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
+  }) {
+    return currentLocationRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
+    TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
+    TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
+    required TResult orElse(),
+  }) {
+    if (currentLocationRequested != null) {
+      return currentLocationRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CurrentLocationDetected implements MapEvent {
+  const factory _CurrentLocationDetected() = _$_CurrentLocationDetected;
 }
 
 /// @nodoc
@@ -337,7 +477,9 @@ class _$_Confirmed implements _Confirmed {
   TResult when<TResult extends Object?>({
     required TResult Function() startedFetchingLocations,
     required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
     required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
   }) {
     return confirmed();
   }
@@ -347,7 +489,9 @@ class _$_Confirmed implements _Confirmed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startedFetchingLocations,
     TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
     TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
     required TResult orElse(),
   }) {
     if (confirmed != null) {
@@ -362,7 +506,11 @@ class _$_Confirmed implements _Confirmed {
     required TResult Function(_StartedFetchingLocations value)
         startedFetchingLocations,
     required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
     required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
   }) {
     return confirmed(this);
   }
@@ -372,7 +520,9 @@ class _$_Confirmed implements _Confirmed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
     TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
     TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
     required TResult orElse(),
   }) {
     if (confirmed != null) {
@@ -387,34 +537,126 @@ abstract class _Confirmed implements MapEvent {
 }
 
 /// @nodoc
+abstract class _$ControllerInitializedCopyWith<$Res> {
+  factory _$ControllerInitializedCopyWith(_ControllerInitialized value,
+          $Res Function(_ControllerInitialized) then) =
+      __$ControllerInitializedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ControllerInitializedCopyWithImpl<$Res>
+    extends _$MapEventCopyWithImpl<$Res>
+    implements _$ControllerInitializedCopyWith<$Res> {
+  __$ControllerInitializedCopyWithImpl(_ControllerInitialized _value,
+      $Res Function(_ControllerInitialized) _then)
+      : super(_value, (v) => _then(v as _ControllerInitialized));
+
+  @override
+  _ControllerInitialized get _value => super._value as _ControllerInitialized;
+}
+
+/// @nodoc
+
+class _$_ControllerInitialized implements _ControllerInitialized {
+  const _$_ControllerInitialized();
+
+  @override
+  String toString() {
+    return 'MapEvent.controllerInitialized()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ControllerInitialized);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startedFetchingLocations,
+    required TResult Function(LatLng location) locationSelected,
+    required TResult Function() currentLocationRequested,
+    required TResult Function() confirmed,
+    required TResult Function() controllerInitialized,
+  }) {
+    return controllerInitialized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startedFetchingLocations,
+    TResult Function(LatLng location)? locationSelected,
+    TResult Function()? currentLocationRequested,
+    TResult Function()? confirmed,
+    TResult Function()? controllerInitialized,
+    required TResult orElse(),
+  }) {
+    if (controllerInitialized != null) {
+      return controllerInitialized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_StartedFetchingLocations value)
+        startedFetchingLocations,
+    required TResult Function(_LocationSelected value) locationSelected,
+    required TResult Function(_CurrentLocationDetected value)
+        currentLocationRequested,
+    required TResult Function(_Confirmed value) confirmed,
+    required TResult Function(_ControllerInitialized value)
+        controllerInitialized,
+  }) {
+    return controllerInitialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_StartedFetchingLocations value)? startedFetchingLocations,
+    TResult Function(_LocationSelected value)? locationSelected,
+    TResult Function(_CurrentLocationDetected value)? currentLocationRequested,
+    TResult Function(_Confirmed value)? confirmed,
+    TResult Function(_ControllerInitialized value)? controllerInitialized,
+    required TResult orElse(),
+  }) {
+    if (controllerInitialized != null) {
+      return controllerInitialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ControllerInitialized implements MapEvent {
+  const factory _ControllerInitialized() = _$_ControllerInitialized;
+}
+
+/// @nodoc
 class _$MapStateTearOff {
   const _$MapStateTearOff();
 
-  _Initial initial() {
-    return const _Initial();
-  }
-
-  _Success success(List<LatLng> locations) {
-    return _Success(
-      locations,
-    );
-  }
-
-  _Loading loading() {
-    return const _Loading();
-  }
-
-  _Failure failure(LocationFailure failure) {
-    return _Failure(
-      failure,
-    );
-  }
-
-  _HasSelectedLocation hasSelectedLocation(
-      List<LatLng> locations, LatLng selectedLocation) {
-    return _HasSelectedLocation(
-      locations,
-      selectedLocation,
+  _MapState call(
+      {required bool isLoading,
+      required Option<List<LatLng>> locations,
+      required Option<LatLng> selectedLocation,
+      required Option<LatLng> currentLocation,
+      required Option<LocationFailure> currentLocationFailure,
+      required Option<LocationFailure> locationsFailure,
+      required bool mapControllerInitialized}) {
+    return _MapState(
+      isLoading: isLoading,
+      locations: locations,
+      selectedLocation: selectedLocation,
+      currentLocation: currentLocation,
+      currentLocationFailure: currentLocationFailure,
+      locationsFailure: locationsFailure,
+      mapControllerInitialized: mapControllerInitialized,
     );
   }
 }
@@ -424,45 +666,18 @@ const $MapState = _$MapStateTearOff();
 
 /// @nodoc
 mixin _$MapState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) =>
+  bool get isLoading => throw _privateConstructorUsedError;
+  Option<List<LatLng>> get locations => throw _privateConstructorUsedError;
+  Option<LatLng> get selectedLocation => throw _privateConstructorUsedError;
+  Option<LatLng> get currentLocation => throw _privateConstructorUsedError;
+  Option<LocationFailure> get currentLocationFailure =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) =>
+  Option<LocationFailure> get locationsFailure =>
       throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) =>
+  bool get mapControllerInitialized => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $MapStateCopyWith<MapState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -470,6 +685,14 @@ mixin _$MapState {
 abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res>;
+  $Res call(
+      {bool isLoading,
+      Option<List<LatLng>> locations,
+      Option<LatLng> selectedLocation,
+      Option<LatLng> currentLocation,
+      Option<LocationFailure> currentLocationFailure,
+      Option<LocationFailure> locationsFailure,
+      bool mapControllerInitialized});
 }
 
 /// @nodoc
@@ -479,608 +702,222 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
   final MapState _value;
   // ignore: unused_field
   final $Res Function(MapState) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
-
-  @override
-  _Initial get _value => super._value as _Initial;
-}
-
-/// @nodoc
-
-class _$_Initial implements _Initial {
-  const _$_Initial();
-
-  @override
-  String toString() {
-    return 'MapState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements MapState {
-  const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$SuccessCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
-      __$SuccessCopyWithImpl<$Res>;
-  $Res call({List<LatLng> locations});
-}
-
-/// @nodoc
-class __$SuccessCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
-    implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
-      : super(_value, (v) => _then(v as _Success));
-
-  @override
-  _Success get _value => super._value as _Success;
 
   @override
   $Res call({
-    Object? locations = freezed,
-  }) {
-    return _then(_Success(
-      locations == freezed
-          ? _value.locations
-          : locations // ignore: cast_nullable_to_non_nullable
-              as List<LatLng>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Success implements _Success {
-  const _$_Success(this.locations);
-
-  @override
-  final List<LatLng> locations;
-
-  @override
-  String toString() {
-    return 'MapState.success(locations: $locations)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Success &&
-            (identical(other.locations, locations) ||
-                const DeepCollectionEquality()
-                    .equals(other.locations, locations)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(locations);
-
-  @JsonKey(ignore: true)
-  @override
-  _$SuccessCopyWith<_Success> get copyWith =>
-      __$SuccessCopyWithImpl<_Success>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) {
-    return success(locations);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(locations);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Success implements MapState {
-  const factory _Success(List<LatLng> locations) = _$_Success;
-
-  List<LatLng> get locations => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$SuccessCopyWith<_Success> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
-
-  @override
-  _Loading get _value => super._value as _Loading;
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'MapState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements MapState {
-  const factory _Loading() = _$_Loading;
-}
-
-/// @nodoc
-abstract class _$FailureCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) then) =
-      __$FailureCopyWithImpl<$Res>;
-  $Res call({LocationFailure failure});
-
-  $LocationFailureCopyWith<$Res> get failure;
-}
-
-/// @nodoc
-class __$FailureCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
-    implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(_Failure _value, $Res Function(_Failure) _then)
-      : super(_value, (v) => _then(v as _Failure));
-
-  @override
-  _Failure get _value => super._value as _Failure;
-
-  @override
-  $Res call({
-    Object? failure = freezed,
-  }) {
-    return _then(_Failure(
-      failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as LocationFailure,
-    ));
-  }
-
-  @override
-  $LocationFailureCopyWith<$Res> get failure {
-    return $LocationFailureCopyWith<$Res>(_value.failure, (value) {
-      return _then(_value.copyWith(failure: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$_Failure implements _Failure {
-  const _$_Failure(this.failure);
-
-  @override
-  final LocationFailure failure;
-
-  @override
-  String toString() {
-    return 'MapState.failure(failure: $failure)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Failure &&
-            (identical(other.failure, failure) ||
-                const DeepCollectionEquality().equals(other.failure, failure)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
-
-  @JsonKey(ignore: true)
-  @override
-  _$FailureCopyWith<_Failure> get copyWith =>
-      __$FailureCopyWithImpl<_Failure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) {
-    return failure(this.failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (failure != null) {
-      return failure(this.failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) {
-    return failure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (failure != null) {
-      return failure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Failure implements MapState {
-  const factory _Failure(LocationFailure failure) = _$_Failure;
-
-  LocationFailure get failure => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$FailureCopyWith<_Failure> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$HasSelectedLocationCopyWith<$Res> {
-  factory _$HasSelectedLocationCopyWith(_HasSelectedLocation value,
-          $Res Function(_HasSelectedLocation) then) =
-      __$HasSelectedLocationCopyWithImpl<$Res>;
-  $Res call({List<LatLng> locations, LatLng selectedLocation});
-}
-
-/// @nodoc
-class __$HasSelectedLocationCopyWithImpl<$Res>
-    extends _$MapStateCopyWithImpl<$Res>
-    implements _$HasSelectedLocationCopyWith<$Res> {
-  __$HasSelectedLocationCopyWithImpl(
-      _HasSelectedLocation _value, $Res Function(_HasSelectedLocation) _then)
-      : super(_value, (v) => _then(v as _HasSelectedLocation));
-
-  @override
-  _HasSelectedLocation get _value => super._value as _HasSelectedLocation;
-
-  @override
-  $Res call({
+    Object? isLoading = freezed,
     Object? locations = freezed,
     Object? selectedLocation = freezed,
+    Object? currentLocation = freezed,
+    Object? currentLocationFailure = freezed,
+    Object? locationsFailure = freezed,
+    Object? mapControllerInitialized = freezed,
   }) {
-    return _then(_HasSelectedLocation(
-      locations == freezed
+    return _then(_value.copyWith(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      locations: locations == freezed
           ? _value.locations
           : locations // ignore: cast_nullable_to_non_nullable
-              as List<LatLng>,
-      selectedLocation == freezed
+              as Option<List<LatLng>>,
+      selectedLocation: selectedLocation == freezed
           ? _value.selectedLocation
           : selectedLocation // ignore: cast_nullable_to_non_nullable
-              as LatLng,
+              as Option<LatLng>,
+      currentLocation: currentLocation == freezed
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as Option<LatLng>,
+      currentLocationFailure: currentLocationFailure == freezed
+          ? _value.currentLocationFailure
+          : currentLocationFailure // ignore: cast_nullable_to_non_nullable
+              as Option<LocationFailure>,
+      locationsFailure: locationsFailure == freezed
+          ? _value.locationsFailure
+          : locationsFailure // ignore: cast_nullable_to_non_nullable
+              as Option<LocationFailure>,
+      mapControllerInitialized: mapControllerInitialized == freezed
+          ? _value.mapControllerInitialized
+          : mapControllerInitialized // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MapStateCopyWith<$Res> implements $MapStateCopyWith<$Res> {
+  factory _$MapStateCopyWith(_MapState value, $Res Function(_MapState) then) =
+      __$MapStateCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {bool isLoading,
+      Option<List<LatLng>> locations,
+      Option<LatLng> selectedLocation,
+      Option<LatLng> currentLocation,
+      Option<LocationFailure> currentLocationFailure,
+      Option<LocationFailure> locationsFailure,
+      bool mapControllerInitialized});
+}
+
+/// @nodoc
+class __$MapStateCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
+    implements _$MapStateCopyWith<$Res> {
+  __$MapStateCopyWithImpl(_MapState _value, $Res Function(_MapState) _then)
+      : super(_value, (v) => _then(v as _MapState));
+
+  @override
+  _MapState get _value => super._value as _MapState;
+
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+    Object? locations = freezed,
+    Object? selectedLocation = freezed,
+    Object? currentLocation = freezed,
+    Object? currentLocationFailure = freezed,
+    Object? locationsFailure = freezed,
+    Object? mapControllerInitialized = freezed,
+  }) {
+    return _then(_MapState(
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      locations: locations == freezed
+          ? _value.locations
+          : locations // ignore: cast_nullable_to_non_nullable
+              as Option<List<LatLng>>,
+      selectedLocation: selectedLocation == freezed
+          ? _value.selectedLocation
+          : selectedLocation // ignore: cast_nullable_to_non_nullable
+              as Option<LatLng>,
+      currentLocation: currentLocation == freezed
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as Option<LatLng>,
+      currentLocationFailure: currentLocationFailure == freezed
+          ? _value.currentLocationFailure
+          : currentLocationFailure // ignore: cast_nullable_to_non_nullable
+              as Option<LocationFailure>,
+      locationsFailure: locationsFailure == freezed
+          ? _value.locationsFailure
+          : locationsFailure // ignore: cast_nullable_to_non_nullable
+              as Option<LocationFailure>,
+      mapControllerInitialized: mapControllerInitialized == freezed
+          ? _value.mapControllerInitialized
+          : mapControllerInitialized // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_HasSelectedLocation implements _HasSelectedLocation {
-  const _$_HasSelectedLocation(this.locations, this.selectedLocation);
+class _$_MapState implements _MapState {
+  const _$_MapState(
+      {required this.isLoading,
+      required this.locations,
+      required this.selectedLocation,
+      required this.currentLocation,
+      required this.currentLocationFailure,
+      required this.locationsFailure,
+      required this.mapControllerInitialized});
 
   @override
-  final List<LatLng> locations;
+  final bool isLoading;
   @override
-  final LatLng selectedLocation;
+  final Option<List<LatLng>> locations;
+  @override
+  final Option<LatLng> selectedLocation;
+  @override
+  final Option<LatLng> currentLocation;
+  @override
+  final Option<LocationFailure> currentLocationFailure;
+  @override
+  final Option<LocationFailure> locationsFailure;
+  @override
+  final bool mapControllerInitialized;
 
   @override
   String toString() {
-    return 'MapState.hasSelectedLocation(locations: $locations, selectedLocation: $selectedLocation)';
+    return 'MapState(isLoading: $isLoading, locations: $locations, selectedLocation: $selectedLocation, currentLocation: $currentLocation, currentLocationFailure: $currentLocationFailure, locationsFailure: $locationsFailure, mapControllerInitialized: $mapControllerInitialized)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _HasSelectedLocation &&
+        (other is _MapState &&
+            (identical(other.isLoading, isLoading) ||
+                const DeepCollectionEquality()
+                    .equals(other.isLoading, isLoading)) &&
             (identical(other.locations, locations) ||
                 const DeepCollectionEquality()
                     .equals(other.locations, locations)) &&
             (identical(other.selectedLocation, selectedLocation) ||
                 const DeepCollectionEquality()
-                    .equals(other.selectedLocation, selectedLocation)));
+                    .equals(other.selectedLocation, selectedLocation)) &&
+            (identical(other.currentLocation, currentLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLocation, currentLocation)) &&
+            (identical(other.currentLocationFailure, currentLocationFailure) ||
+                const DeepCollectionEquality().equals(
+                    other.currentLocationFailure, currentLocationFailure)) &&
+            (identical(other.locationsFailure, locationsFailure) ||
+                const DeepCollectionEquality()
+                    .equals(other.locationsFailure, locationsFailure)) &&
+            (identical(
+                    other.mapControllerInitialized, mapControllerInitialized) ||
+                const DeepCollectionEquality().equals(
+                    other.mapControllerInitialized, mapControllerInitialized)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(locations) ^
-      const DeepCollectionEquality().hash(selectedLocation);
+      const DeepCollectionEquality().hash(selectedLocation) ^
+      const DeepCollectionEquality().hash(currentLocation) ^
+      const DeepCollectionEquality().hash(currentLocationFailure) ^
+      const DeepCollectionEquality().hash(locationsFailure) ^
+      const DeepCollectionEquality().hash(mapControllerInitialized);
 
   @JsonKey(ignore: true)
   @override
-  _$HasSelectedLocationCopyWith<_HasSelectedLocation> get copyWith =>
-      __$HasSelectedLocationCopyWithImpl<_HasSelectedLocation>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<LatLng> locations) success,
-    required TResult Function() loading,
-    required TResult Function(LocationFailure failure) failure,
-    required TResult Function(List<LatLng> locations, LatLng selectedLocation)
-        hasSelectedLocation,
-  }) {
-    return hasSelectedLocation(locations, selectedLocation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<LatLng> locations)? success,
-    TResult Function()? loading,
-    TResult Function(LocationFailure failure)? failure,
-    TResult Function(List<LatLng> locations, LatLng selectedLocation)?
-        hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (hasSelectedLocation != null) {
-      return hasSelectedLocation(locations, selectedLocation);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_HasSelectedLocation value) hasSelectedLocation,
-  }) {
-    return hasSelectedLocation(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Success value)? success,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_HasSelectedLocation value)? hasSelectedLocation,
-    required TResult orElse(),
-  }) {
-    if (hasSelectedLocation != null) {
-      return hasSelectedLocation(this);
-    }
-    return orElse();
-  }
+  _$MapStateCopyWith<_MapState> get copyWith =>
+      __$MapStateCopyWithImpl<_MapState>(this, _$identity);
 }
 
-abstract class _HasSelectedLocation implements MapState {
-  const factory _HasSelectedLocation(
-      List<LatLng> locations, LatLng selectedLocation) = _$_HasSelectedLocation;
+abstract class _MapState implements MapState {
+  const factory _MapState(
+      {required bool isLoading,
+      required Option<List<LatLng>> locations,
+      required Option<LatLng> selectedLocation,
+      required Option<LatLng> currentLocation,
+      required Option<LocationFailure> currentLocationFailure,
+      required Option<LocationFailure> locationsFailure,
+      required bool mapControllerInitialized}) = _$_MapState;
 
-  List<LatLng> get locations => throw _privateConstructorUsedError;
-  LatLng get selectedLocation => throw _privateConstructorUsedError;
+  @override
+  bool get isLoading => throw _privateConstructorUsedError;
+  @override
+  Option<List<LatLng>> get locations => throw _privateConstructorUsedError;
+  @override
+  Option<LatLng> get selectedLocation => throw _privateConstructorUsedError;
+  @override
+  Option<LatLng> get currentLocation => throw _privateConstructorUsedError;
+  @override
+  Option<LocationFailure> get currentLocationFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  Option<LocationFailure> get locationsFailure =>
+      throw _privateConstructorUsedError;
+  @override
+  bool get mapControllerInitialized => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  _$HasSelectedLocationCopyWith<_HasSelectedLocation> get copyWith =>
+  _$MapStateCopyWith<_MapState> get copyWith =>
       throw _privateConstructorUsedError;
 }

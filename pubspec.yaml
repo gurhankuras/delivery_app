@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   another_flushbar: ^1.10.23
+  app_settings: ^4.1.1
   auto_route: ^2.2.0
   auto_route_generator: ^2.1.0
   bloc: ^7.0.0
@@ -68,6 +69,7 @@ dependencies:
 
 dev_dependencies:
   analyzer: 1.5.0
+  flutter_config: ^2.0.0
   build_runner: ^2.0.4
   dependency_validator: ^3.0.0
   freezed_annotation: ^0.14.2

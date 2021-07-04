@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,7 +26,19 @@ class AuthService implements IAuthService {
     required this.dio,
     required this.tokenService,
   }) {
-    kDebugMode ? dio.interceptors.add(PrettyDioLogger()) : null;
+    kDebugMode
+        ? dio.interceptors.add(PrettyDioLogger(
+            error: true,
+            logPrint: log.i,
+            maxWidth: 200,
+            request: true,
+            requestBody: true,
+            requestHeader: true,
+            responseBody: true,
+            responseHeader: true,
+            compact: false,
+          ))
+        : null;
     dio.interceptors.add(getIt<ConnectivityDioChecker>());
     dio.interceptors.add(getIt<TokenDioInterceptor>());
   }

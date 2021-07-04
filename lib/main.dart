@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:logger/logger.dart';
 
 import 'app.dart';
@@ -11,6 +12,7 @@ import 'presentation/langs/codegen_loader.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterConfig.loadEnvVariables();
   await EasyLocalization.ensureInitialized();
   await configureDependencies(Env.dev);
   Bloc.observer = SimpleBlocObserver();

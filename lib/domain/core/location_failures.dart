@@ -15,3 +15,11 @@ class LocationFailure with _$LocationFailure {
         String message,
   }) = _PermissionDeniedForever;
 }
+
+String locationFailureSwitch(LocationFailure f) {
+  return f.map(
+    locationServicesDisabled: (f) => f.message,
+    permissionDenied: (f) => f.message,
+    permissonDeniedForever: (f) => f.message,
+  );
+}

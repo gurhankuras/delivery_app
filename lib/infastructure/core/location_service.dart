@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:delivery_app/presentation/core/logger.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geolocator_platform_interface/src/models/position.dart';
 import 'package:google_maps_flutter_platform_interface/src/types/location.dart';
@@ -47,7 +48,13 @@ class LocationService implements ILocationService {
 
   @override
   Future<Either<LocationFailure, List<LatLng>>> getFranchiseLocations() {
-    // TODO: implement getFranchiseLocations
-    throw UnimplementedError();
+    return Future.value(right([
+      LatLng(39.048201, 31.265389),
+      LatLng(37.048201, 25.265389),
+      LatLng(35.3, 29.265389),
+      LatLng(34.4, 36.265389),
+      LatLng(32.6, 30.265389),
+      LatLng(26.9, 27.265389),
+    ]));
   }
 }

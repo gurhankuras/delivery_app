@@ -69,14 +69,16 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
                     serverError: (f) => some(ValueFailure.empty(
                         failedValue: '', message: 'Server Error')),
                     emailAlreadyInUse: (f) => some(ValueFailure.empty(
-                        failedValue: '', message: 'Server Error')),
+                        failedValue: '',
+                        message: 'email already in use Error')),
                     invalidEmailAndPasswordCombination: (f) => some(
                         ValueFailure.empty(
-                            failedValue: '', message: 'Server Error')),
+                            failedValue: '',
+                            message: 'invalid email or password Error')),
                     tokenNotFound: (f) => some(ValueFailure.empty(
-                        failedValue: '', message: 'Server Error')),
+                        failedValue: '', message: 'Token not found Error')),
                     unexpected: (f) => some(ValueFailure.empty(
-                        failedValue: '', message: 'Server Error')),
+                        failedValue: '', message: 'Unexpected Error')),
                     notConnected: (f) => some(ValueFailure.empty(
                         failedValue: '', message: 'No Internet Connection')),
                   ),

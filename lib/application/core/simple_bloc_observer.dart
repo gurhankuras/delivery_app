@@ -6,7 +6,8 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    log.d('${transition.nextState}');
+    // log.d('${transition.nextState}');
+    log.d(transition);
   }
 
   @override

@@ -11,6 +11,6 @@ class FakeBarcodeScannerService implements IBarcodeScannerService {
   Future<String> scan() async {
     final picker = getIt<ImagePicker>();
     await picker.getImage(source: ImageSource.camera);
-    return '60db4e92d9c7be3740a56c5d';
+    return '60e1afd981bcfb383c00323a';
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:delivery_app/infastructure/core/token_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/src/material/date.dart';
 import 'package:injectable/injectable.dart';
@@ -19,6 +20,7 @@ class StatisticsRepository implements IStatisticsRepository {
 
   StatisticsRepository({required this.dio}) {
     dio.interceptors.add(PrettyDioLogger());
+    dio.interceptors.add(getIt<TokenDioInterceptor>());
     dio.interceptors.add(getIt<ConnectivityDioChecker>());
   }
 

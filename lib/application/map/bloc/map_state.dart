@@ -2,16 +2,22 @@ part of 'map_bloc.dart';
 
 @freezed
 class MapState with _$MapState {
-  // const factory MapState(
-  //   {
-  //     required bool isLoading,
-  //     required Option<List<LatLng>>>
-  //   }
-  // ) = _MapState;
-  const factory MapState.initial() = _Initial;
-  const factory MapState.success(List<LatLng> locations) = _Success;
-  const factory MapState.loading() = _Loading;
-  const factory MapState.failure(LocationFailure failure) = _Failure;
-  const factory MapState.hasSelectedLocation(
-      List<LatLng> locations, LatLng selectedLocation) = _HasSelectedLocation;
+  const factory MapState(
+      {required bool isLoading,
+      required Option<List<LatLng>> locations,
+      required Option<LatLng> selectedLocation,
+      required Option<LatLng> currentLocation,
+      required Option<LocationFailure> currentLocationFailure,
+      required Option<LocationFailure> locationsFailure,
+      required bool mapControllerInitialized}) = _MapState;
+
+  factory MapState.initial() => MapState(
+        currentLocation: none(),
+        currentLocationFailure: none(),
+        locations: none(),
+        locationsFailure: none(),
+        selectedLocation: none(),
+        isLoading: false,
+        mapControllerInitialized: false,
+      );
 }
